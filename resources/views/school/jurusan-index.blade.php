@@ -248,22 +248,6 @@ if (!function_exists('getMajorColorHex')) {
                 @endforeach
             </div>
 
-            <!-- Pagination Container -->
-            <div class="mt-20 flex justify-center">
-                <nav class="flex items-center gap-3 p-2 bg-white rounded-2xl shadow-sm border border-slate-100">
-                    <button class="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-100 text-slate-300 bg-slate-50 cursor-not-allowed">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                    </button>
-                    
-                    <button class="w-10 h-10 flex items-center justify-center rounded-xl bg-blue-600 text-white font-black text-sm shadow-xl shadow-blue-600/20">1</button>
-                    <button class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-slate-50 text-slate-600 font-black text-sm transition-colors">2</button>
-                    <button class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-slate-50 text-slate-600 font-black text-sm transition-colors">3</button>
-                    
-                    <button class="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-100 text-slate-600 bg-white hover:bg-slate-50 shadow-sm transition-all hover:translate-x-0.5">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </button>
-                </nav>
-            </div>
         </main>
 </section>
 
