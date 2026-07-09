@@ -21,52 +21,36 @@ class ChatbotController extends Controller
         ]);
 
         $userMessage = $request->message;
-        $context = $this->buildContext($userMessage);
-
-        // Mengambil kunci rahasia Groq dari file .env
         $apiKey = env('GROQ_API_KEY');
-        if (!$apiKey) {
-            return response()->json([
-                'reply' => 'Maaf, konfigurasi AI (GROQ_API_KEY) belum diatur di file .env.'
-            ]);
+
+        // Jika API key tersedia, gunakan Groq AI
+        if ($apiKey) {
+            return $this->sendToGroq($userMessage, $apiKey);
         }
 
-        $systemPrompt = "Anda adalah AI Asisten Virtual yang ramah, sopan, dan informatif untuk sebuah SMK (Sekolah Menengah Kejuruan). 
-Tugas Anda adalah membalas pertanyaan pengunjung website sekolah dengan bahasa Indonesia yang baik dan baku.
-Gunakan data KNOWLEDGE BASE di bawah ini untuk menjawab. Jika data/informasi tidak ada di KNOWLEDGE BASE atau tidak relevan, mohon maaf dan katakan dengan sopan bahwa informasi tersebut belum tersedia atau sarankan mereka untuk menghubungi pihak sekolah. Jangan mengarang informasi di luar konteks yang diberikan.
+        // Fallback: jawab berdasarkan keyword dari database
+        return $this->fallbackReply($userMessage);
+    }
 
-KNOWLEDGE BASE:
-" . $context;
+    private function sendToGroq(string $userMessage, string $apiKey)
+    {
+        $context = $this->buildContext($userMessage);
+
+        $systemPrompt = "Anda adalah asisten virtual SMKN 1 Katapang. Jawab pertanyaan pengunjung dengan bahasa Indonesia yang natural, ramah, dan langsung ke inti jawaban. Jangan gunakan format markdown seperti **bold**, bullet point dengan simbol, atau emoji. Tulis seperti orang berbicara biasa. Gunakan data dari KNOWLEDGE BASE berikut untuk menjawab. Jika informasi tidak tersedia, katakan dengan sopan dan sarankan menghubungi sekolah. Jangan mengarang informasi di luar konteks yang diberikan.\n\nKNOWLEDGE BASE:\n" . $context;
 
         try {
-            $apiKey = trim($apiKey);
-            
-            // Endpoint API Groq
-            $url = "https://api.groq.com/openai/v1/chat/completions";
-
-            // Menggunakan model Llama 3 (sangat cepat dan pintar)
-          $payload = [
-                'model' => 'llama-3.3-70b-versatile', 
-                'messages' => [
-                    [
-                        'role' => 'system',
-                        'content' => $systemPrompt
-                    ],
-                    [
-                        'role' => 'user',
-                        'content' => $userMessage
-                    ]
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . trim($apiKey),
+                'Content-Type'  => 'application/json',
+            ])->timeout(30)->post('https://api.groq.com/openai/v1/chat/completions', [
+                'model'       => 'llama-3.3-70b-versatile',
+                'messages'    => [
+                    ['role' => 'system', 'content' => $systemPrompt],
+                    ['role' => 'user',   'content' => $userMessage],
                 ],
                 'temperature' => 0.7,
-                'max_tokens' => 1024
-            ];
-
-            Log::info("Chatbot: Mengirim request ke Groq API...");
-            
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $apiKey,
-                'Content-Type' => 'application/json',
-            ])->timeout(30)->post($url, $payload);
+                'max_tokens'  => 1024,
+            ]);
 
             if ($response->successful()) {
                 $result = $response->json();
@@ -77,22 +61,140 @@ KNOWLEDGE BASE:
                 }
             }
 
-            // Menangkap error jika gagal
-            $errorData = $response->json();
-            $errorMessage = $errorData['error']['message'] ?? 'Kesalahan API Tidak Diketahui';
-            Log::error("Groq API Error: " . json_encode($errorData));
-
-            return response()->json([
-                'reply' => "Gangguan teknis AI: " . $errorMessage
-            ], 200);
+            Log::error('Groq API Error: ' . json_encode($response->json()));
+            // Jika Groq gagal, gunakan fallback
+            return $this->fallbackReply($userMessage);
 
         } catch (\Exception $e) {
-            Log::error("Chatbot Critical Error: " . $e->getMessage());
-            
-            return response()->json([
-                'reply' => 'Kesalahan Sistem: ' . $e->getMessage()
-            ], 200);
+            Log::error('Chatbot Error: ' . $e->getMessage());
+            return $this->fallbackReply($userMessage);
         }
+    }
+
+    private function fallbackReply(string $userMessage)
+    {
+        $msg = Str::lower($userMessage);
+        $reply = '';
+
+        // Sapa
+        if (Str::contains($msg, ['halo', 'hai', 'hello', 'hi', 'selamat'])) {
+            $reply = "Halo! Selamat datang di SMKN 1 Katapang. Saya asisten virtual sekolah. Saya bisa membantu informasi tentang jurusan, ekstrakurikuler, prestasi, SPMB, dan profil sekolah. Silakan tanyakan!";
+            return response()->json(['reply' => $reply]);
+        }
+
+        // Profil / visi misi
+        if (Str::contains($msg, ['profil', 'visi', 'misi', 'sejarah', 'kepala sekolah', 'tentang'])) {
+            $profile = SchoolProfile::first();
+            if ($profile) {
+                $reply  = "Profil SMKN 1 Katapang\n\n";
+                $reply .= "Kepala Sekolah: {$profile->principal_name}\n\n";
+                $reply .= "Visi: {$profile->vision}\n\n";
+                if (is_array($profile->mission) && count($profile->mission)) {
+                    $reply .= "Misi:\n";
+                    foreach ($profile->mission as $i => $m) {
+                        $reply .= ($i + 1) . ". {$m}\n";
+                    }
+                }
+            } else {
+                $reply = "Informasi profil sekolah belum tersedia. Silakan kunjungi halaman Tentang Kami atau hubungi sekolah langsung.";
+            }
+            return response()->json(['reply' => $reply]);
+        }
+
+        // Jurusan
+        if (Str::contains($msg, ['jurusan', 'program keahlian', 'belajar apa', 'prodi', 'kompetensi'])) {
+            $majors = Major::where('is_active', true)->get();
+            if ($majors->isNotEmpty()) {
+                $reply = "Program Keahlian SMKN 1 Katapang:\n\n";
+                foreach ($majors as $major) {
+                    $reply .= "{$major->name} ({$major->acronym})";
+                    if ($major->description) {
+                        $reply .= " - {$major->description}";
+                    }
+                    $reply .= "\n\n";
+                }
+            } else {
+                $reply = "Informasi jurusan belum tersedia. Silakan cek menu Program Keahlian di website kami.";
+            }
+            return response()->json(['reply' => $reply]);
+        }
+
+        // Ekskul
+        if (Str::contains($msg, ['ekskul', 'ekstrakurikuler', 'kegiatan', 'organisasi', 'osis'])) {
+            $ekskuls = Extracurricular::where('is_active', true)->get();
+            if ($ekskuls->isNotEmpty()) {
+                $reply = "Ekstrakurikuler SMKN 1 Katapang:\n\n";
+                foreach ($ekskuls as $ekskul) {
+                    $reply .= "{$ekskul->name}";
+                    if ($ekskul->mentor) $reply .= " - Pembina: {$ekskul->mentor}";
+                    $reply .= "\n";
+                }
+            } else {
+                $reply = "Informasi ekstrakurikuler belum tersedia. Silakan cek menu Ekstrakurikuler di website kami.";
+            }
+            return response()->json(['reply' => $reply]);
+        }
+
+        // Prestasi
+        if (Str::contains($msg, ['prestasi', 'juara', 'lomba', 'penghargaan', 'kompetisi'])) {
+            $achievements = Achievement::latest()->take(5)->get();
+            if ($achievements->isNotEmpty()) {
+                $reply = "Prestasi Terbaru SMKN 1 Katapang:\n\n";
+                foreach ($achievements as $a) {
+                    $reply .= "{$a->title} ({$a->year})\n";
+                }
+            } else {
+                $reply = "Data prestasi belum tersedia. Silakan cek menu Prestasi di website kami.";
+            }
+            return response()->json(['reply' => $reply]);
+        }
+
+        // SPMB
+        if (Str::contains($msg, ['ppdb', 'daftar', 'pendaftaran', 'masuk sekolah', 'penerimaan'])) {
+            $reply = "Informasi SPMB SMKN 1 Katapang\n\n";
+            $reply .= "Pendaftaran Peserta Didik Baru (SPMB) biasanya dibuka sekitar bulan Mei–Juni.\n\n";
+            $reply .= "Untuk informasi lengkap dan link pendaftaran online, silakan kunjungi menu SPMB di website kami atau hubungi sekolah langsung.";
+            return response()->json(['reply' => $reply]);
+        }
+
+        // Berita
+        if (Str::contains($msg, ['berita', 'artikel', 'kegiatan terbaru', 'info terbaru', 'pengumuman'])) {
+            $posts = Post::where('status', 'published')->latest()->take(3)->get();
+            if ($posts->isNotEmpty()) {
+                $reply = "Berita dan Artikel Terbaru:\n\n";
+                foreach ($posts as $post) {
+                    $reply .= "{$post->title}\n";
+                }
+                $reply .= "\nBaca selengkapnya di menu Berita & Artikel website kami.";
+            } else {
+                $reply = "Belum ada berita terbaru. Silakan cek menu Berita & Artikel di website kami.";
+            }
+            return response()->json(['reply' => $reply]);
+        }
+
+        // Kontak / lokasi
+        if (Str::contains($msg, ['kontak', 'alamat', 'telepon', 'email', 'lokasi', 'dimana', 'dimana sekolah'])) {
+            $reply = "SMKN 1 Katapang beralamat di Jl. Ceuri Jalan Terusan Kopo No.KM 13, RW.5, Katapang, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40971, Indonesia. Untuk informasi kontak lengkap seperti nomor telepon dan email, silakan kunjungi halaman Kontak Kami di website kami.";
+            return response()->json(['reply' => $reply]);
+        }
+
+        // Terima kasih
+        if (Str::contains($msg, ['terima kasih', 'makasih', 'thanks', 'thank you'])) {
+            $reply = "Sama-sama! Senang bisa membantu. Jika ada pertanyaan lain seputar SMKN 1 Katapang, jangan ragu untuk bertanya ya!";
+            return response()->json(['reply' => $reply]);
+        }
+
+        // Default
+        $reply = "Halo! Saya asisten virtual SMKN 1 Katapang.\n\nSaya bisa membantu informasi tentang:\n";
+        $reply .= "- Jurusan dan Program Keahlian\n";
+        $reply .= "- Ekstrakurikuler\n";
+        $reply .= "- Prestasi Siswa\n";
+        $reply .= "- Pendaftaran (SPMB)\n";
+        $reply .= "- Profil Sekolah\n";
+        $reply .= "- Berita dan Kegiatan\n\n";
+        $reply .= "Silakan tanyakan salah satunya, atau hubungi sekolah langsung melalui halaman Kontak Kami.";
+
+        return response()->json(['reply' => $reply]);
     }
 
     private function buildContext(string $message): string
@@ -100,7 +202,6 @@ KNOWLEDGE BASE:
         $context = "";
         $messageLower = Str::lower($message);
 
-        // 1. Profil Sekolah (Visi Misi)
         if (Str::contains($messageLower, ['profil', 'visi', 'misi', 'sejarah', 'kepala sekolah'])) {
             $profile = SchoolProfile::first();
             if ($profile) {
@@ -113,7 +214,6 @@ KNOWLEDGE BASE:
             }
         }
 
-        // 2. Jurusan
         if (Str::contains($messageLower, ['jurusan', 'program', 'keahlian', 'belajar apa'])) {
             $majors = Major::where('is_active', true)->get();
             $context .= "\nDaftar Jurusan:\n";
@@ -122,16 +222,14 @@ KNOWLEDGE BASE:
             }
         }
 
-        // 3. Ekstrakurikuler
         if (Str::contains($messageLower, ['ekskul', 'ekstrakurikuler', 'kegiatan'])) {
             $ekskuls = Extracurricular::where('is_active', true)->get();
             $context .= "\nDaftar Ekstrakurikuler:\n";
             foreach ($ekskuls as $ekskul) {
-                $context .= "- {$ekskul->name}: Mentored by {$ekskul->mentor}\n";
+                $context .= "- {$ekskul->name}: Pembina {$ekskul->mentor}\n";
             }
         }
 
-        // 4. Prestasi
         if (Str::contains($messageLower, ['prestasi', 'juara', 'lomba'])) {
             $achievements = Achievement::latest()->take(5)->get();
             $context .= "\nPrestasi Terbaru:\n";
@@ -140,7 +238,6 @@ KNOWLEDGE BASE:
             }
         }
 
-        // 5. Berita/Artikel (Hanya judul)
         if (Str::contains($messageLower, ['berita', 'artikel', 'kegiatan terbaru'])) {
             $posts = Post::latest()->take(3)->get();
             $context .= "\nBerita Terbaru:\n";
@@ -149,11 +246,16 @@ KNOWLEDGE BASE:
             }
         }
 
-        // 6. PPDB (Statis/Logic simple)
         if (Str::contains($messageLower, ['ppdb', 'daftar', 'masuk', 'pendaftaran'])) {
-            $context .= "\nInformasi PPDB: Pendaftaran biasanya dibuka sekitar bulan Mei/Juni. Silakan cek menu PPDB di website untuk info link pendaftaran online.\n";
+            $context .= "\nInformasi SPMB: Pendaftaran biasanya dibuka sekitar bulan Mei/Juni.\n";
         }
 
-        return $context ?: "Informasi umum tentang SMK.";
+        if (Str::contains($messageLower, ['kontak', 'alamat', 'telepon', 'email', 'lokasi', 'dimana'])) {
+            $context .= "\nKontak Sekolah:\n";
+            $context .= "Alamat: Jl. Ceuri Jalan Terusan Kopo No.KM 13, RW.5, Katapang, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40971, Indonesia\n";
+            $context .= "Untuk nomor telepon dan email lengkap, kunjungi halaman Kontak di website.\n";
+        }
+
+        return $context ?: "Informasi umum tentang SMKN 1 Katapang.";
     }
 }

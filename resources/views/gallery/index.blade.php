@@ -19,20 +19,20 @@
             <div class="max-w-3xl">
                 <h6 class="text-blue-400 font-bold uppercase tracking-[0.3em] text-[10px] mb-4">SMKN 1 KATAPANG</h6>
                 <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-tight mb-8">
-                    Media Album <br/> & <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400 italic">Gallery</span>
+                    Media Album <br/> & <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400 italic">Galeri</span>
                 </h1>
                 <p class="text-slate-400 text-lg md:text-xl font-medium leading-relaxed mb-12">
-                    Relive the best moments from our school activities, sports competitions, and academic ceremonies.
+                    Kenang kembali momen terbaik dari kegiatan sekolah, kompetisi olahraga, dan upacara akademik kami.
                 </p>
 
                 <!-- Filter Bar -->
                 <div class="flex flex-wrap gap-3 mt-12 bg-white/5 backdrop-blur-md p-2 rounded-[2rem] border border-white/10 w-fit">
-                    @php $categories = ['All', 'Events', 'Sports', 'Academic', 'Excursions']; @endphp
+                    @php $categories = ['Semua', 'Acara', 'Olahraga', 'Akademik', 'Ekskursi']; @endphp
                     @foreach($categories as $cat)
                     <a href="{{ route('gallery.index', ['category' => $cat]) }}" 
                        class="px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all 
-                              {{ ($category ?? 'All') == $cat ? 'bg-white text-slate-900 shadow-xl' : 'text-white/60 hover:text-white' }}">
-                        {{ $cat }} {{ $cat == 'All' ? 'Albums' : '' }}
+                              {{ ($category ?? 'Semua') == $cat ? 'bg-white text-slate-900 shadow-xl' : 'text-white/60 hover:text-white' }}">
+                        {{ $cat }} {{ $cat == 'Semua' ? 'Album' : '' }}
                     </a>
                     @endforeach
                 </div>
@@ -124,8 +124,8 @@
     <section class="max-w-7xl mx-auto px-6 py-24">
         <div class="flex items-center justify-between mb-12">
             <div>
-                <h2 class="text-3xl font-black text-slate-900 tracking-tight">Recent Gallery</h2>
-                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] mt-2">A collection of individual highlights from all events.</p>
+                <h2 class="text-3xl font-black text-slate-900 tracking-tight">Galeri Terbaru</h2>
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] mt-2">Kumpulan sorotan dari semua acara.</p>
             </div>
             <div class="flex gap-2">
                  <button class="p-4 bg-white rounded-2xl border border-slate-100 shadow-sm text-slate-900 hover:bg-slate-50 transition-all">

@@ -1,12 +1,12 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Manajemen Foto PPDB')
+@section('title', 'Manajemen Foto SPMB')
 
 @section('content')
 <div class="sm:flex sm:items-center">
     <div class="sm:flex-auto">
-        <h1 class="text-2xl font-semibold leading-6 text-slate-900">Manajemen Foto PPDB</h1>
-        <p class="mt-2 text-sm text-slate-700">Pilih foto terbaru untuk diperbarui pada halaman publik PPDB sekolah.</p>
+        <h1 class="text-2xl font-semibold leading-6 text-slate-900">Manajemen Foto SPMB</h1>
+        <p class="mt-2 text-sm text-slate-700">Pilih foto terbaru untuk diperbarui pada halaman publik SPMB sekolah.</p>
     </div>
 </div>
 
@@ -34,7 +34,7 @@
             <div class="grid grid-cols-1 gap-x-8 gap-y-10 py-8 md:grid-cols-3">
                 <div>
                     <h2 class="text-base font-semibold leading-7 text-slate-900 font-outfit uppercase text-blue-600">Foto Utama (Hero)</h2>
-                    <p class="mt-1 text-sm leading-6 text-slate-600">Gambar besar yang pertama kali dilihat saat membuka halaman PPDB. Direkomendasikan resolusi HD (landscape).</p>
+                    <p class="mt-1 text-sm leading-6 text-slate-600">Gambar besar yang pertama kali dilihat saat membuka halaman SPMB. Direkomendasikan resolusi HD (landscape).</p>
                 </div>
 
                 <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
@@ -61,7 +61,7 @@
             <div class="grid grid-cols-1 gap-x-8 gap-y-10 py-12 border-t border-slate-900/10 md:grid-cols-3">
                 <div>
                     <h2 class="text-base font-semibold leading-7 text-slate-900 font-outfit uppercase text-blue-600">Foto Info Pendaftaran (Grid Bawah)</h2>
-                    <p class="mt-1 text-sm leading-6 text-slate-600">Tiga buah foto yang tampil pada bagian Kartu Informasi Jadwal, Kartu Alur, dan Kartu Kuota PPDB. Gambar potret direkomendasikan.</p>
+                    <p class="mt-1 text-sm leading-6 text-slate-600">Tiga buah foto yang tampil pada bagian Kartu Informasi Jadwal, Kartu Alur, dan Kartu Kuota SPMB. Gambar potret direkomendasikan.</p>
                 </div>
 
                 <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">

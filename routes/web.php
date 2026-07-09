@@ -22,6 +22,7 @@ use App\Http\Controllers\SuperAdmin\TeacherManagementController;
 use App\Http\Controllers\SuperAdmin\LandingSettingController;
 use App\Http\Controllers\SuperAdmin\SchoolProfileController;
 use App\Http\Controllers\SuperAdmin\AlbumController;
+use App\Http\Controllers\SuperAdmin\PasswordResetRequestController;
 use App\Http\Controllers\GalleryController;
 
 Route::get('/media', [GalleryController::class, 'index'])->name('gallery.index');
@@ -94,6 +95,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware('role:super_admin|super-admin')->prefix('super-admin')->group(function () {
         Route::get('/dashboard', [SuperAdminController::class, 'dashboard'])->name('super_admin.dashboard');
         Route::get('/users', [SuperAdminController::class, 'users'])->name('super_admin.users');
+        Route::get('/users/create', [SuperAdminController::class, 'createUser'])->name('super_admin.users.create');
+        Route::post('/users', [SuperAdminController::class, 'storeUser'])->name('super_admin.users.store');
+
+        // Password Reset Requests
+        Route::get('/password-reset-requests', [PasswordResetRequestController::class, 'index'])->name('super_admin.password_reset_requests.index');
+        Route::post('/password-reset-requests/{resetRequest}/resolve', [PasswordResetRequestController::class, 'resolve'])->name('super_admin.password_reset_requests.resolve');
+        Route::delete('/password-reset-requests/{resetRequest}', [PasswordResetRequestController::class, 'destroy'])->name('super_admin.password_reset_requests.destroy');
+        Route::get('/password-reset-requests/pending-count', [PasswordResetRequestController::class, 'pendingCount'])->name('super_admin.password_reset_requests.pending_count');
         Route::get('/users/trash', [SuperAdminController::class, 'trashedUsers'])->name('super_admin.users.trash');
         Route::get('/users/{user}/edit', [SuperAdminController::class, 'editUser'])->name('super_admin.users.edit');
         Route::put('/users/{user}', [SuperAdminController::class, 'updateUser'])->name('super_admin.users.update');
@@ -130,6 +139,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/bidang-kerja-settings', [App\Http\Controllers\SuperAdmin\BidangKerjaSettingController::class, 'index'])->name('super_admin.bidang_kerja_settings.index');
         Route::post('/bidang-kerja-settings', [App\Http\Controllers\SuperAdmin\BidangKerjaSettingController::class, 'update'])->name('super_admin.bidang_kerja_settings.update');
 
+        // Auth Appearance (background login/register/forgot-password)
+        Route::get('/auth-appearance', [\App\Http\Controllers\SuperAdmin\AuthAppearanceController::class, 'index'])->name('super_admin.auth_appearance.index');
+        Route::post('/auth-appearance', [\App\Http\Controllers\SuperAdmin\AuthAppearanceController::class, 'update'])->name('super_admin.auth_appearance.update');
+        Route::post('/auth-appearance/reset', [\App\Http\Controllers\SuperAdmin\AuthAppearanceController::class, 'reset'])->name('super_admin.auth_appearance.reset');
+
         // Landing Page CMS
         Route::get('/landing-settings', [LandingSettingController::class, 'index'])->name('super_admin.landing_settings.index');
         Route::post('/landing-settings', [LandingSettingController::class, 'update'])->name('super_admin.landing_settings.update');
@@ -152,6 +166,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
         Route::get('/ppdb', [AdminController::class, 'ppdb'])->name('admin.ppdb');
         Route::get('/e-rapor', [AdminController::class, 'eRapor'])->name('admin.e_rapor');
+
+        // Password Reset Requests (admin can also manage)
+        Route::get('/password-reset-requests', [PasswordResetRequestController::class, 'index'])->name('admin.password_reset_requests.index');
+        Route::post('/password-reset-requests/{resetRequest}/resolve', [PasswordResetRequestController::class, 'resolve'])->name('admin.password_reset_requests.resolve');
+        Route::delete('/password-reset-requests/{resetRequest}', [PasswordResetRequestController::class, 'destroy'])->name('admin.password_reset_requests.destroy');
+        Route::get('/password-reset-requests/pending-count', [PasswordResetRequestController::class, 'pendingCount'])->name('admin.password_reset_requests.pending_count');
+
+        // Auth Appearance (background login)
+        Route::get('/auth-appearance', [\App\Http\Controllers\SuperAdmin\AuthAppearanceController::class, 'index'])->name('admin.auth_appearance.index');
+        Route::post('/auth-appearance', [\App\Http\Controllers\SuperAdmin\AuthAppearanceController::class, 'update'])->name('admin.auth_appearance.update');
+        Route::post('/auth-appearance/reset', [\App\Http\Controllers\SuperAdmin\AuthAppearanceController::class, 'reset'])->name('admin.auth_appearance.reset');
+
+        // User Management (Admin: hanya bisa tambah/hapus editor)
+        Route::get('/users', [\App\Http\Controllers\Admin\UserManagementController::class, 'index'])->name('admin.users.index');
+        Route::get('/users/create', [\App\Http\Controllers\Admin\UserManagementController::class, 'create'])->name('admin.users.create');
+        Route::post('/users', [\App\Http\Controllers\Admin\UserManagementController::class, 'store'])->name('admin.users.store');
+        Route::delete('/users/{user}', [\App\Http\Controllers\Admin\UserManagementController::class, 'destroy'])->name('admin.users.destroy');
     });
 
     // Editor Panel

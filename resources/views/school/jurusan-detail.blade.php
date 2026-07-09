@@ -3,6 +3,46 @@
 @section('title', $jurusan->name)
 
 @section('content')
+@php
+if (!function_exists('getMajorColorHex')) {
+    function getMajorColorHex($color) {
+        if (str_starts_with($color, 'bg-[')) {
+            preg_match('/bg-\\[([^\]]+)\\]/', $color, $matches);
+            if (isset($matches[1])) {
+                return $matches[1];
+            }
+        }
+        // Fallback mapping
+        $map = [
+            'bg-red-500' => '#ef4444',
+            'bg-green-400' => '#4ade80',
+            'bg-blue-500' => '#3b82f6',
+            'bg-yellow-500' => '#eab308',
+            'bg-orange-500' => '#f97316',
+        ];
+        return $map[$color] ?? '#3b82f6';
+    }
+}
+$majorColor = getMajorColorHex($jurusan->color);
+@endphp
+<style>
+    /* Dynamic Theme Colors for {{ $jurusan->name }} */
+    .major-theme-text { color: {{ $majorColor }} !important; }
+    .major-theme-bg { background-color: {{ $majorColor }} !important; }
+    .major-theme-border { border-color: {{ $majorColor }} !important; }
+    
+    .major-theme-hover-bg:hover { 
+        background-color: {{ $majorColor }} !important; 
+        color: #ffffff !important; 
+    }
+    .major-theme-hover-border:hover { 
+        border-color: {{ $majorColor }} !important; 
+        color: {{ $majorColor }} !important; 
+    }
+    .major-theme-gallery-hover:hover {
+        background-color: {{ $majorColor }}60 !important;
+    }
+</style>
 <div class="bg-[#0A142F] min-h-screen font-inter text-white overflow-hidden">
     <!-- HERO SECTION -->
     <section class="relative h-screen flex items-center justify-center p-4">
@@ -18,16 +58,17 @@
         <!-- Content -->
         <div class="relative z-10 max-w-7xl mx-auto w-full px-6 lg:px-8">
             <div class="max-w-3xl" data-aos="fade-up">
-                <div class="inline-flex items-center gap-3 px-4 py-2 bg-blue-600/20 backdrop-blur-md rounded-full border border-blue-500/30 mb-8">
-                    <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
-                    <span class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400">{{ $jurusan->category ?? 'Program Keahlian' }}</span>
+                <div class="inline-flex items-center gap-3 px-4 py-2 backdrop-blur-md rounded-full border mb-8"
+                     style="background-color: {{ $majorColor }}15; border-color: {{ $majorColor }}40;">
+                    <span class="w-2 h-2 rounded-full animate-pulse" style="background-color: {{ $majorColor }};"></span>
+                    <span class="text-[10px] font-black uppercase tracking-[0.2em]" style="color: {{ $majorColor }};">{{ $jurusan->category ?? 'Program Keahlian' }}</span>
                 </div>
                 
-                <h1 class="text-5xl sm:text-7xl md:text-9xl font-black mb-6 font-outfit uppercase leading-none tracking-tighter">
-                    {{ explode(' ', $jurusan->name)[0] }}<span class="text-blue-500">{{ count(explode(' ', $jurusan->name)) > 1 ? ' ' . implode(' ', array_slice(explode(' ', $jurusan->name), 1)) : '' }}</span>
+                <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 font-outfit uppercase leading-none tracking-tighter">
+                    {{ explode(' ', $jurusan->name)[0] }}<span style="color: {{ $majorColor }};">{{ count(explode(' ', $jurusan->name)) > 1 ? ' ' . implode(' ', array_slice(explode(' ', $jurusan->name), 1)) : '' }}</span>
                 </h1>
                 
-                <p class="text-xl md:text-2xl text-gray-300 font-medium leading-relaxed mb-6 max-w-2xl">
+                <p class="text-lg md:text-xl text-gray-300 font-medium leading-relaxed mb-6 max-w-2xl">
                     {{ $jurusan->tagline ?? $jurusan->name . ' (' . $jurusan->acronym . ')' }}
                 </p>
 
@@ -36,7 +77,8 @@
                 </p>
 
                 <div class="flex flex-wrap gap-6">
-                    <a href="#about" class="px-10 py-5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl shadow-2xl shadow-blue-600/30 transition-all transform hover:-translate-y-1 uppercase tracking-widest text-xs">Jelajahi Jurusan</a>
+                    <a href="#about" class="px-10 py-5 text-white font-bold rounded-2xl transition-all transform hover:-translate-y-1 uppercase tracking-widest text-xs shadow-2xl hover:brightness-110 active:scale-95"
+                       style="background-color: {{ $majorColor }}; box-shadow: 0 15px 30px -5px {{ $majorColor }}60;">Jelajahi Jurusan</a>
                 </div>
             </div>
         </div>
@@ -65,11 +107,11 @@
                     
                     <div class="grid grid-cols-2 gap-8">
                         <div class="p-8 bg-gray-50 rounded-[2rem] border border-gray-100">
-                            <span class="text-[10px] font-black uppercase tracking-widest text-blue-600 mb-2 block">Kepala Jurusan</span>
+                            <span class="text-[10px] font-black uppercase tracking-widest mb-2 block major-theme-text">Kepala Jurusan</span>
                             <p class="font-extrabold font-outfit">{{ $jurusan->head_of_major ?? 'TBA' }}</p>
                         </div>
                         <div class="p-8 bg-gray-50 rounded-[2rem] border border-gray-100">
-                            <span class="text-[10px] font-black uppercase tracking-widest text-blue-600 mb-2 block">Kapasitas (Kuota)</span>
+                            <span class="text-[10px] font-black uppercase tracking-widest mb-2 block major-theme-text">Kapasitas (Kuota)</span>
                             <p class="font-extrabold font-outfit">{{ $jurusan->seats > 0 ? $jurusan->seats . ' Siswa' : 'TBA' }}</p>
                         </div>
                     </div>
@@ -81,7 +123,7 @@
                              class="w-full h-full object-cover">
                     </div>
                     <!-- Decorative back frame -->
-                    <div class="absolute inset-0 bg-blue-600 rounded-[3rem] -translate-x-4 translate-y-4 -z-10 opacity-20"></div>
+                    <div class="absolute inset-0 rounded-[3rem] -translate-x-4 translate-y-4 -z-10 opacity-20 major-theme-bg"></div>
                 </div>
             </div>
         </div>
@@ -95,7 +137,7 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-end mb-16" data-aos="fade-up">
                 <div>
-                    <h2 class="text-[10px] font-black uppercase tracking-[0.5em] text-blue-600 mb-6">Momen</h2>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.5em] mb-6 major-theme-text">Momen</h2>
                     <h3 class="text-4xl md:text-7xl font-black font-outfit uppercase leading-tight">Sorotan <br> Terbaru</h3>
                 </div>
                 <div class="mt-8 md:mt-0">
@@ -109,7 +151,7 @@
                         @foreach($album->photos->take(4) as $photo)
                         <div class="group relative aspect-square rounded-[2rem] overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500" data-aos="zoom-in" data-aos-delay="{{ $loop->index * 100 }}">
                             <img src="{{ asset('storage/' . $photo->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
-                            <div class="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/40 transition-all duration-500 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                            <div class="absolute inset-0 transition-all duration-500 flex items-center justify-center opacity-0 group-hover:opacity-100 major-theme-gallery-hover">
                                 <i class="fas fa-expand text-white text-2xl"></i>
                             </div>
                         </div>
@@ -132,7 +174,7 @@
     <section class="py-32 bg-[#FBFCFE]">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="text-center mb-16" data-aos="fade-up">
-                <div class="text-blue-600 font-bold tracking-[0.2em] uppercase text-xs mb-3">Jelajahi Lebih Lanjut</div>
+                <div class="font-bold tracking-[0.2em] uppercase text-xs mb-3 major-theme-text">Jelajahi Lebih Lanjut</div>
                 <h3 class="text-3xl md:text-5xl font-extrabold text-[#0A142F] mb-4 font-outfit uppercase tracking-tight">Program Keahlian Lainnya</h3>
                 <p class="text-gray-400 max-w-2xl mx-auto font-inter text-lg">Temukan potensi diri Anda melalui berbagai pilihan program keahlian unggulan kami lainnya.</p>
             </div>
@@ -148,7 +190,8 @@
                         
                         <!-- Top Badge -->
                         <div class="absolute top-6 left-6">
-                            <div class="px-3 py-1 bg-blue-600 rounded-full text-[10px] font-bold text-white uppercase tracking-widest shadow-lg">
+                            <div class="px-3 py-1 rounded-full text-[10px] font-bold text-white uppercase tracking-widest shadow-lg"
+                                 style="background-color: {{ getMajorColorHex($other->color) }};">
                                 {{ $other->category ?? 'UNGGULAN' }}
                             </div>
                         </div>
@@ -157,21 +200,27 @@
                     <!-- Content Area -->
                     <div class="p-8 flex-1 flex flex-col justify-between relative bg-white">
                         <!-- Acronym Background Shadow -->
-                        <div class="absolute top-4 right-8 text-7xl font-black text-gray-50 pointer-events-none group-hover:text-blue-50 transition-all duration-700">
+                        <div class="absolute top-4 right-8 text-7xl font-black text-gray-50 pointer-events-none transition-all duration-700"
+                             style="color: {{ getMajorColorHex($other->color) }}12;">
                             {{ $other->acronym }}
                         </div>
 
                         <div class="relative z-10">
-                            <h3 class="text-2xl font-extrabold text-[#0A142F] mb-3 font-outfit uppercase group-hover:text-blue-600 transition-colors tracking-tight">
+                            <h3 class="text-2xl font-extrabold text-[#0A142F] mb-3 font-outfit uppercase transition-colors tracking-tight"
+                                onmouseover="this.style.color='{{ getMajorColorHex($other->color) }}'"
+                                onmouseout="this.style.color='#0A142F'">
                                 {{ $other->name }}
                             </h3>
                             <p class="text-gray-500 text-sm font-medium leading-relaxed line-clamp-2">
-                                {{ $other->description ?? 'Membentuk tenaga kerja profesional and kompeten di bidangnya dengan standar industri global.' }}
+                                {{ $other->description ?? 'Membentuk tenaga kerja profesional dan kompeten di bidangnya dengan standar industri global.' }}
                             </p>
                         </div>
 
                         <div class="flex items-center justify-between pt-6 border-t border-gray-50 mt-auto relative z-10">
-                            <a href="{{ route('jurusan.detail', $other->slug) }}" class="text-[11px] font-extrabold text-[#0A142F] uppercase tracking-[0.2em] group-hover:text-blue-600 transition-all flex items-center gap-2">
+                            <a href="{{ route('jurusan.detail', $other->slug) }}" 
+                               class="text-[11px] font-extrabold text-[#0A142F] uppercase tracking-[0.2em] transition-all flex items-center gap-2"
+                               onmouseover="this.style.color='{{ getMajorColorHex($other->color) }}'"
+                               onmouseout="this.style.color='#0A142F'">
                                 PELAJARI &rarr;
                             </a>
                             <span class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">DEPARTEMEN {{ $other->acronym }}</span>
@@ -182,7 +231,8 @@
             </div>
             
             <div class="mt-20 text-center" data-aos="zoom-in">
-                <a href="{{ route('jurusan.index') }}" class="inline-flex justify-center items-center px-10 py-4 bg-white border-2 border-gray-100 hover:border-blue-600 hover:text-blue-600 text-[#0A142F] font-extrabold rounded-2xl shadow-sm transition-all text-xs uppercase tracking-widest">
+                <a href="{{ route('jurusan.index') }}" 
+                   class="inline-flex justify-center items-center px-10 py-4 bg-white border-2 border-gray-100 text-[#0A142F] font-extrabold rounded-2xl shadow-sm transition-all text-xs uppercase tracking-widest major-theme-hover-border">
                     Lihat Semua Jurusan
                 </a>
             </div>
@@ -194,10 +244,12 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-16" data-aos="fade-up">
                 <div>
-                    <h2 class="text-3xl md:text-5xl font-black text-[#0A142F] font-outfit uppercase tracking-tight mb-4">Berita & <span class="text-blue-600">Pembaruan</span></h2>
+                    <h2 class="text-3xl md:text-5xl font-black text-[#0A142F] font-outfit uppercase tracking-tight mb-4">Berita & <span class="major-theme-text">Pembaruan</span></h2>
                     <p class="text-gray-500 font-inter">Informasi dan berita terbaru dari program keahlian {{ $jurusan->name }}.</p>
                 </div>
-                <a href="{{ route('berita.index') }}" class="mt-6 md:mt-0 text-[10px] bg-blue-50 text-blue-600 px-6 py-3 rounded-xl font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-blue-600 hover:text-white transition-all shadow-sm">
+                <a href="{{ route('berita.index') }}" 
+                   class="mt-6 md:mt-0 text-[10px] px-6 py-3 rounded-xl font-bold uppercase tracking-widest flex items-center gap-2 transition-all shadow-sm major-theme-hover-bg major-theme-text"
+                   style="background-color: {{ $majorColor }}15;">
                     Lihat Semua Berita
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                 </a>
@@ -217,12 +269,17 @@
                     <div class="p-8">
                         <div class="flex items-center gap-2 text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-4">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                            {{ $post->created_at->format('M d, Y') }}
+                            {{ $post->created_at->translatedFormat('d M Y') }}
                         </div>
-                        <h3 class="text-xl font-extrabold text-[#0A142F] mb-4 font-outfit leading-tight group-hover:text-blue-600 transition-colors line-clamp-2">
+                        <h3 class="text-xl font-extrabold text-[#0A142F] mb-4 font-outfit leading-tight transition-colors line-clamp-2"
+                            onmouseover="this.style.color='{{ $majorColor }}'"
+                            onmouseout="this.style.color='#0A142F'">
                             {{ $post->title }}
                         </h3>
-                        <a href="{{ route('berita.detail', $post->slug) }}" class="text-[10px] font-black text-[#0A142F] hover:text-blue-600 transition-all uppercase tracking-widest flex items-center gap-2">
+                        <a href="{{ route('berita.detail', $post->slug) }}" 
+                           class="text-[10px] font-black text-[#0A142F] transition-all uppercase tracking-widest flex items-center gap-2"
+                           onmouseover="this.style.color='{{ $majorColor }}'"
+                           onmouseout="this.style.color='#0A142F'">
                             Baca Selengkapnya
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                         </a>
@@ -230,7 +287,8 @@
                 </div>
                 @empty
                     <div class="col-span-full text-center py-16 bg-white rounded-[2rem] border border-gray-100 shadow-sm" data-aos="fade-up">
-                        <div class="w-16 h-16 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+                             style="background-color: {{ $majorColor }}15; color: {{ $majorColor }};">
                             <svg class="w-8 h-8 font-light" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l6 6v10a2 2 0 01-2 2z"></path></svg>
                         </div>
                         <p class="text-gray-500 font-inter font-medium">Belum ada berita atau update untuk program keahlian ini.</p>

@@ -8,7 +8,10 @@
         <h1 class="text-2xl font-semibold leading-6 text-gray-900">Users</h1>
         <p class="mt-2 text-sm text-gray-700">Daftar semua pengguna dalam sistem dan peran mereka.</p>
     </div>
-    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none flex gap-3">
+        <a href="{{ route('super_admin.users.create') }}" class="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+            + Tambah User
+        </a>
         <a href="{{ route('super_admin.users.trash') }}" class="block rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
             View Trash
         </a>

@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Profile')
+@section('title', 'Profil')
 
 @section('content')
 <div class="max-w-7xl mx-auto space-y-8">

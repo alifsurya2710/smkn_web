@@ -1,6 +1,6 @@
 @extends('layouts.landing')
 
-@section('title', 'Informasi PPDB')
+@section('title', 'Informasi SPMB')
 
 @section('content')
 <!-- Hero Section -->
@@ -15,11 +15,11 @@
     </div>
     
     <div class="relative z-10 text-center px-4" data-aos="zoom-in">
-        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4 font-outfit uppercase tracking-tight">Informasi PPDB</h1>
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4 font-outfit uppercase tracking-tight">Informasi SPMB</h1>
         <nav class="flex justify-center space-x-2 text-gray-300 text-sm font-medium uppercase tracking-widest font-inter">
             <a href="{{ route('home') }}" class="hover:text-white transition">HOME</a>
             <span>&raquo;</span>
-            <span class="text-white">PPDB</span>
+            <span class="text-white">SPMB</span>
         </nav>
     </div>
 </div>
@@ -29,11 +29,11 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
         <div class="flex items-center justify-center space-x-2 text-gray-500 mb-4">
             <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
-            <span class="text-xs font-bold uppercase tracking-[0.3em]">SPMB / PPDB 2025</span>
+            <span class="text-xs font-bold uppercase tracking-[0.3em]">SPMB 2026</span>
         </div>
         <h2 class="text-3xl md:text-5xl font-extrabold text-[#0A142F] mb-8 font-outfit uppercase">Seleksi Penerimaan Murid Baru</h2>
         <div class="text-gray-500 leading-relaxed text-lg font-inter space-y-6">
-            <p>SMK Negeri 1 Katapang berkomitmen untuk menyelenggarakan proses penerimaan murid baru yang transparan, akuntabel, dan bebas dari gratifikasi. Seluruh data yang dikumpulkan dalam sistem SPMB Dinas Pendidikan Provinsi Jawa Barat 2025 hanya akan digunakan untuk keperluan seleksi akademik dan administrasi sesuai ketentuan yang berlaku.</p>
+            <p>SMK Negeri 1 Katapang berkomitmen untuk menyelenggarakan proses penerimaan murid baru yang transparan, akuntabel, dan bebas dari gratifikasi. Seluruh data yang dikumpulkan dalam sistem SPMB Dinas Pendidikan Provinsi Jawa Barat 2026 hanya akan digunakan untuk keperluan seleksi akademik dan administrasi sesuai ketentuan yang berlaku.</p>
             <p>Pastikan Anda membaca seluruh syarat dan jadwal yang telah ditetapkan agar tidak terjadi kesalahan dalam proses pendaftaran.</p>
         </div>
     </div>
@@ -59,7 +59,7 @@
                                  <div class="bg-white/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-white/30">
                                      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 00-2 2z"></path></svg>
                                  </div>
-                                 <h3 class="text-white text-xl font-bold uppercase tracking-widest font-outfit">Jadwal PPDB</h3>
+                                 <h3 class="text-white text-xl font-bold uppercase tracking-widest font-outfit">Jadwal SPMB</h3>
                              </div>
                         </div>
                     </div>

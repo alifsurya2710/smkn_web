@@ -69,16 +69,16 @@
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div class="mt-4 p-4 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800">
                     <p class="text-xs text-amber-800 dark:text-amber-300">
-                        {{ __('Your email address is unverified.') }}
+                        {{ __('Alamat email Anda belum diverifikasi.') }}
 
                         <button form="send-verification" class="ml-2 font-bold underline hover:text-amber-900">
-                            {{ __('Click here to re-send the verification email.') }}
+                            {{ __('Klik di sini untuk mengirim ulang email verifikasi.') }}
                         </button>
                     </p>
 
                     @if (session('status') === 'verification-link-sent')
                         <p class="mt-2 font-bold text-xs text-emerald-600 dark:text-emerald-400">
-                            {{ __('A new verification link has been sent to your email address.') }}
+                            {{ __('Tautan verifikasi baru telah dikirimkan ke alamat email Anda.') }}
                         </p>
                     @endif
                 </div>

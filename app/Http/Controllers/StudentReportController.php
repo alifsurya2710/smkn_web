@@ -62,9 +62,18 @@ class StudentReportController extends Controller
         return back()->with('error', 'Data verifikasi tidak cocok. Silakan cek Nama Lengkap dan NISN Anda.');
     }
 
-    public function logoutRapor()
+    public function logoutRapor(Request $request)
     {
-        session()->forget(['rapor_verified', 'rapor_student_nisn', 'rapor_student_name']);
+        // Clear rapor session data
+        session()->forget(['rapor_verified', 'rapor_student_nisn', 'rapor_student_name', 'rapor_student_id']);
+
+        // If user is logged in via Breeze (role: siswa), also logout from Auth
+        if (Auth::check()) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+        }
+
         return redirect()->route('e-rapor');
     }
 

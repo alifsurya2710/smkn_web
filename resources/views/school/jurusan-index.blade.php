@@ -3,6 +3,27 @@
 @section('title', 'Program Keahlian')
 
 @section('content')
+@php
+if (!function_exists('getMajorColorHex')) {
+    function getMajorColorHex($color) {
+        if (str_starts_with($color, 'bg-[')) {
+            preg_match('/bg-\\[([^\]]+)\\]/', $color, $matches);
+            if (isset($matches[1])) {
+                return $matches[1];
+            }
+        }
+        // Fallback mapping
+        $map = [
+            'bg-red-500' => '#ef4444',
+            'bg-green-400' => '#4ade80',
+            'bg-blue-500' => '#3b82f6',
+            'bg-yellow-500' => '#eab308',
+            'bg-orange-500' => '#f97316',
+        ];
+        return $map[$color] ?? '#3b82f6';
+    }
+}
+@endphp
 <!-- Hero Section -->
 <section class="bg-[#0A142F] text-white pt-32 pb-20 relative overflow-hidden">
     @php
@@ -130,34 +151,67 @@
                     <p class="text-slate-400 font-medium text-sm mt-1 uppercase tracking-widest">Menampilkan {{ count($majors) }} Jurusan Pilihan</p>
                 </div>
                 
-                <div class="flex items-center gap-4 bg-white px-5 py-3 rounded-2xl shadow-sm border border-slate-100">
-                    <span class="text-sm font-bold text-slate-500">Urutkan:</span>
-                    <select class="bg-transparent border-none p-0 pr-8 text-sm font-black text-[#0A142F] focus:ring-0 cursor-pointer">
-                        <option>Terpopuler</option>
-                        <option>Abjad (A-Z)</option>
-                    </select>
+                <div x-data="{ open: false, selected: 'Terpopuler' }" 
+                     @click.away="open = false"
+                     class="relative flex items-center bg-white px-5 py-3 rounded-2xl shadow-sm border border-slate-100 min-w-[200px]">
+                    <span class="text-sm font-bold text-slate-400 mr-2">Urutkan:</span>
+                    
+                    <button type="button" @click="open = !open" 
+                            class="flex items-center justify-between gap-2 w-full text-sm font-black text-[#0A142F] focus:outline-none select-none cursor-pointer">
+                        <span x-text="selected"></span>
+                        <svg class="w-4 h-4 text-slate-400 transition-transform duration-300"
+                             :class="{ 'rotate-180': open }"
+                             fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+
+                    <div x-show="open"
+                         x-transition:enter="transition ease-out duration-150"
+                         x-transition:enter-start="opacity-0 scale-95 -translate-y-2"
+                         x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                         x-transition:leave="transition ease-in duration-100"
+                         x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                         x-transition:leave-end="opacity-0 scale-95 -translate-y-2"
+                         style="display: none;"
+                         class="absolute right-0 top-full mt-2 w-full bg-white rounded-2xl border border-slate-100 shadow-[0_10px_30px_rgba(0,0,0,0.08)] overflow-hidden z-50 p-1.5">
+                        
+                        <div @click="selected = 'Terpopuler'; open = false; sortMajors('Terpopuler')" 
+                             class="flex items-center px-4 py-2.5 rounded-xl text-sm font-bold cursor-pointer transition-colors duration-150"
+                             :class="selected === 'Terpopuler' ? 'bg-blue-50 text-blue-600' : 'text-slate-700 hover:bg-slate-50'">
+                            Terpopuler
+                        </div>
+                        
+                        <div @click="selected = 'Abjad (A-Z)'; open = false; sortMajors('Abjad (A-Z)')" 
+                             class="flex items-center px-4 py-2.5 rounded-xl text-sm font-bold cursor-pointer transition-colors duration-150"
+                             :class="selected === 'Abjad (A-Z)' ? 'bg-blue-50 text-blue-600' : 'text-slate-700 hover:bg-slate-50'">
+                            Abjad (A-Z)
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Grid of Majors -->
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+            <div id="majors-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                 @foreach($majors as $slug => $major)
-                <div class="bg-white rounded-3xl shadow-[0_15px_50px_-15px_rgba(0,0,0,0.03)] border border-slate-100/80 overflow-hidden flex flex-col group hover:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-1">
+                <div data-order="{{ $loop->index }}" data-name="{{ $major->name }}" class="bg-white rounded-3xl shadow-[0_15px_50px_-15px_rgba(0,0,0,0.03)] border border-slate-100/80 overflow-hidden flex flex-col group hover:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-1">
                     <!-- Image and Banner Section -->
                     <div class="h-64 relative overflow-hidden bg-slate-100">
                         <img src="{{ str_starts_with($major->image, 'http') ? $major->image : asset('storage/' . $major->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 blur-[0.5px] group-hover:blur-0" alt="{{ $major->name }}">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                         
-                        <!-- Banner Text Overlay (Match Yellow Style) -->
-                        <div class="absolute top-0 right-0 p-4 w-full text-right pointer-events-none">
-                           <h4 class="text-[#facc15] font-black text-base md:text-lg leading-tight uppercase font-outfit drop-shadow-lg scale-y-110 origin-right italic">
+                        <!-- Banner Text Overlay (Avoid badge collision at bottom-right) -->
+                        <div class="absolute bottom-4 right-4 left-16 text-right pointer-events-none z-10">
+                           <h4 class="font-black text-xs md:text-sm leading-tight uppercase font-outfit drop-shadow-lg scale-y-110 origin-right italic"
+                               style="color: {{ getMajorColorHex($major->color) }};">
                                {{ $major->banner_text }}
                            </h4>
                         </div>
 
                         <!-- Category Badge -->
                         <div class="absolute top-4 left-4">
-                            <span class="text-[10px] font-black px-3 py-1.5 rounded-lg {{ $major->color }} text-white uppercase tracking-widest shadow-lg shadow-black/10">
+                            <span class="text-[10px] font-black px-3 py-1.5 rounded-lg text-white uppercase tracking-widest shadow-lg shadow-black/10"
+                                  style="background-color: {{ getMajorColorHex($major->color) }};">
                                 {{ $major->category }}
                             </span>
                         </div>
@@ -165,7 +219,9 @@
 
                     <!-- Content Section -->
                     <div class="p-8 flex-1 flex flex-col">
-                        <h3 class="font-black text-[#0A142F] text-xl leading-tight mb-4 font-outfit group-hover:text-blue-600 transition-colors">
+                        <h3 class="font-black text-[#0A142F] text-xl leading-tight mb-4 font-outfit transition-colors"
+                            onmouseover="this.style.color='{{ getMajorColorHex($major->color) }}'"
+                            onmouseout="this.style.color='#0A142F'">
                             {{ $major->name }}
                         </h3>
                         
@@ -181,7 +237,9 @@
                                 <span>{{ $major->seats }} Kursi</span>
                             </div>
                             
-                            <a href="{{ route('jurusan.detail', $major->slug) }}" class="{{ $major->color }} text-white text-[10px] font-black px-6 py-3 rounded-xl shadow-lg hover:brightness-110 transition-all uppercase tracking-widest active:scale-95">
+                            <a href="{{ route('jurusan.detail', $major->slug) }}" 
+                               class="text-white text-[10px] font-black px-6 py-3 rounded-xl shadow-lg hover:brightness-110 transition-all uppercase tracking-widest active:scale-95"
+                               style="background-color: {{ getMajorColorHex($major->color) }};">
                                 Detail
                             </a>
                         </div>
@@ -207,6 +265,30 @@
                 </nav>
             </div>
         </main>
-    </div>
 </section>
+
+<script>
+function sortMajors(criteria) {
+    const grid = document.getElementById('majors-grid');
+    if (!grid) return;
+    const cards = Array.from(grid.children);
+    
+    if (criteria === 'Terpopuler') {
+        cards.sort((a, b) => {
+            return parseInt(a.getAttribute('data-order')) - parseInt(b.getAttribute('data-order'));
+        });
+    } else if (criteria === 'Abjad (A-Z)') {
+        cards.sort((a, b) => {
+            const nameA = a.getAttribute('data-name').trim().toLowerCase();
+            const nameB = b.getAttribute('data-name').trim().toLowerCase();
+            return nameA.localeCompare(nameB);
+        });
+    }
+    
+    // Clear and append sorted cards
+    grid.innerHTML = '';
+    cards.forEach(card => grid.appendChild(card));
+}
+</script>
 @endsection
+

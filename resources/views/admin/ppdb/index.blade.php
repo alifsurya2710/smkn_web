@@ -1,11 +1,11 @@
 @extends('layouts.dashboard')
 
-@section('title', 'PPDB Online')
+@section('title', 'SPMB Online')
 
 @section('content')
 <div class="sm:flex sm:items-center">
     <div class="sm:flex-auto">
-        <h1 class="text-2xl font-semibold leading-6 text-gray-900">PPDB Applications</h1>
+        <h1 class="text-2xl font-semibold leading-6 text-gray-900">SPMB Applications</h1>
         <p class="mt-2 text-sm text-gray-700">Daftar calon siswa yang mendaftar melalui website.</p>
     </div>
 </div>

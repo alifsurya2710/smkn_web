@@ -32,6 +32,37 @@ class SuperAdminController extends Controller
         return view('super-admin.users.index', compact('users'));
     }
 
+    public function createUser()
+    {
+        // Super admin bisa membuat admin dan editor
+        $availableRoles = ['admin', 'editor'];
+        return view('super-admin.users.create', compact('availableRoles'));
+    }
+
+    public function storeUser(Request $request)
+    {
+        $request->validate([
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|string|email|max:255|unique:users,email',
+            'password' => [
+                'required', 'string', 'min:8', 'confirmed',
+                'regex:/[A-Z]/', 'regex:/[a-z]/',
+                'regex:/[0-9]/', 'regex:/[@$!%*?&]/',
+            ],
+            'role'     => 'required|in:admin,editor',
+        ]);
+
+        $user = \App\Models\User::create([
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'password' => \Illuminate\Support\Facades\Hash::make($request->password),
+        ]);
+
+        $user->assignRole($request->role);
+
+        return redirect()->route('super_admin.users')->with('success', 'User ' . $request->role . ' berhasil ditambahkan.');
+    }
+
     public function activityLog()
     {
         return view('super-admin.activity-log.index');

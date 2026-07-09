@@ -14,7 +14,7 @@ class SchoolController extends Controller
 
     public function index()
     {
-        $profile = SchoolProfile::first();
+        $profile = SchoolProfile::firstOrCreate([]);
         $featuredMajors = \App\Models\Major::where('is_active', true)->orderBy('order')->take(3)->get();
         $majors = \App\Models\Major::where('is_active', true)->orderBy('order')->get();
 
@@ -46,7 +46,7 @@ class SchoolController extends Controller
 
     public function about()
     {
-        $profile = SchoolProfile::first();
+        $profile = SchoolProfile::firstOrCreate([]);
         return view('school.about', compact('profile'));
     }
 
@@ -82,7 +82,7 @@ class SchoolController extends Controller
     public function jurusan($slug)
     {
         $jurusan = \App\Models\Major::where('slug', $slug)->where('is_active', true)->firstOrFail();
-        $profile = SchoolProfile::first();
+        $profile = SchoolProfile::firstOrCreate([]);
         
         // Fetch related news (by major_id first, fallback to general news)
         $relatedNews = \App\Models\Post::where('major_id', $jurusan->id)
@@ -146,7 +146,7 @@ class SchoolController extends Controller
 
     public function staff()
     {
-        $profile = SchoolProfile::first();
+        $profile = SchoolProfile::firstOrCreate([]);
         $management = User::role('guru')->where('is_management', true)->orderBy('order')->get();
         $teachers = User::role('guru')->where('is_management', false)->orderBy('order', 'asc')->orderBy('name', 'asc')->get()->groupBy(function($item) {
             $pos = trim($item->position ?? '');
@@ -168,6 +168,7 @@ class SchoolController extends Controller
         });
         return view('school.staff', compact('profile', 'management', 'teachers'));
     }
+
 
     public function facilities()
     {

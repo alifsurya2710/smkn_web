@@ -12,6 +12,18 @@
     </a>
 </li>
 
+@if($user->hasRole(['super_admin', 'super-admin', 'admin', 'editor']))
+<li>
+    <a href="{{ route('home') }}" target="_blank"
+       class="text-slate-400 hover:bg-emerald-700 hover:text-white group flex gap-x-3 rounded-lg p-2.5 text-sm font-semibold leading-6 transition-all duration-200">
+        <svg class="h-5 w-5 shrink-0 text-slate-500 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+        </svg>
+        Lihat Website
+    </a>
+</li>
+@endif
+
 <!-- KONTEN WEBSITE -->
 <div class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mb-4 mt-8 px-2">Konten Website</div>
 
@@ -23,6 +35,25 @@
             Hero & Landing
         </a>
     </li>
+@endif
+
+{{-- Background Login (Super Admin & Admin) --}}
+@if($user->hasRole(['super_admin', 'super-admin', 'admin']))
+    @php
+        $bgLoginRoute = $user->hasRole(['super_admin','super-admin'])
+            ? route('super_admin.auth_appearance.index')
+            : route('admin.auth_appearance.index');
+        $bgLoginActive = request()->routeIs('super_admin.auth_appearance.*') || request()->routeIs('admin.auth_appearance.*');
+    @endphp
+    <li>
+        <a href="{{ $bgLoginRoute }}" class="{{ $bgLoginActive ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }} group flex gap-x-3 rounded-lg p-2.5 text-sm font-semibold leading-6 transition-all duration-200">
+            <svg class="h-5 w-5 shrink-0 {{ $bgLoginActive ? 'text-white' : 'text-slate-500 group-hover:text-white' }}" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            Background Login
+        </a>
+    </li>
+@endif
+
+@if($user->hasRole(['super_admin', 'super-admin']))
     <li>
         <a href="{{ route('super_admin.blud_settings.index') }}" class="{{ request()->routeIs('super_admin.blud_settings.*') ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }} group flex gap-x-3 rounded-lg p-2.5 text-sm font-semibold leading-6 transition-all duration-200">
             <svg class="h-5 w-5 shrink-0 {{ request()->routeIs('super_admin.blud_settings.*') ? 'text-white' : 'text-slate-500 group-hover:text-white' }}" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18" /></svg>
@@ -38,7 +69,7 @@
     <li>
         <a href="{{ route('super_admin.ppdb_settings.index') }}" class="{{ request()->routeIs('super_admin.ppdb_settings.*') ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }} group flex gap-x-3 rounded-lg p-2.5 text-sm font-semibold leading-6 transition-all duration-200">
             <svg class="h-5 w-5 shrink-0 {{ request()->routeIs('super_admin.ppdb_settings.*') ? 'text-white' : 'text-slate-500 group-hover:text-white' }}" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" /></svg>
-            Fitur PPDB
+            Fitur SPMB
         </a>
     </li>
     <li>
@@ -150,6 +181,31 @@
 <!-- ADMINISTRASI -->
 <div class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mb-4 mt-8 px-2">Administrasi</div>
 @if($user->hasRole(['super_admin', 'super-admin', 'admin']))
+
+    {{-- Reset Password Requests --}}
+    @php
+        $pendingResetCount = \App\Models\PasswordResetRequest::where('status','pending')->count();
+    @endphp
+    <li>
+        @php
+            $resetRoute = $user->hasRole(['super_admin','super-admin'])
+                ? route('super_admin.password_reset_requests.index')
+                : route('admin.password_reset_requests.index');
+            $isResetActive = request()->routeIs('super_admin.password_reset_requests.*') || request()->routeIs('admin.password_reset_requests.*');
+        @endphp
+        <a href="{{ $resetRoute }}"
+           class="{{ $isResetActive ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }} group flex gap-x-3 rounded-lg p-2.5 text-sm font-semibold leading-6 transition-all duration-200">
+            <svg class="h-5 w-5 shrink-0 {{ $isResetActive ? 'text-white' : 'text-slate-500 group-hover:text-white' }}" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+            </svg>
+            Reset Password
+            @if($pendingResetCount > 0)
+                <span class="ml-auto inline-flex items-center justify-center w-5 h-5 text-[10px] font-black bg-red-500 text-white rounded-full">
+                    {{ $pendingResetCount > 9 ? '9+' : $pendingResetCount }}
+                </span>
+            @endif
+        </a>
+    </li>
 
     {{-- E-Rapor --}}
     <li>

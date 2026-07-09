@@ -205,6 +205,23 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             @forelse($featuredMajors as $major)
+            @php
+                // Helper: convert Tailwind color class to hex
+                $mColor = (function($color) {
+                    if (str_starts_with($color, 'bg-[')) {
+                        preg_match('/bg-\[([^\]]+)\]/', $color, $m);
+                        if (isset($m[1])) return $m[1];
+                    }
+                    $map = [
+                        'bg-red-500'    => '#ef4444',
+                        'bg-green-400'  => '#4ade80',
+                        'bg-blue-500'   => '#3b82f6',
+                        'bg-yellow-500' => '#eab308',
+                        'bg-orange-500' => '#f97316',
+                    ];
+                    return $map[$color] ?? '#3b82f6';
+                })($major->color);
+            @endphp
             <div class="group relative bg-white border border-gray-100 rounded-[32px] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col h-[480px]" data-aos="fade-up" data-aos-delay="{{ $loop->index * 150 }}">
                 <!-- Major Image -->
                 <div class="h-1/2 relative overflow-hidden">
@@ -214,7 +231,8 @@
                     
                     <!-- Top Badge -->
                     <div class="absolute top-6 left-6">
-                        <div class="px-3 py-1 bg-blue-600 rounded-full text-[10px] font-bold text-white uppercase tracking-widest shadow-lg">
+                        <div class="px-3 py-1 rounded-full text-[10px] font-bold text-white uppercase tracking-widest shadow-lg"
+                             style="background-color: {{ $mColor }};">
                             {{ $major->category ?? 'UNGGULAN' }}
                         </div>
                     </div>
@@ -223,12 +241,15 @@
                 <!-- Content Area -->
                 <div class="p-8 flex-1 flex flex-col justify-between relative bg-white">
                     <!-- Acronym Background Shadow -->
-                    <div class="absolute top-4 right-8 text-7xl font-black text-gray-50 pointer-events-none group-hover:text-blue-50 transition-all duration-700">
+                    <div class="absolute top-4 right-8 text-7xl font-black pointer-events-none transition-all duration-700"
+                         style="color: {{ $mColor }}12;">
                         {{ $major->acronym }}
                     </div>
 
                     <div class="relative z-10">
-                        <h3 class="text-2xl font-extrabold text-[#0A142F] mb-3 font-outfit uppercase group-hover:text-blue-600 transition-colors">
+                        <h3 class="text-2xl font-extrabold text-[#0A142F] mb-3 font-outfit uppercase transition-colors tracking-tight"
+                            onmouseover="this.style.color='{{ $mColor }}'"
+                            onmouseout="this.style.color='#0A142F'">
                             {{ $major->name }}
                         </h3>
                         <p class="text-gray-500 text-sm font-medium leading-relaxed line-clamp-3">
@@ -237,7 +258,10 @@
                     </div>
 
                     <div class="flex items-center justify-between pt-6 border-t border-gray-50 mt-auto relative z-10">
-                        <a href="{{ route('jurusan.detail', $major->slug) }}" class="text-[11px] font-extrabold text-[#0A142F] uppercase tracking-[0.2em] group-hover:text-blue-600 transition-all flex items-center gap-2">
+                        <a href="{{ route('jurusan.detail', $major->slug) }}" 
+                           class="text-[11px] font-extrabold text-[#0A142F] uppercase tracking-[0.2em] transition-all flex items-center gap-2"
+                           onmouseover="this.style.color='{{ $mColor }}'"
+                           onmouseout="this.style.color='#0A142F'">
                             Pelajari &rarr;
                         </a>
                         <span class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">DEPARTEMEN {{ $major->acronym }}</span>
@@ -250,7 +274,10 @@
         </div>
         
         <div class="text-center" data-aos="zoom-in">
-            <a href="{{ route('jurusan.index') }}" class="inline-flex justify-center items-center px-10 py-4 bg-white border-2 border-gray-100 hover:border-blue-600 hover:text-blue-600 text-[#0A142F] font-extrabold rounded-2xl shadow-sm transition-all text-xs uppercase tracking-widest">
+            <a href="{{ route('jurusan.index') }}" 
+               class="inline-flex justify-center items-center px-10 py-4 bg-white border-2 border-gray-100 text-[#0A142F] font-extrabold rounded-2xl shadow-sm transition-all text-xs uppercase tracking-widest"
+               onmouseover="this.style.borderColor='#0A142F'; this.style.backgroundColor='#0A142F'; this.style.color='#fff';"
+               onmouseout="this.style.borderColor='#f3f4f6'; this.style.backgroundColor='#fff'; this.style.color='#0A142F';">
                 Lihat Semua Jurusan
             </a>
         </div>
