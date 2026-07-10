@@ -10,6 +10,9 @@
             animation: gradient-bg 8s ease infinite;
         }
     </style>
+    @if(env('RECAPTCHA_SITE_KEY'))
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    @endif
     <div class="flex min-h-screen w-full font-sans bg-white">
         <!-- LEFT SIDE: BRANDING -->
         <div class="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-slate-900">
@@ -113,6 +116,16 @@
                         <input id="remember_me" type="checkbox" name="remember" class="w-[12px] h-[12px] text-black border-slate-300 rounded focus:ring-black focus:ring-offset-0 transition-colors">
                         <label for="remember_me" class="ml-2 text-[10px] font-semibold text-slate-500 tracking-wide">Ingat perangkat ini selama 30 hari</label>
                     </div>
+
+                    {{-- reCAPTCHA --}}
+                    @if(env('RECAPTCHA_SITE_KEY'))
+                    <div class="flex justify-center">
+                        <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+                    </div>
+                    @if($errors->has('g-recaptcha-response'))
+                        <p class="text-xs text-red-500 text-center">{{ $errors->first('g-recaptcha-response') }}</p>
+                    @endif
+                    @endif
 
                     <!-- Submit -->
                     <button type="submit" class="w-full py-2.5 bg-black text-white rounded-lg text-[13px] font-bold tracking-wide hover:bg-slate-800 focus:ring-4 focus:ring-slate-200 active:scale-[0.98] transition-all flex justify-center items-center shadow-md">

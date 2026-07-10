@@ -1,4 +1,7 @@
 <x-guest-layout>
+    @if(env('RECAPTCHA_SITE_KEY'))
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    @endif
     <style>
         @keyframes gradient-bg {
             0% { background-position: 0% 50%; }
@@ -267,6 +270,15 @@
 
                     {{-- Submit --}}
                     <div class="pt-2 fade-in-up fade-in-up-d6">
+                        {{-- reCAPTCHA --}}
+                        @if(env('RECAPTCHA_SITE_KEY'))
+                        <div class="flex justify-center mb-4">
+                            <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+                        </div>
+                        @if($errors->has('g-recaptcha-response'))
+                            <p class="text-xs text-red-500 text-center mb-3">{{ $errors->first('g-recaptcha-response') }}</p>
+                        @endif
+                        @endif
                         <button type="submit"
                                 class="w-full py-2.5 bg-black text-white rounded-lg text-[13px] font-bold tracking-wide hover:bg-slate-800 focus:ring-4 focus:ring-slate-200 active:scale-[0.98] transition-all flex justify-center items-center shadow-md">
                             Daftar Sekarang
