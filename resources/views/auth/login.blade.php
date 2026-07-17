@@ -61,11 +61,10 @@
             <div class="w-full max-w-[380px] space-y-7">
                 <!-- Header -->
                 <div class="text-center space-y-6 flex flex-col items-center">
-                    <!-- School Logo -->
-                    <div class="mb-2 w-16 h-16 flex items-center justify-center overflow-hidden drop-shadow-lg transition-transform duration-300 hover:scale-105">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Logo_SMK_Negeri_1_Katapang.png/600px-Logo_SMK_Negeri_1_Katapang.png" 
-                             onerror="this.src='https://via.placeholder.com/80/e2e8f0/0f172a?text=SMK';"
-                             alt="Logo" class="h-full w-auto object-contain">
+                    <!-- Logo -->
+                    <div class="w-20 h-20 flex items-center justify-center overflow-hidden drop-shadow-lg transition-transform duration-300 hover:scale-105">
+                        <img src="{{ asset('images/logo.png') }}"
+                             alt="Logo SMKN 1 Katapang" class="h-full w-auto object-contain">
                     </div>
                     <h2 class="text-[22px] font-bold text-slate-800 tracking-tight font-sans">Selamat Datang Kembali</h2>
                 </div>
