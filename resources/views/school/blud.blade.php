@@ -1,6 +1,6 @@
-@extends('layouts.landing')
+﻿@extends('layouts.landing')
 
-@section('title', $settings['blud_title'] ?? 'PRA BLUD SMKN 1 KATAPANG')
+@section('title', $settings['blud_title'] ?? 'PRA BLUD RA AL-IKHWAN')
 
 @section('content')
 <div class="bg-white min-h-screen pt-32 pb-0 overflow-hidden">
@@ -24,15 +24,15 @@
 
         <!-- Title & Main Description -->
         <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
-            <h1 class="text-3xl md:text-6xl font-black text-[#0A142F] mb-10 font-outfit uppercase tracking-tighter">
-                {{ $settings['blud_title'] ?? 'PRA BLUD SMKN 1 KATAPANG' }}
+            <h1 class="text-3xl md:text-6xl font-black text-[#0D2461] mb-10 font-outfit uppercase tracking-tighter">
+                {{ $settings['blud_title'] ?? 'PRA BLUD RA AL-IKHWAN' }}
             </h1>
             
             <div class="text-slate-600 text-sm md:text-lg leading-relaxed font-inter text-center md:text-justify max-w-4xl mx-auto">
                 @if(isset($settings['blud_description']))
                     {!! nl2br(e($settings['blud_description'])) !!}
                 @else
-                    <p>BLUD (Badan Layanan Umum Daerah) SMKN 1 Katapang merupakan sebuah inovasi di bidang pendidikan yang memungkinkan sekolah untuk lebih mandiri dan fleksibel dalam mengelola sumber daya keuangan...</p>
+                    <p>BLUD (Badan Layanan Umum Daerah) RA AL-IKHWAN merupakan sebuah inovasi di bidang pendidikan yang memungkinkan sekolah untuk lebih mandiri dan fleksibel dalam mengelola sumber daya keuangan...</p>
                 @endif
             </div>
 
@@ -50,7 +50,7 @@
 
         // Fallback for demo
         if(empty($messages)) {
-            $messages[] = "Assalamu'alaikum warahmatullahi wabarakatuh,\n\nPerkenalkan, saya Andri Lesmana, S.Pd., Kepala Program Keahlian Teknik Kendaraan Ringan di SMKN 1 Katapang. Dengan semangat untuk mencetak generasi yang unggul, kami fokus pada pengembangan keterampilan teknis dan profesional siswa melalui pembelajaran berbasis praktik dan kolaborasi dengan industri. Kami berkomitmen untuk melahirkan lulusan yang kompeten dan siap bersaing di dunia otomotif. Terima kasih atas dukungan dan kepercayaan dari semua pihak dalam mendukung pendidikan di SMKN 1 Katapang.\n\nWassalamu'alaikum warahmatullahi wabarakatuh.";
+            $messages[] = "Assalamu'alaikum warahmatullahi wabarakatuh,\n\nPerkenalkan, saya Andri Lesmana, S.Pd., Kepala Program Keahlian Teknik Kendaraan Ringan di RA AL-IKHWAN. Dengan semangat untuk mencetak generasi yang unggul, kami fokus pada pengembangan keterampilan teknis dan profesional siswa melalui pembelajaran berbasis praktik dan kolaborasi dengan industri. Kami berkomitmen untuk melahirkan lulusan yang kompeten dan siap bersaing di dunia otomotif. Terima kasih atas dukungan dan kepercayaan dari semua pihak dalam mendukung pendidikan di RA AL-IKHWAN.\n\nWassalamu'alaikum warahmatullahi wabarakatuh.";
         }
     @endphp
 

@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
 @section('title', 'Dashboard Admin')
 
@@ -12,7 +12,7 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
     <!-- Similar Cards as Super Admin but for SPMB/Rapor -->
     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden group">
-        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform text-blue-600">
+        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform text-green-700">
             <svg class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
         </div>
         <p class="text-3xl font-bold text-slate-900">{{ $stats['total_ppdb'] }}</p>
@@ -32,7 +32,7 @@
     <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
         <div class="px-6 py-4 border-b border-slate-50 flex items-center justify-between">
             <h3 class="text-xs font-bold text-slate-900 uppercase tracking-widest">Pendaftaran SPMB Terbaru</h3>
-            <a href="{{ route('admin.ppdb') }}" class="text-[10px] font-bold text-blue-600 uppercase">Lihat SPMB</a>
+            <a href="{{ route('admin.ppdb') }}" class="text-[10px] font-bold text-green-700 uppercase">Lihat SPMB</a>
         </div>
          <div class="p-8 text-center bg-slate-50/20">
             <p class="text-xs text-slate-400">Belum ada pendaftaran masuk.</p>
@@ -42,7 +42,7 @@
     <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
         <div class="px-6 py-4 border-b border-slate-50 flex items-center justify-between">
             <h3 class="text-xs font-bold text-slate-900 uppercase tracking-widest">Rapor Siswa Terbaru</h3>
-            <a href="{{ route('admin.e_rapor') }}" class="text-[10px] font-bold text-blue-600 uppercase">Input Rapor</a>
+            <a href="{{ route('admin.e_rapor') }}" class="text-[10px] font-bold text-green-700 uppercase">Input Rapor</a>
         </div>
         <div class="p-8 text-center bg-slate-50/20">
             <p class="text-xs text-slate-400">Belum ada rapor diupload hari ini.</p>

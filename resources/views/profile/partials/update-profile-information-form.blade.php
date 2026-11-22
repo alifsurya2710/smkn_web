@@ -13,13 +13,18 @@
         @csrf
     </form>
 
+    <form id="delete-photo-form" method="post" action="{{ route('profile.photo.destroy') }}" class="hidden">
+        @csrf
+        @method('delete')
+    </form>
+
     <form method="post" action="{{ route('profile.update') }}" class="mt-8 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
-        <div class="flex items-center gap-6 pb-4">
-            <div class="relative group">
-                <div class="h-24 w-24 rounded-2xl bg-blue-600 flex items-center justify-center text-white text-3xl font-bold shadow-xl shadow-blue-500/20 overflow-hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 pb-4">
+            <div class="relative group self-center sm:self-auto">
+                <div class="h-20 w-20 sm:h-24 sm:w-24 rounded-2xl bg-green-600 flex items-center justify-center text-white text-2xl sm:text-3xl font-bold shadow-xl shadow-green-600/20 overflow-hidden">
                     @if($user->photo)
                         <img src="{{ asset('storage/' . $user->photo) }}" alt="Profile Photo" class="h-full w-full object-cover">
                     @else
@@ -27,23 +32,34 @@
                     @endif
                 </div>
                 <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl cursor-pointer" onclick="document.getElementById('photo-input').click()">
-                    <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    <svg class="h-7 w-7 sm:h-8 sm:w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                 </div>
             </div>
-            <div>
+            <div class="text-center sm:text-left">
                 <h3 class="text-sm font-bold text-slate-900 dark:text-white">Foto Profil</h3>
                 <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Gunakan foto formal untuk identitas website.</p>
+                <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mt-3">
+                    <button type="button" onclick="document.getElementById('photo-input').click()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-colors">
+                        Unggah Foto
+                    </button>
+                    @if($user->photo)
+                        <button type="button" onclick="if(confirm('Yakin ingin menghapus foto profil ini?')) document.getElementById('delete-photo-form').submit();" class="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1">
+                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                            Hapus Foto
+                        </button>
+                    @endif
+                </div>
                 <input type="file" id="photo-input" name="photo" class="hidden" accept="image/*" onchange="
                     const reader = new FileReader(); 
                     reader.onload = (e) => { 
-                        const container = document.querySelector('.h-24.w-24');
+                        const container = document.querySelector('.h-20.w-20') || document.querySelector('.h-24.w-24');
                         let img = container.querySelector('img');
                         if (!img) {
                             container.innerHTML = '<img class=\'h-full w-full object-cover\' alt=\'Profile Photo\'>';
                             img = container.querySelector('img');
                         }
                         img.src = e.target.result;
-                        container.classList.remove('bg-blue-600', 'text-white', 'text-3xl', 'font-bold');
+                        container.classList.remove('bg-green-600', 'text-white', 'text-3xl', 'font-bold');
                     }; 
                     reader.readAsDataURL(this.files[0]);
                 " />
@@ -54,7 +70,7 @@
         <div class="space-y-2">
             <label for="name" class="block text-sm font-semibold text-slate-700 dark:text-slate-300">Nama Lengkap</label>
             <input id="name" name="name" type="text" 
-                   class="block w-full rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-900/50 dark:text-white focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-200" 
+                   class="block w-full rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-900/50 dark:text-white focus:border-green-500 focus:ring-green-500/20 transition-all duration-200" 
                    value="{{ old('name', $user->name) }}" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
@@ -62,7 +78,7 @@
         <div class="space-y-2">
             <label for="email" class="block text-sm font-semibold text-slate-700 dark:text-slate-300">Alamat Email</label>
             <input id="email" name="email" type="email" 
-                   class="block w-full rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-900/50 dark:text-white focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-200" 
+                   class="block w-full rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-900/50 dark:text-white focus:border-green-500 focus:ring-green-500/20 transition-all duration-200" 
                    value="{{ old('email', $user->email) }}" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
@@ -86,7 +102,7 @@
         </div>
 
         <div class="flex items-center gap-4 pt-2">
-            <button type="submit" class="inline-flex items-center px-6 py-3 bg-blue-600 dark:bg-blue-500 border border-transparent rounded-xl font-bold text-sm text-white uppercase tracking-widest hover:bg-blue-700 dark:hover:bg-blue-400 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150 shadow-lg shadow-blue-500/25">
+            <button type="submit" class="inline-flex items-center px-6 py-3 bg-green-600 dark:bg-green-500 border border-transparent rounded-xl font-bold text-sm text-white uppercase tracking-widest hover:bg-green-700 dark:hover:bg-green-400 focus:bg-blue-700 active:bg-[#0D2461] focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150 shadow-lg shadow-blue-500/25">
                 Simpan Perubahan
             </button>
 

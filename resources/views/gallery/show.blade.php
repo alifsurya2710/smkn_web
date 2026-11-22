@@ -1,4 +1,4 @@
-@extends('layouts.landing')
+﻿@extends('layouts.landing')
 
 @section('title', $album->title . ' - Galeri')
 
@@ -15,12 +15,12 @@
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-12">
                 <div class="max-w-3xl">
                     <div class="flex items-center gap-3 mb-6">
-                        <span class="px-4 py-1.5 bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-widest rounded-full">{{ $album->category }}</span>
+                        <span class="px-4 py-1.5 bg-green-50 text-green-700 text-[10px] font-black uppercase tracking-widest rounded-full">{{ $album->category }}</span>
                         <span class="text-slate-300 font-bold tracking-widest text-[10px] uppercase">{{ $album->created_at->format('d M Y') }}</span>
                     </div>
                     <h1 class="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight mb-8">{{ $album->title }}</h1>
                     <p class="text-slate-500 text-lg md:text-xl font-medium leading-relaxed">
-                        {{ $album->description ?? 'Menampilan dokumentasi kegiatan dari album ' . $album->title . ' SMKN 1 Katapang.' }}
+                        {{ $album->description ?? 'Menampilan dokumentasi kegiatan dari album ' . $album->title . ' RA AL-IKHWAN.' }}
                     </p>
                 </div>
                 
@@ -74,11 +74,11 @@
     <section class="max-w-5xl mx-auto px-6 pb-24">
         <div class="bg-slate-900 rounded-[3rem] p-16 text-center relative overflow-hidden">
             <div class="absolute inset-0 opacity-20">
-                <div class="absolute top-0 left-0 w-64 h-64 bg-blue-500 rounded-full blur-[80px] -ml-20 -mt-20"></div>
+                <div class="absolute top-0 left-0 w-64 h-64 bg-green-500 rounded-full blur-[80px] -ml-20 -mt-20"></div>
             </div>
             <div class="relative z-10">
                 <h2 class="text-3xl font-bold text-white mb-6">Browse More Albums?</h2>
-                <a href="{{ route('gallery.index') }}" class="inline-flex bg-white text-slate-900 px-10 py-5 rounded-full text-xs font-black uppercase tracking-[0.2em] hover:bg-blue-400 hover:text-white transition-all shadow-2xl">Return to Media Center</a>
+                <a href="{{ route('gallery.index') }}" class="inline-flex bg-white text-slate-900 px-10 py-5 rounded-full text-xs font-black uppercase tracking-[0.2em] hover:bg-green-400 hover:text-white transition-all shadow-2xl">Return to Media Center</a>
             </div>
         </div>
     </section>

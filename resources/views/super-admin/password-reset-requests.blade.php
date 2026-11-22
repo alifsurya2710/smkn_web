@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
 @section('title', 'Permintaan Reset Kata Sandi')
 
@@ -59,7 +59,7 @@
                     <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30 transition-colors {{ $req->status === 'pending' ? 'bg-amber-50/30 dark:bg-amber-900/10' : '' }}">
                         <td class="px-6 py-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-sm overflow-hidden flex-shrink-0">
+                                <div class="w-9 h-9 rounded-xl bg-green-600 flex items-center justify-center text-white font-bold text-sm overflow-hidden flex-shrink-0">
                                     @if($req->user->photo)
                                         <img src="{{ asset('storage/' . $req->user->photo) }}" class="w-full h-full object-cover" alt="">
                                     @else
@@ -103,7 +103,7 @@
                             @if($req->status === 'pending')
                                 <div x-data="{ modalOpen: false }" class="flex items-center gap-2">
                                     <button @click="modalOpen = true"
-                                            class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white text-xs font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+                                            class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-600 text-white text-xs font-semibold rounded-lg hover:bg-green-700 transition-colors">
                                         <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
                                         </svg>
@@ -145,8 +145,8 @@
                                                 get allPass()   { return this.hasMin && this.hasUpper && this.hasLower && this.hasNumber && this.hasSymbol },
                                              }">
                                             <div class="flex items-center gap-3 mb-5">
-                                                <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center">
-                                                    <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+                                                <div class="w-10 h-10 bg-green-100 dark:bg-[#0D2461]/30 rounded-xl flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
                                                 </div>
                                                 <div>
                                                     <h3 class="text-sm font-bold text-slate-900 dark:text-white">Reset Kata Sandi</h3>
@@ -166,7 +166,7 @@
                                                         <label class="text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wide">Password Baru</label>
                                                         <div class="relative mt-1.5">
                                                             <input :type="showPw ? 'text' : 'password'" name="new_password" x-model="pw" required placeholder="Buat password yang kuat"
-                                                                   class="block w-full pr-10 px-3 py-2.5 border border-slate-200 dark:border-slate-600 rounded-lg text-sm text-slate-800 dark:text-white dark:bg-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                                                                   class="block w-full pr-10 px-3 py-2.5 border border-slate-200 dark:border-slate-600 rounded-lg text-sm text-slate-800 dark:text-white dark:bg-slate-700 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all">
                                                             <button type="button" @click="showPw = !showPw" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
                                                                 <svg x-show="!showPw" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                                                                 <svg x-cloak x-show="showPw" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg>
@@ -206,10 +206,10 @@
                                                                     <div :class="[hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length >= 1 ? 'bg-red-400' : 'bg-slate-200 dark:bg-slate-600'" class="h-1 flex-1 rounded-full transition-colors duration-300"></div>
                                                                     <div :class="[hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length >= 2 ? 'bg-orange-400' : 'bg-slate-200 dark:bg-slate-600'" class="h-1 flex-1 rounded-full transition-colors duration-300"></div>
                                                                     <div :class="[hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length >= 3 ? 'bg-yellow-400' : 'bg-slate-200 dark:bg-slate-600'" class="h-1 flex-1 rounded-full transition-colors duration-300"></div>
-                                                                    <div :class="[hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length >= 4 ? 'bg-blue-400' : 'bg-slate-200 dark:bg-slate-600'" class="h-1 flex-1 rounded-full transition-colors duration-300"></div>
+                                                                    <div :class="[hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length >= 4 ? 'bg-green-400' : 'bg-slate-200 dark:bg-slate-600'" class="h-1 flex-1 rounded-full transition-colors duration-300"></div>
                                                                     <div :class="allPass ? 'bg-emerald-500' : 'bg-slate-200 dark:bg-slate-600'" class="h-1 flex-1 rounded-full transition-colors duration-300"></div>
                                                                 </div>
-                                                                <p class="text-[9px] font-bold mt-1" :class="{ 'text-red-500': [hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length <= 1, 'text-orange-500': [hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length === 2, 'text-yellow-600': [hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length === 3, 'text-blue-500': [hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length === 4, 'text-emerald-500': allPass }">
+                                                                <p class="text-[9px] font-bold mt-1" :class="{ 'text-red-500': [hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length <= 1, 'text-orange-500': [hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length === 2, 'text-yellow-600': [hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length === 3, 'text-green-600': [hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length === 4, 'text-emerald-500': allPass }">
                                                                     <span x-text="allPass ? 'Kata sandi kuat ✓' : [hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length <= 1 ? 'Sangat lemah' : [hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length === 2 ? 'Lemah' : [hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length === 3 ? 'Cukup' : 'Hampir kuat'"></span>
                                                                 </p>
                                                             </div>
@@ -220,7 +220,7 @@
                                                         <label class="text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wide">Konfirmasi Password Baru</label>
                                                         <div class="relative mt-1.5">
                                                             <input :type="showPwC ? 'text' : 'password'" name="new_password_confirmation" required placeholder="Ulangi password baru"
-                                                                   class="block w-full pr-10 px-3 py-2.5 border border-slate-200 dark:border-slate-600 rounded-lg text-sm text-slate-800 dark:text-white dark:bg-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                                                                   class="block w-full pr-10 px-3 py-2.5 border border-slate-200 dark:border-slate-600 rounded-lg text-sm text-slate-800 dark:text-white dark:bg-slate-700 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all">
                                                             <button type="button" @click="showPwC = !showPwC" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
                                                                 <svg x-show="!showPwC" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                                                                 <svg x-cloak x-show="showPwC" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg>
@@ -234,7 +234,7 @@
                                                         Batal
                                                     </button>
                                                     <button type="submit" :disabled="!allPass"
-                                                            :class="allPass ? 'bg-blue-600 hover:bg-blue-700 cursor-pointer' : 'bg-slate-300 dark:bg-slate-600 cursor-not-allowed'"
+                                                            :class="allPass ? 'bg-green-600 hover:bg-green-700 cursor-pointer' : 'bg-slate-300 dark:bg-slate-600 cursor-not-allowed'"
                                                             class="flex-1 py-2.5 text-white text-sm font-semibold rounded-xl transition-colors">
                                                         Simpan Password
                                                     </button>

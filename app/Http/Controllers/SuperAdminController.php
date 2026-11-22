@@ -8,25 +8,34 @@ class SuperAdminController extends Controller
 {
     public function dashboard()
     {
+        $currentYear = date('Y');
+        
         $stats = [
             'total_users' => \App\Models\User::count(),
             'total_admin' => \App\Models\User::role('admin')->count(),
             'total_guru' => \App\Models\User::role('guru')->count(),
-            'total_siswa' => \App\Models\User::role('siswa')->count(),
             'total_posts' => \App\Models\Post::count(),
             'trash_posts' => \App\Models\Post::onlyTrashed()->count(),
         ];
 
+        // Hitung registrasi user per bulan untuk tahun berjalan
+        $monthlyRegistrations = [];
+        for ($month = 1; $month <= 12; $month++) {
+            $monthlyRegistrations[] = \App\Models\User::whereYear('created_at', $currentYear)
+                ->whereMonth('created_at', $month)
+                ->count();
+        }
+
         $recent_users = \App\Models\User::latest()->take(5)->get();
         $recent_posts = \App\Models\Post::latest()->take(5)->get();
 
-        return view('super-admin.dashboard', compact('stats', 'recent_users', 'recent_posts'));
+        return view('super-admin.dashboard', compact('stats', 'recent_users', 'recent_posts', 'monthlyRegistrations', 'currentYear'));
     }
 
     public function users()
     {
         $users = \App\Models\User::whereDoesntHave('roles', function ($query) {
-            $query->whereIn('name', ['guru', 'siswa']);
+            $query->whereIn('name', ['guru']);
         })->with('roles')->paginate(20);
         
         return view('super-admin.users.index', compact('users'));
@@ -34,8 +43,8 @@ class SuperAdminController extends Controller
 
     public function createUser()
     {
-        // Super admin bisa membuat admin dan editor
-        $availableRoles = ['admin', 'editor'];
+        // Super admin bisa membuat admin dan guru
+        $availableRoles = ['admin', 'guru'];
         return view('super-admin.users.create', compact('availableRoles'));
     }
 
@@ -49,7 +58,7 @@ class SuperAdminController extends Controller
                 'regex:/[A-Z]/', 'regex:/[a-z]/',
                 'regex:/[0-9]/', 'regex:/[@$!%*?&]/',
             ],
-            'role'     => 'required|in:admin,editor',
+            'role'     => 'required|in:admin,guru',
         ]);
 
         $user = \App\Models\User::create([
@@ -70,7 +79,7 @@ class SuperAdminController extends Controller
 
     public function editUser(\App\Models\User $user)
     {
-        $roles = \Spatie\Permission\Models\Role::all();
+        $roles = \Spatie\Permission\Models\Role::whereIn('name', ['super_admin', 'admin', 'guru'])->get();
         $majors = \App\Models\Major::all();
         return view('super-admin.users.edit', compact('user', 'roles', 'majors'));
     }

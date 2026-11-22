@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
 @section('title', 'Audit Trail - Activity Log')
 
@@ -60,7 +60,7 @@
                             <td class="px-6 py-4">
                                 <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-tight 
                                     {{ $activity->description === 'created' ? 'bg-emerald-50 text-emerald-700' : 
-                                       ($activity->description === 'updated' ? 'bg-blue-50 text-blue-700' : 'bg-red-50 text-red-700') }}">
+                                       ($activity->description === 'updated' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700') }}">
                                     {{ $activity->description }}
                                 </span>
                             </td>
@@ -68,7 +68,7 @@
                                 {{ class_basename($activity->subject_type) }}
                             </td>
                             <td class="px-6 py-4">
-                                <button class="text-[10px] font-bold text-blue-600 hover:text-blue-800 uppercase tracking-widest">Detail JSON</button>
+                                <button class="text-[10px] font-bold text-green-700 hover:text-blue-800 uppercase tracking-widest">Detail JSON</button>
                             </td>
                         </tr>
                         @endforeach

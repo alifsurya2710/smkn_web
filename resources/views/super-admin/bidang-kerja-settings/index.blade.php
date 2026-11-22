@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
 @section('title', 'Manajemen Bidang Kerja')
 
@@ -39,7 +39,7 @@
 
     @foreach($areas as $key => $label)
     <div class="bg-white px-6 py-8 shadow-sm ring-1 ring-slate-900/5 sm:rounded-xl">
-        <h2 class="text-lg font-semibold leading-7 text-blue-600 font-outfit uppercase tracking-widest border-b pb-4 mb-6">{{ $label }}</h2>
+        <h2 class="text-lg font-semibold leading-7 text-green-700 font-outfit uppercase tracking-widest border-b pb-4 mb-6">{{ $label }}</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Image Upload -->
@@ -53,7 +53,7 @@
                             <span class="text-xs text-slate-400">Belum ada foto</span>
                         </div>
                     @endif
-                    <input type="file" name="{{ $key }}_image" class="block w-full text-xs text-slate-500 file:mr-4 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer">
+                    <input type="file" name="{{ $key }}_image" class="block w-full text-xs text-slate-500 file:mr-4 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100 cursor-pointer">
                     <p class="mt-2 text-xs text-slate-500 text-center">Format JPEG, PNG, JPG (maks 5MB).</p>
                 </div>
                 @error($key.'_image') <p class="mt-1 text-sm text-red-500">{{ $message }}</p> @enderror
@@ -63,7 +63,7 @@
             <div>
                 <label class="block text-sm font-medium leading-6 text-slate-900">Penjelasan Singkat / Deskripsi</label>
                 <div class="mt-2">
-                    <textarea name="{{ $key }}_text" rows="7" class="block w-full rounded-md border-0 py-1.5 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Ketikkan deskripsi tentang {{ $label }} di sini...">{{ old($key.'_text', isset($settings[$key . '_text']) ? $settings[$key . '_text'] : '') }}</textarea>
+                    <textarea name="{{ $key }}_text" rows="7" class="block w-full rounded-md border-0 py-1.5 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6" placeholder="Ketikkan deskripsi tentang {{ $label }} di sini...">{{ old($key.'_text', isset($settings[$key . '_text']) ? $settings[$key . '_text'] : '') }}</textarea>
                 </div>
                 <p class="mt-2 text-xs text-slate-500">Mendukung paragraf dan spasi turun baris (enter).</p>
                 @error($key.'_text') <p class="mt-1 text-sm text-red-500">{{ $message }}</p> @enderror
@@ -73,7 +73,7 @@
     @endforeach
 
     <div class="flex items-center justify-end gap-x-6 sticky bottom-6 z-10">
-        <button type="submit" class="rounded-xl bg-blue-600 px-10 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/30 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-all font-outfit uppercase tracking-widest active:scale-95">
+        <button type="submit" class="rounded-xl bg-green-600 px-10 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/30 hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-all font-outfit uppercase tracking-widest active:scale-95">
             Simpan Semua Perubahan
         </button>
     </div>

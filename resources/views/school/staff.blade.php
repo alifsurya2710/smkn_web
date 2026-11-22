@@ -5,7 +5,7 @@
 <div class="relative h-[450px] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0 overflow-hidden">
         <img src="{{ $profile->staff_hero_image ? asset('storage/' . $profile->staff_hero_image) : 'https://images.unsplash.com/photo-1523050335392-1fb0f3403362?q=80&w=2000' }}" class="w-full h-full object-cover brightness-[0.4] animate-soft-zoom" alt="School Building">
-        <div class="absolute inset-0 bg-blue-900/30 backdrop-blur-[2px] mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-[#0D2461]/30 backdrop-blur-[2px] mix-blend-multiply"></div>
     </div>
     <div class="relative z-10 text-center px-4 max-w-4xl space-y-4">
         <h1 class="text-6xl font-extrabold text-white tracking-tight uppercase">{{ $profile->staff_hero_title ?? 'Guru & Tata Usaha' }}</h1>
@@ -17,29 +17,29 @@
 </div>
 
 <div class="bg-slate-50 py-24 space-y-32">
-    <!-- KEPALA SEKOLAH -->
+    <!-- KEPALA SEKOLAH / KEPALA YAYASAN -->
     <section class="max-w-7xl mx-auto px-6">
         <div class="text-center space-y-4 mb-16">
-            <span class="text-[10px] font-bold text-blue-600 uppercase tracking-[0.3em]">Pimpinan Lembaga</span>
-            <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">Kepala Sekolah</h2>
+            <span class="text-[10px] font-bold text-green-700 uppercase tracking-[0.3em]">Pimpinan Lembaga</span>
+            <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">{{ $profile->principal_title ?? 'Kepala Yayasan' }}</h2>
         </div>
         
         <div class="flex justify-center">
             <div class="group relative bg-white p-4 rounded-[40px] shadow-2xl shadow-slate-200/50 border border-slate-100 max-w-sm transition-transform hover:scale-[1.02] duration-500">
                 <div class="relative aspect-[4/5] overflow-hidden rounded-[32px] mb-8">
                     @if($profile && $profile->principal_photo)
-                        <img src="{{ asset('storage/' . $profile->principal_photo) }}" alt="Kepala Sekolah" class="w-full h-full object-cover">
+                        <img src="{{ asset('storage/' . $profile->principal_photo) }}" alt="Pimpinan" class="w-full h-full object-cover">
                     @else
-                        <img src="https://ui-avatars.com/api/?name={{ urlencode($profile->principal_name ?? 'Hendra Hermansah') }}&color=1e3a8a&background=e2e8f0&size=512" alt="Kepala Sekolah" class="w-full h-full object-cover">
+                        <img src="https://ui-avatars.com/api/?name={{ urlencode($profile->principal_name ?? 'Arip Budiman Muslim') }}&color=1e3a8a&background=e2e8f0&size=512" alt="Pimpinan" class="w-full h-full object-cover">
                     @endif
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
                 </div>
                 <div class="text-center pb-6">
-                    <h3 class="text-2xl font-bold text-slate-900 mb-1">{{ $profile->principal_name ?? 'Hendra Hermansah, S.Pd., M.M' }}</h3>
-                    <p class="text-sm font-semibold text-slate-500 uppercase tracking-widest">{{ $profile->principal_title ?? 'Kepala Sekolah' }}</p>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-1">{{ $profile->principal_name ?? 'Arip Budiman Muslim, S.Pd.I.' }}</h3>
+                    <p class="text-sm font-semibold text-slate-500 uppercase tracking-widest">{{ $profile->principal_title ?? 'Kepala Yayasan' }}</p>
                 </div>
                 <!-- Mini Logo Decoration -->
-                <div class="absolute bottom-10 right-10 h-10 w-10 bg-blue-600 rounded-full border-4 border-white shadow-lg flex items-center justify-center">
+                <div class="absolute bottom-10 right-10 h-10 w-10 bg-green-600 rounded-full border-4 border-white shadow-lg flex items-center justify-center">
                     <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /></svg>
                 </div>
             </div>
@@ -49,7 +49,7 @@
     <!-- MANAJEMEN SEKOLAH -->
     <section class="max-w-7xl mx-auto px-6">
         <div class="text-center space-y-4 mb-16">
-            <span class="text-[10px] font-bold text-blue-600 uppercase tracking-[0.3em]">Unit Kerja</span>
+            <span class="text-[10px] font-bold text-green-700 uppercase tracking-[0.3em]">Unit Kerja</span>
             <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">Manajemen Sekolah</h2>
         </div>
         
@@ -94,7 +94,7 @@
                                 $groupName = 'Guru ' . $groupName;
                             }
                         @endphp
-                        <h4 class="text-sm font-black text-blue-600 uppercase tracking-[0.3em]">{{ $groupName }}</h4>
+                        <h4 class="text-sm font-black text-green-700 uppercase tracking-[0.3em]">{{ $groupName }}</h4>
                         <div class="h-px flex-1 bg-slate-200"></div>
                     </div>
                     
@@ -123,7 +123,7 @@
                                         @if($teacher->nip && $teacher->rank) • @endif
                                         @if($teacher->rank) GOL. {{ $teacher->rank }} @endif
                                     </p>
-                                    <p class="text-[9px] font-black text-blue-600 uppercase tracking-[0.2em] pt-1">
+                                    <p class="text-[9px] font-black text-green-700 uppercase tracking-[0.2em] pt-1">
                                         {{ $teacher->position ?? 'Tenaga Pengajar' }}
                                     </p>
                                 </div>

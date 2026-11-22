@@ -23,6 +23,10 @@ class PpdbSettingController extends Controller
             'ppdb_jadwal_image' => 'nullable|image|max:5120',
             'ppdb_alur_image' => 'nullable|image|max:5120',
             'ppdb_kuota_image' => 'nullable|image|max:5120',
+            'ppdb_reguler_image' => 'nullable|image|max:5120',
+            'ppdb_yatim_image' => 'nullable|image|max:5120',
+            'ppdb_kurang_mampu_image' => 'nullable|image|max:5120',
+            'ppdb_prestasi_image' => 'nullable|image|max:5120',
         ]);
 
         foreach ($data as $key => $value) {

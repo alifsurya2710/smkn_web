@@ -44,6 +44,10 @@ Route::get('/ekstrakurikuler', [ExtracurricularController::class, 'index'])->nam
 Route::get('/ekstrakurikuler/{slug}', [ExtracurricularController::class, 'show'])->name('extracurriculars.show');
 Route::get('/guru-staff', [SchoolController::class, 'staff'])->name('staff.index');
 Route::get('/ppdb', [PpdbController::class, 'index'])->name('ppdb.index');
+Route::post('/ppdb/daftar', [PpdbController::class, 'store'])->name('ppdb.store')->middleware('auth');
+Route::post('/spmb/login', [App\Http\Controllers\SpmbAuthController::class, 'login'])->name('spmb.login');
+Route::post('/spmb/register', [App\Http\Controllers\SpmbAuthController::class, 'register'])->name('spmb.register');
+Route::get('/spmb/captcha', [App\Http\Controllers\SpmbAuthController::class, 'captcha'])->name('spmb.captcha');
 Route::get('/prestasi', [AchievementController::class, 'indexPublic'])->name('prestasi.index');
 Route::get('/prestasi/{id}', [AchievementController::class, 'showPublic'])->name('prestasi.detail');
 
@@ -64,14 +68,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
         $user = auth()->user();
         if ($user->hasRole(['super_admin', 'super-admin'])) return redirect()->route('super_admin.dashboard');
         if ($user->hasRole(['admin'])) return redirect()->route('admin.dashboard');
-        if ($user->hasRole(['editor'])) return redirect()->route('editor.dashboard');
         if ($user->hasRole(['guru'])) return redirect()->route('guru.dashboard');
-        if ($user->hasRole(['siswa'])) return redirect()->route('e-rapor');
         return view('dashboard');
     })->name('dashboard');
 
     // Shared Content Management (Super Admin & Admin)
     Route::middleware('role:super_admin|super-admin|admin')->group(function () {
+        // Data Pendaftaran SPMB (Verifikasi Berkas, Foto, Approve, Reject & Email)
+        Route::get('/super-admin/ppdb-applications/export', [\App\Http\Controllers\SuperAdmin\PpdbApplicationManagementController::class, 'export'])->name('super_admin.ppdb_applications.export');
+        Route::post('/super-admin/ppdb-applications/import', [\App\Http\Controllers\SuperAdmin\PpdbApplicationManagementController::class, 'import'])->name('super_admin.ppdb_applications.import');
+        Route::get('/super-admin/ppdb-applications', [\App\Http\Controllers\SuperAdmin\PpdbApplicationManagementController::class, 'index'])->name('super_admin.ppdb_applications.index');
+        Route::get('/super-admin/ppdb-applications/{id}', [\App\Http\Controllers\SuperAdmin\PpdbApplicationManagementController::class, 'show'])->name('super_admin.ppdb_applications.show');
+        Route::put('/super-admin/ppdb-applications/{id}/status', [\App\Http\Controllers\SuperAdmin\PpdbApplicationManagementController::class, 'updateStatus'])->name('super_admin.ppdb_applications.update_status');
+
         Route::resource('/super-admin/jurusan', App\Http\Controllers\SuperAdmin\MajorManagementController::class)->names('super_admin.jurusan');
         Route::resource('/super-admin/prestasi-categories', PrestasiCategoryController::class)->names('super_admin.prestasi_categories');
         Route::resource('/super-admin/prestasi', AchievementController::class)->names('super_admin.prestasi');
@@ -110,8 +119,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/users/{id}/restore', [SuperAdminController::class, 'restoreUser'])->name('super_admin.users.restore');
         Route::delete('/users/{id}/force-delete', [SuperAdminController::class, 'forceDeleteUser'])->name('super_admin.users.force_delete');
         Route::get('/activity-log', [SuperAdminController::class, 'activityLog'])->name('super_admin.activity_log');
-        
-        // E-Rapor Management
+    });
+
+    // E-Rapor Management (Super Admin, Admin, and Guru)
+    Route::middleware('role:super_admin|super-admin|admin|guru')->prefix('super-admin')->group(function () {
         Route::get('/e-rapor', [App\Http\Controllers\SuperAdmin\StudentReportManagementController::class, 'index'])->name('super_admin.rapor.index');
         Route::get('/e-rapor/recap', [App\Http\Controllers\SuperAdmin\StudentReportManagementController::class, 'recap'])->name('super_admin.rapor.recap');
         Route::post('/e-rapor/recap', [App\Http\Controllers\SuperAdmin\StudentReportManagementController::class, 'bulkStore'])->name('super_admin.rapor.bulk_store');
@@ -122,7 +133,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('/e-rapor/{rapor}', [App\Http\Controllers\SuperAdmin\StudentReportManagementController::class, 'destroy'])->name('super_admin.rapor.destroy');
         Route::post('/e-rapor/import', [App\Http\Controllers\SuperAdmin\StudentReportManagementController::class, 'import'])->name('super_admin.rapor.import');
         Route::get('/e-rapor/export', [App\Http\Controllers\SuperAdmin\StudentReportManagementController::class, 'export'])->name('super_admin.rapor.export');
+    });
 
+    // Super Admin Settings
+    Route::middleware('role:super_admin|super-admin')->prefix('super-admin')->group(function () {
         // BLUD CMS
         Route::get('/blud-settings', [App\Http\Controllers\SuperAdmin\BludSettingController::class, 'index'])->name('super_admin.blud_settings.index');
         Route::post('/blud-settings', [App\Http\Controllers\SuperAdmin\BludSettingController::class, 'update'])->name('super_admin.blud_settings.update');
@@ -202,6 +216,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile/photo', [ProfileController::class, 'deletePhoto'])->name('profile.photo.destroy');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 

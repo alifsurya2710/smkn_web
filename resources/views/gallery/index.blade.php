@@ -9,19 +9,20 @@
 </style>
 <div class="bg-slate-50 min-h-screen pb-24">
     <!-- HERO SECTION -->
-    <section class="relative bg-[#0F172A] pt-32 pb-24 overflow-hidden">
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500 rounded-full blur-[120px] -mr-64 -mt-64"></div>
-            <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500 rounded-full blur-[120px] -ml-64 -mb-64"></div>
+    <section class="relative bg-[#0D2461] pt-32 pb-24 overflow-hidden">
+        <div class="absolute inset-0 opacity-15">
+            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-green-500 rounded-full blur-[120px] -mr-64 -mt-64"></div>
+            <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-green-700 rounded-full blur-[100px] -ml-48 -mb-48"></div>
+            <div class="absolute top-1/2 left-1/2 w-[300px] h-[300px] bg-green-400 rounded-full blur-[80px] -translate-x-1/2 -translate-y-1/2 opacity-10"></div>
         </div>
         
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="max-w-3xl">
-                <h6 class="text-blue-400 font-bold uppercase tracking-[0.3em] text-[10px] mb-4">SMKN 1 KATAPANG</h6>
+                <h6 class="text-green-400 font-bold uppercase tracking-[0.3em] text-[10px] mb-4">RA AL-IKHWAN</h6>
                 <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-tight mb-8">
-                    Media Album <br/> & <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400 italic">Galeri</span>
+                    Media Album <br/> &amp; <span style="color:#4ade80;font-style:italic;">Galeri</span>
                 </h1>
-                <p class="text-slate-400 text-lg md:text-xl font-medium leading-relaxed mb-12">
+                <p class="text-blue-200 text-lg md:text-xl font-medium leading-relaxed mb-12">
                     Kenang kembali momen terbaik dari kegiatan sekolah, kompetisi olahraga, dan upacara akademik kami.
                 </p>
 
@@ -31,7 +32,7 @@
                     @foreach($categories as $cat)
                     <a href="{{ route('gallery.index', ['category' => $cat]) }}" 
                        class="px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all 
-                              {{ ($category ?? 'Semua') == $cat ? 'bg-white text-slate-900 shadow-xl' : 'text-white/60 hover:text-white' }}">
+                              {{ ($category ?? 'Semua') == $cat ? 'bg-green-500 text-white shadow-xl shadow-green-500/30' : 'text-white/60 hover:text-white hover:bg-white/10' }}">
                         {{ $cat }} {{ $cat == 'Semua' ? 'Album' : '' }}
                     </a>
                     @endforeach
@@ -56,10 +57,10 @@
                 
                 <div class="absolute bottom-0 left-0 p-10 w-full translate-y-4 group-hover:translate-y-0 transition-transform">
                     <div class="flex items-center gap-3 mb-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <span class="px-3 py-1 bg-blue-500 text-white text-[8px] font-black uppercase tracking-widest rounded-full">{{ $album->category }}</span>
+                        <span class="px-3 py-1 bg-green-500 text-white text-[8px] font-black uppercase tracking-widest rounded-full">{{ $album->category }}</span>
                         <span class="px-3 py-1 bg-white/20 backdrop-blur-md text-white text-[8px] font-black uppercase tracking-widest rounded-full">Featured</span>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-2 leading-tight group-hover:text-blue-400 transition-colors">{{ $album->title }}</h3>
+                    <h3 class="text-2xl font-bold text-white mb-2 leading-tight group-hover:text-green-400 transition-colors">{{ $album->title }}</h3>
                     <div class="flex items-center gap-6 text-[10px] font-bold text-white/50 uppercase tracking-widest">
                         <span class="flex items-center gap-2">
                             <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
@@ -88,7 +89,7 @@
                     </span>
                     Youtube Timeline
                 </h2>
-                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] mt-4 ml-16">Eksplorasi kegiatan sekolah melalui lensa video resmi SMKN 1 Katapang.</p>
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] mt-4 ml-16">Eksplorasi kegiatan sekolah melalui lensa video resmi RA AL-IKHWAN.</p>
             </div>
             
             <a href="https://youtube.com/@smkn1katapang" target="_blank" class="hidden md:flex items-center gap-3 px-6 py-3 bg-white border border-slate-200 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-red-600 hover:border-red-600 transition-all shadow-sm">

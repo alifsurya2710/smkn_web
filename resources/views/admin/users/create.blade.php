@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
 @section('title', 'Tambah User Editor')
 
@@ -18,8 +18,8 @@
 <div class="max-w-2xl">
     <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
         <div class="px-6 py-4 border-b border-slate-100 dark:border-slate-700 flex items-center gap-3">
-            <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                <svg class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+            <div class="w-8 h-8 bg-green-100 dark:bg-[#0D2461]/30 rounded-lg flex items-center justify-center">
+                <svg class="w-4 h-4 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
             </div>
             <div>
                 <h3 class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-widest">Role: Editor</h3>
@@ -54,14 +54,14 @@
                         <label class="text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wide">Nama Lengkap</label>
                         <input type="text" name="name" value="{{ old('name') }}" required
                                placeholder="Masukkan nama lengkap"
-                               class="mt-1.5 block w-full px-3 py-2.5 border border-slate-200 dark:border-slate-600 rounded-lg text-sm text-slate-800 dark:text-white dark:bg-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                               class="mt-1.5 block w-full px-3 py-2.5 border border-slate-200 dark:border-slate-600 rounded-lg text-sm text-slate-800 dark:text-white dark:bg-slate-700 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all">
                     </div>
 
                     <div>
                         <label class="text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wide">Alamat Email</label>
                         <input type="email" name="email" value="{{ old('email') }}" required
                                placeholder="email@example.com"
-                               class="mt-1.5 block w-full px-3 py-2.5 border border-slate-200 dark:border-slate-600 rounded-lg text-sm text-slate-800 dark:text-white dark:bg-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                               class="mt-1.5 block w-full px-3 py-2.5 border border-slate-200 dark:border-slate-600 rounded-lg text-sm text-slate-800 dark:text-white dark:bg-slate-700 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all">
                     </div>
 
                     <div>
@@ -69,7 +69,7 @@
                         <div class="relative mt-1.5">
                             <input :type="showPw ? 'text' : 'password'" name="password" x-model="pw" required
                                    placeholder="Buat password yang kuat"
-                                   class="block w-full pr-10 px-3 py-2.5 border border-slate-200 dark:border-slate-600 rounded-lg text-sm text-slate-800 dark:text-white dark:bg-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                                   class="block w-full pr-10 px-3 py-2.5 border border-slate-200 dark:border-slate-600 rounded-lg text-sm text-slate-800 dark:text-white dark:bg-slate-700 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all">
                             <button type="button" @click="showPw = !showPw" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400">
                                 <svg x-show="!showPw" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                                 <svg x-cloak x-show="showPw" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg>
@@ -107,7 +107,7 @@
                         <div class="relative mt-1.5">
                             <input :type="showPwC ? 'text' : 'password'" name="password_confirmation" required
                                    placeholder="Ulangi password"
-                                   class="block w-full pr-10 px-3 py-2.5 border border-slate-200 dark:border-slate-600 rounded-lg text-sm text-slate-800 dark:text-white dark:bg-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                                   class="block w-full pr-10 px-3 py-2.5 border border-slate-200 dark:border-slate-600 rounded-lg text-sm text-slate-800 dark:text-white dark:bg-slate-700 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all">
                             <button type="button" @click="showPwC = !showPwC" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400">
                                 <svg x-show="!showPwC" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                                 <svg x-cloak x-show="showPwC" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg>
@@ -117,7 +117,7 @@
 
                     <div class="pt-2 flex gap-3">
                         <button type="submit" :disabled="!allPass"
-                                :class="allPass ? 'bg-blue-600 hover:bg-blue-700 cursor-pointer' : 'bg-slate-300 dark:bg-slate-600 cursor-not-allowed'"
+                                :class="allPass ? 'bg-green-600 hover:bg-green-700 cursor-pointer' : 'bg-slate-300 dark:bg-slate-600 cursor-not-allowed'"
                                 class="flex-1 py-2.5 text-white text-sm font-semibold rounded-xl transition-colors">
                             Tambah Editor
                         </button>

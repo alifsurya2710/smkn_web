@@ -32,6 +32,7 @@ class LandingSettingController extends Controller
             'major_hero_description' => 'nullable|string',
             'major_hero_image' => 'nullable|image|max:5120',
             'stats_siswa_count' => 'nullable|string',
+            'stats_kelas_count' => 'nullable|string',
             'stats_pengajar_count' => 'nullable|string',
             'stats_mitra_count' => 'nullable|string',
             'stats_alumni_working_count' => 'nullable|string',

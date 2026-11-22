@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
 @section('title', 'Dashboard Editor')
 
@@ -30,7 +30,7 @@
 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
     <div class="px-6 py-4 border-b border-slate-50 flex items-center justify-between">
         <h3 class="text-xs font-bold text-slate-900 uppercase tracking-widest">Artikel Terakhir Kamu</h3>
-        <a href="{{ route('editor.posts.create') }}" class="text-[10px] font-bold text-blue-600 uppercase border-b-2 border-blue-600 hover:text-blue-700">Tulis Berita Baru</a>
+        <a href="{{ route('editor.posts.create') }}" class="text-[10px] font-bold text-green-700 uppercase border-b-2 border-green-600 hover:text-green-700">Tulis Berita Baru</a>
     </div>
     @if($recent_posts->isEmpty())
         <div class="p-12 text-center">

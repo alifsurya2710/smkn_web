@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
 @section('title', 'Kelola User Editor')
 
@@ -9,7 +9,7 @@
         <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Tambah dan kelola akun editor untuk pengelolaan konten website.</p>
     </div>
     <a href="{{ route('admin.users.create') }}"
-       class="inline-flex items-center gap-2 px-4 py-2.5 bg-blue-600 text-white text-sm font-semibold rounded-xl hover:bg-blue-700 transition-colors shadow-sm">
+       class="inline-flex items-center gap-2 px-4 py-2.5 bg-green-600 text-white text-sm font-semibold rounded-xl hover:bg-green-700 transition-colors shadow-sm">
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
         Tambah Editor
     </a>
@@ -58,7 +58,7 @@
                     <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30 transition-colors">
                         <td class="px-6 py-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-sm overflow-hidden flex-shrink-0">
+                                <div class="w-9 h-9 rounded-xl bg-green-600 flex items-center justify-center text-white font-bold text-sm overflow-hidden flex-shrink-0">
                                     @if($user->photo)
                                         <img src="{{ asset('storage/' . $user->photo) }}" class="w-full h-full object-cover" alt="">
                                     @else
@@ -67,7 +67,7 @@
                                 </div>
                                 <div>
                                     <p class="text-sm font-semibold text-slate-900 dark:text-white">{{ $user->name }}</p>
-                                    <span class="inline-block text-[9px] font-black uppercase tracking-widest text-blue-600 bg-blue-50 dark:bg-blue-900/30 px-1.5 py-0.5 rounded-full mt-0.5">Editor</span>
+                                    <span class="inline-block text-[9px] font-black uppercase tracking-widest text-green-700 bg-green-50 dark:bg-[#0D2461]/30 px-1.5 py-0.5 rounded-full mt-0.5">Editor</span>
                                 </div>
                             </div>
                         </td>

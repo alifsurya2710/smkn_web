@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
 @section('title', 'Manajemen Berita')
 
@@ -9,7 +9,7 @@
         <p class="mt-2 text-sm text-gray-700">Daftar semua berita, informasi, dan pengumuman sekolah.</p>
     </div>
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-        <a href="{{ route('editor.posts.create') }}" class="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Tambah Berita</a>
+        <a href="{{ route('editor.posts.create') }}" class="block rounded-md bg-green-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Tambah Berita</a>
     </div>
 </div>
 
@@ -34,14 +34,14 @@
                         <tr>
                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ $post->title }}</td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
+                                <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-blue-700/10">
                                     {{ ucfirst($post->category) }}
                                 </span>
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $post->author->name }}</td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $post->created_at->format('d M Y') }}</td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                <a href="{{ route('editor.posts.edit', $post) }}" class="text-blue-600 hover:text-blue-900 mr-4">Edit</a>
+                                <a href="{{ route('editor.posts.edit', $post) }}" class="text-green-700 hover:text-green-900 mr-4">Edit</a>
                                 <form action="{{ route('editor.posts.destroy', $post) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')

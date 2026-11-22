@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
 @section('title', 'SPMB Online')
 
@@ -38,7 +38,7 @@
                                 </span>
                             </td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                <a href="#" class="text-blue-600 hover:text-blue-900">Detail</a>
+                                <a href="#" class="text-green-700 hover:text-green-900">Detail</a>
                             </td>
                         </tr>
                         @empty

@@ -27,16 +27,21 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email'               => ['required', 'string', 'email'],
-            'password'            => ['required', 'string'],
-            'g-recaptcha-response' => ['required', new \App\Rules\RecaptchaRule],
+            'email'        => ['required', 'string', 'email'],
+            'password'     => ['required', 'string'],
+            'math_captcha' => ['required', 'numeric', function ($attribute, $value, $fail) {
+                if (!\App\Services\MathCaptchaService::validate('login', $value)) {
+                    $fail('Jawaban perhitungan matematika captcha salah. Silakan coba lagi.');
+                }
+            }],
         ];
     }
 
     public function messages(): array
     {
         return [
-            'g-recaptcha-response.required' => 'Harap selesaikan verifikasi captcha.',
+            'math_captcha.required' => 'Harap isi jawaban perhitungan matematika.',
+            'math_captcha.numeric'  => 'Jawaban captcha harus berupa angka.',
         ];
     }
 

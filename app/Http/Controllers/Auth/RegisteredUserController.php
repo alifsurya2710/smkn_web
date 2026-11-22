@@ -19,7 +19,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $captcha = \App\Services\MathCaptchaService::generate('register');
+        return view('auth.register', compact('captcha'));
     }
 
     /**
@@ -43,7 +44,14 @@ class RegisteredUserController extends Controller
             ],
             'nisn'     => ['nullable', 'string', 'max:20', 'unique:users,nisn'],
             'no_telp'  => ['nullable', 'string', 'max:15'],
-            'g-recaptcha-response' => ['required', new \App\Rules\RecaptchaRule],
+            'math_captcha' => ['required', 'numeric', function ($attribute, $value, $fail) {
+                if (!\App\Services\MathCaptchaService::validate('register', $value)) {
+                    $fail('Jawaban perhitungan matematika captcha salah. Silakan coba lagi.');
+                }
+            }],
+        ], [
+            'math_captcha.required' => 'Harap isi jawaban perhitungan matematika.',
+            'math_captcha.numeric'  => 'Jawaban captcha harus berupa angka.',
         ]);
 
         $user = User::create([
@@ -53,6 +61,8 @@ class RegisteredUserController extends Controller
             'nisn' => $request->nisn,
             'no_telp' => $request->no_telp,
         ]);
+
+        $user->assignRole('guru');
 
         event(new Registered($user));
 

@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
 @section('title', 'Edit Profil Sekolah')
 
@@ -77,7 +77,7 @@
                                 </div>
                             </template>
                         </div>
-                        <button type="button" @click="missions.push('')" class="mt-6 inline-flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-700 bg-blue-50 px-4 py-2 rounded-xl transition-all">
+                        <button type="button" @click="missions.push('')" class="mt-6 inline-flex items-center gap-2 text-xs font-bold text-green-700 hover:text-green-700 bg-green-50 px-4 py-2 rounded-xl transition-all">
                             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                             Tambah Poin Misi
                         </button>

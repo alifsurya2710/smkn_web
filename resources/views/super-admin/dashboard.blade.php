@@ -21,10 +21,10 @@
 </div>
 
 <!-- STATS GRID -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden group">
         <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
-            <svg class="h-12 w-12 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a7 7 0 00-7 7v1h11v-1a7 7 0 00-7-7z"/></svg>
+            <svg class="h-12 w-12 text-green-700" fill="currentColor" viewBox="0 0 20 20"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a7 7 0 00-7 7v1h11v-1a7 7 0 00-7-7z"/></svg>
         </div>
         <p class="text-3xl font-bold text-slate-900">{{ $stats['total_users'] }}</p>
         <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mt-1">Total Users</p>
@@ -48,23 +48,14 @@
         <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mt-1">Total Guru</p>
         <p class="text-[10px] text-slate-400 mt-2">Tenaga pengajar aktif</p>
     </div>
-
-    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden group">
-        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
-            <svg class="h-12 w-12 text-purple-600" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0z"/></svg>
-        </div>
-        <p class="text-3xl font-bold text-slate-900">{{ $stats['total_siswa'] }}</p>
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mt-1">Total Siswa</p>
-        <p class="text-[10px] text-slate-400 mt-2">Siswa terdaftar e-rapor</p>
-    </div>
 </div>
 
 <!-- CHART AND SECONDARY STATS -->
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
     <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
         <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-6 flex items-center gap-2">
-            <svg class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-            Statistik Pendaftaran User 2026
+            <svg class="h-4 w-4 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            Statistik Pendaftaran User {{ $currentYear ?? date('Y') }}
         </h3>
         <div class="relative h-64">
             <canvas id="userChart"></canvas>
@@ -91,15 +82,15 @@
                 </a>
                 <a href="{{ route('about') }}" class="p-3 bg-slate-50 hover:bg-slate-100 rounded-xl flex flex-col items-center gap-1 transition-colors">
                     <svg class="h-5 w-5 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                    <span class="text-[9px] font-bold text-slate-900 uppercase">Profil SMK</span>
+                    <span class="text-[9px] font-bold text-slate-900 uppercase">Profil RA</span>
                 </a>
                 <a href="{{ route('editor.posts.create') }}" class="p-3 bg-slate-50 hover:bg-slate-100 rounded-xl flex flex-col items-center gap-1 transition-colors">
                     <svg class="h-5 w-5 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                     <span class="text-[9px] font-bold text-slate-900 uppercase">Input Berita</span>
                 </a>
-                <a href="#" class="p-3 bg-slate-50 hover:bg-slate-100 rounded-xl flex flex-col items-center gap-1 transition-colors">
-                    <svg class="h-5 w-5 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                    <span class="text-[9px] font-bold text-slate-900 uppercase">Produk SMK</span>
+                <a href="{{ route('super_admin.rapor.index') }}" class="p-3 bg-slate-50 hover:bg-slate-100 rounded-xl flex flex-col items-center gap-1 transition-colors">
+                    <svg class="h-5 w-5 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    <span class="text-[9px] font-bold text-slate-900 uppercase">E-Rapor</span>
                 </a>
              </div>
         </div>
@@ -111,7 +102,7 @@
     <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
         <div class="px-6 py-4 border-b border-slate-50 flex items-center justify-between">
             <h3 class="text-xs font-bold text-slate-900 uppercase tracking-widest">User Management</h3>
-            <a href="{{ route('super_admin.users') }}" class="text-[10px] font-bold text-blue-600 uppercase border-b-2 border-blue-600 hover:text-blue-700">Lihat Semua</a>
+            <a href="{{ route('super_admin.users') }}" class="text-[10px] font-bold text-green-700 uppercase border-b-2 border-green-600 hover:text-green-700">Lihat Semua</a>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
@@ -156,7 +147,7 @@
     <div class="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col">
         <div class="px-6 py-4 border-b border-slate-50 flex items-center justify-between">
             <h3 class="text-xs font-bold text-slate-900 uppercase tracking-widest">Artikel Terbaru</h3>
-            <a href="{{ route('editor.posts.index') }}" class="text-[10px] font-bold text-blue-600 uppercase border-b-2 border-blue-600 hover:text-blue-700">Lihat Semua</a>
+            <a href="{{ route('editor.posts.index') }}" class="text-[10px] font-bold text-green-700 uppercase border-b-2 border-green-600 hover:text-green-700">Lihat Semua</a>
         </div>
         @if($recent_posts->isEmpty())
             <div class="flex-1 flex flex-col items-center justify-center p-8 text-center">
@@ -181,7 +172,7 @@
                              @endif
                         </div>
                         <div class="flex-1 overflow-hidden">
-                            <p class="text-[11px] font-bold text-slate-900 truncate group-hover:text-blue-600 transition-colors">{{ $post->title }}</p>
+                            <p class="text-[11px] font-bold text-slate-900 truncate group-hover:text-green-700 transition-colors">{{ $post->title }}</p>
                             <p class="text-[9px] text-slate-400 mt-0.5 uppercase tracking-tight">Terlampir oleh {{ $post->author->name ?? 'Admin' }}</p>
                         </div>
                         <div class="text-right">
@@ -197,20 +188,22 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const ctx = document.getElementById('userChart').getContext('2d');
+    const monthlyData = {!! json_encode($monthlyRegistrations ?? [0,0,0,0,0,0,0,0,0,0,0,0]) !!};
     new Chart(ctx, {
         type: 'line',
         data: {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             datasets: [{
-                label: 'Jumlah User',
-                data: [1, 2, 4, 3, 5, 4, 6, 8, 7, 9, 10, 12],
-                borderColor: '#2563eb',
+                label: 'Jumlah User Mendaftar',
+                data: monthlyData,
+                borderColor: '#16a34a',
                 tension: 0.4,
                 pointRadius: 6,
                 pointBackgroundColor: '#fff',
+                pointBorderColor: '#16a34a',
                 pointBorderWidth: 3,
                 fill: true,
-                backgroundColor: 'rgba(37, 99, 235, 0.05)'
+                backgroundColor: 'rgba(22, 163, 74, 0.08)'
             }]
         },
         options: {
@@ -222,7 +215,11 @@
             scales: {
                 y: {
                     beginAtZero: true,
-                    grid: { display: false },
+                    ticks: {
+                        precision: 0,
+                        stepSize: 1
+                    },
+                    grid: { color: 'rgba(0, 0, 0, 0.05)' },
                     border: { display: false }
                 },
                 x: {

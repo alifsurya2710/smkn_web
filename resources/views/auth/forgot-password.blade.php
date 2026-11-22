@@ -1,4 +1,4 @@
-<x-guest-layout>
+﻿<x-guest-layout>
     <style>
         @keyframes gradient-bg {
             0% { background-position: 0% 50%; }
@@ -27,13 +27,13 @@
                 @php $authBg = \App\Models\Setting::getByKey('auth_hero_image', 'images/hero-login.jpg'); @endphp
                 <img src="{{ str_starts_with($authBg, 'images/') ? asset($authBg) : asset('storage/' . $authBg) }}"
                      class="h-full w-full object-cover object-center filter brightness-[0.55]"
-                     alt="SMKN 1 Katapang">
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-900/50 via-indigo-800/30 to-slate-900/70 mix-blend-multiply animate-gradient-bg"></div>
+                     alt="RA AL-IKHWAN">
+                <div class="absolute inset-0 bg-gradient-to-br from-[#0D2461]/50 via-indigo-800/30 to-slate-900/70 mix-blend-multiply animate-gradient-bg"></div>
             </div>
 
             <div class="relative z-10 w-full flex flex-col justify-between p-12 lg:p-16 text-white h-full">
                 <div>
-                    <span class="text-[13px] font-bold tracking-widest uppercase opacity-90 drop-shadow-sm">SMKN 1 KATAPANG</span>
+                    <span class="text-[13px] font-bold tracking-widest uppercase opacity-90 drop-shadow-sm">RA AL-IKHWAN</span>
                 </div>
 
                 <div class="max-w-xl pb-32">
@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="text-[11px] font-medium opacity-60 tracking-wide">
-                    &copy; 2026 SMK Negeri 1 Katapang
+                    &copy; {{ date('Y') }} RA AL-IKHWAN
                 </div>
             </div>
         </div>
@@ -69,7 +69,7 @@
                     {{-- Logo --}}
                     <div class="w-20 h-20 flex items-center justify-center overflow-hidden drop-shadow-lg transition-transform duration-300 hover:scale-105">
                         <img src="{{ asset('images/logo.png') }}"
-                             alt="Logo SMKN 1 Katapang" class="h-full w-auto object-contain">
+                             alt="Logo RA AL-IKHWAN" class="h-full w-auto object-contain">
                     </div>
                     <div>
                         <h2 class="text-[22px] font-bold text-slate-800 tracking-tight">Lupa Kata Sandi?</h2>
@@ -98,14 +98,14 @@
                     <div class="space-y-1.5">
                         <label for="email" class="text-[10px] font-bold text-slate-600 tracking-wide">Alamat Email</label>
                         <div class="relative group">
-                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-blue-500 transition-colors">
+                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-green-600 transition-colors">
                                 <svg class="h-[16px] w-[16px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                 </svg>
                             </div>
                             <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
                                    placeholder="email@example.com"
-                                   class="block w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-800 text-[13px] placeholder-slate-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition-all font-medium">
+                                   class="block w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-800 text-[13px] placeholder-slate-400 focus:ring-1 focus:ring-green-500 focus:border-green-500 shadow-sm transition-all font-medium">
                         </div>
                         <x-input-error :messages="$errors->get('email')" class="mt-1 text-xs" />
                     </div>
@@ -129,7 +129,7 @@
                             <div class="w-full border-t border-slate-100"></div>
                         </div>
                         <div class="relative flex justify-center text-xs uppercase tracking-widest font-black">
-                            <a href="{{ route('login') }}" class="bg-white px-4 text-blue-600 hover:text-blue-800 transition-colors">
+                            <a href="{{ route('login') }}" class="bg-white px-4 text-green-700 hover:text-blue-800 transition-colors">
                                 Kembali ke Halaman Masuk
                             </a>
                         </div>

@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
 @section('content')
 <div class="py-12">
@@ -47,7 +47,7 @@
                                         @if($testimoni->status === 'pending')
                                             <form action="{{ route('super_admin.testimonis.approve', $testimoni) }}" method="POST">
                                                 @csrf
-                                                <button type="submit" class="text-blue-600 hover:text-blue-900">Approve</button>
+                                                <button type="submit" class="text-green-700 hover:text-green-900">Approve</button>
                                             </form>
                                         @endif
                                         <form action="{{ route('super_admin.testimonis.destroy', $testimoni) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus testimoni ini?')">

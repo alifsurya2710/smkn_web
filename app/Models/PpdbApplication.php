@@ -11,22 +11,31 @@ class PpdbApplication extends Model
 
     protected $fillable = [
         'registration_number',
+        'user_id',
         'full_name',
+        'parent_name',
         'nisn',
         'email',
         'phone',
+        'jalur_pendaftaran',
+        'nominal_biaya',
+        'pernah_paud',
+        'foto_kk',
+        'foto_akta',
+        'foto_rapot_paud',
+        'bukti_transfer',
         'first_choice_major_id',
         'second_choice_major_id',
         'status',
+        'catatan',
     ];
 
-    public function firstChoice()
-    {
-        return $this->belongsTo(Major::class, 'first_choice_major_id');
-    }
+    protected $casts = [
+        'pernah_paud' => 'boolean',
+    ];
 
-    public function secondChoice()
+    public function user()
     {
-        return $this->belongsTo(Major::class, 'second_choice_major_id');
+        return $this->belongsTo(User::class);
     }
 }

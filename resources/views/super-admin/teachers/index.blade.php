@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
 @section('title', 'Kelola Guru')
 
@@ -98,7 +98,7 @@
                                 @if($teacher->photo)
                                     <img src="{{ asset('storage/' . $teacher->photo) }}" class="h-full w-full object-cover">
                                 @else
-                                    <div class="h-full w-full flex items-center justify-center text-slate-400 bg-blue-50 text-blue-600 font-bold uppercase">
+                                    <div class="h-full w-full flex items-center justify-center text-slate-400 bg-green-50 text-green-700 font-bold uppercase">
                                         {{ substr($teacher->name, 0, 1) }}
                                     </div>
                                 @endif
@@ -121,14 +121,14 @@
                     </td>
                     <td class="whitespace-nowrap px-3 py-4">
                         @if($teacher->is_management)
-                            <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-[9px] font-bold text-blue-700 uppercase tracking-tight ring-1 ring-inset ring-blue-700/10">Manajemen</span>
+                            <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-[9px] font-bold text-green-700 uppercase tracking-tight ring-1 ring-inset ring-blue-700/10">Manajemen</span>
                         @else
                             <span class="inline-flex items-center rounded-md bg-slate-50 px-2 py-1 text-[9px] font-bold text-slate-600 uppercase tracking-tight ring-1 ring-inset ring-slate-500/10">Reguler</span>
                         @endif
                     </td>
                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                         <div class="flex items-center justify-end gap-2">
-                             <a href="{{ route('super_admin.teachers.edit', $teacher) }}" class="p-2 text-slate-400 hover:text-blue-600 bg-slate-50 hover:bg-blue-50 rounded-lg transition-colors">
+                             <a href="{{ route('super_admin.teachers.edit', $teacher) }}" class="p-2 text-slate-400 hover:text-green-700 bg-slate-50 hover:bg-green-50 rounded-lg transition-colors">
                                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
                             </a>
                             <form action="{{ route('super_admin.teachers.destroy', $teacher) }}" method="POST" onsubmit="return confirm('Hapus data guru ini?')">
@@ -176,10 +176,10 @@
             </div>
             <form action="{{ route('super_admin.teachers.import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="relative group h-40 border-2 border-dashed border-slate-200 rounded-2xl flex flex-col items-center justify-center hover:border-blue-500 transition-colors">
+                <div class="relative group h-40 border-2 border-dashed border-slate-200 rounded-2xl flex flex-col items-center justify-center hover:border-green-500 transition-colors">
                     <input type="file" name="file" class="absolute inset-0 opacity-0 cursor-pointer" onchange="this.nextElementSibling.innerText = this.files[0].name">
-                    <div class="text-sm text-slate-400 group-hover:text-blue-600 font-medium transition-colors">Klik untuk pilih file atau seret kesini</div>
-                    <svg class="h-10 w-10 text-slate-200 group-hover:text-blue-500 mt-4 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    <div class="text-sm text-slate-400 group-hover:text-green-700 font-medium transition-colors">Klik untuk pilih file atau seret kesini</div>
+                    <svg class="h-10 w-10 text-slate-200 group-hover:text-green-600 mt-4 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                 </div>
                 <div class="mt-8 flex gap-3">
                     <button type="button" onclick="document.getElementById('importModal').classList.add('hidden')" class="flex-1 py-3 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 hover:bg-slate-50 transition-colors">Batal</button>

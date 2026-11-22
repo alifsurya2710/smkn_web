@@ -1,4 +1,4 @@
-@extends('layouts.landing')
+﻿@extends('layouts.landing')
 
 @section('title', $jurusan->name)
 
@@ -16,7 +16,7 @@ if (!function_exists('getMajorColorHex')) {
         $map = [
             'bg-red-500' => '#ef4444',
             'bg-green-400' => '#4ade80',
-            'bg-blue-500' => '#3b82f6',
+            'bg-green-500' => '#3b82f6',
             'bg-yellow-500' => '#eab308',
             'bg-orange-500' => '#f97316',
         ];
@@ -43,7 +43,7 @@ $majorColor = getMajorColorHex($jurusan->color);
         background-color: {{ $majorColor }}60 !important;
     }
 </style>
-<div class="bg-[#0A142F] min-h-screen font-inter text-white overflow-hidden">
+<div class="bg-[#0D2461] min-h-screen font-inter text-white overflow-hidden">
     <!-- HERO SECTION -->
     <section class="relative h-screen flex items-center justify-center p-4">
         <!-- Background Image with Ken Burns Effect -->
@@ -52,7 +52,7 @@ $majorColor = getMajorColorHex($jurusan->color);
                  class="w-full h-full object-cover animate-soft-zoom opacity-50" 
                  alt="{{ $jurusan->name }}">
             <!-- Cinematic Overlays -->
-            <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#0A142F]"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#0D2461]"></div>
         </div>
 
         <!-- Content -->
@@ -91,12 +91,12 @@ $majorColor = getMajorColorHex($jurusan->color);
     </section>
 
     <!-- ABOUT SECTION -->
-    <section id="about" class="py-32 relative overflow-hidden bg-white text-[#0A142F]">
+    <section id="about" class="py-32 relative overflow-hidden bg-white text-[#0D2461]">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row items-center gap-20">
                 <div class="lg:w-1/2" data-aos="fade-right">
                     <div class="mb-12">
-                        <div class="w-20 h-1.5 bg-[#0A142F] mb-8"></div>
+                        <div class="w-20 h-1.5 bg-[#0D2461] mb-8"></div>
                         <h2 class="text-4xl md:text-6xl font-black font-outfit uppercase tracking-tight mb-8">
                             Tentang {{ $jurusan->acronym }}
                         </h2>
@@ -133,7 +133,7 @@ $majorColor = getMajorColorHex($jurusan->color);
     @php
         $totalPhotos = $jurusan->albums->sum(fn($a) => $a->photos->count());
     @endphp
-    <section class="py-32 bg-white text-[#0A142F]">
+    <section class="py-32 bg-white text-[#0D2461]">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-end mb-16" data-aos="fade-up">
                 <div>
@@ -175,7 +175,7 @@ $majorColor = getMajorColorHex($jurusan->color);
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="text-center mb-16" data-aos="fade-up">
                 <div class="font-bold tracking-[0.2em] uppercase text-xs mb-3 major-theme-text">Jelajahi Lebih Lanjut</div>
-                <h3 class="text-3xl md:text-5xl font-extrabold text-[#0A142F] mb-4 font-outfit uppercase tracking-tight">Program Keahlian Lainnya</h3>
+                <h3 class="text-3xl md:text-5xl font-extrabold text-[#0D2461] mb-4 font-outfit uppercase tracking-tight">Program Keahlian Lainnya</h3>
                 <p class="text-gray-400 max-w-2xl mx-auto font-inter text-lg">Temukan potensi diri Anda melalui berbagai pilihan program keahlian unggulan kami lainnya.</p>
             </div>
 
@@ -206,9 +206,9 @@ $majorColor = getMajorColorHex($jurusan->color);
                         </div>
 
                         <div class="relative z-10">
-                            <h3 class="text-2xl font-extrabold text-[#0A142F] mb-3 font-outfit uppercase transition-colors tracking-tight"
+                            <h3 class="text-2xl font-extrabold text-[#0D2461] mb-3 font-outfit uppercase transition-colors tracking-tight"
                                 onmouseover="this.style.color='{{ getMajorColorHex($other->color) }}'"
-                                onmouseout="this.style.color='#0A142F'">
+                                onmouseout="this.style.color='#0D2461'">
                                 {{ $other->name }}
                             </h3>
                             <p class="text-gray-500 text-sm font-medium leading-relaxed line-clamp-2">
@@ -218,9 +218,9 @@ $majorColor = getMajorColorHex($jurusan->color);
 
                         <div class="flex items-center justify-between pt-6 border-t border-gray-50 mt-auto relative z-10">
                             <a href="{{ route('jurusan.detail', $other->slug) }}" 
-                               class="text-[11px] font-extrabold text-[#0A142F] uppercase tracking-[0.2em] transition-all flex items-center gap-2"
+                               class="text-[11px] font-extrabold text-[#0D2461] uppercase tracking-[0.2em] transition-all flex items-center gap-2"
                                onmouseover="this.style.color='{{ getMajorColorHex($other->color) }}'"
-                               onmouseout="this.style.color='#0A142F'">
+                               onmouseout="this.style.color='#0D2461'">
                                 PELAJARI &rarr;
                             </a>
                             <span class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">DEPARTEMEN {{ $other->acronym }}</span>
@@ -232,7 +232,7 @@ $majorColor = getMajorColorHex($jurusan->color);
             
             <div class="mt-20 text-center" data-aos="zoom-in">
                 <a href="{{ route('jurusan.index') }}" 
-                   class="inline-flex justify-center items-center px-10 py-4 bg-white border-2 border-gray-100 text-[#0A142F] font-extrabold rounded-2xl shadow-sm transition-all text-xs uppercase tracking-widest major-theme-hover-border">
+                   class="inline-flex justify-center items-center px-10 py-4 bg-white border-2 border-gray-100 text-[#0D2461] font-extrabold rounded-2xl shadow-sm transition-all text-xs uppercase tracking-widest major-theme-hover-border">
                     Lihat Semua Jurusan
                 </a>
             </div>
@@ -244,7 +244,7 @@ $majorColor = getMajorColorHex($jurusan->color);
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-16" data-aos="fade-up">
                 <div>
-                    <h2 class="text-3xl md:text-5xl font-black text-[#0A142F] font-outfit uppercase tracking-tight mb-4">Berita & <span class="major-theme-text">Pembaruan</span></h2>
+                    <h2 class="text-3xl md:text-5xl font-black text-[#0D2461] font-outfit uppercase tracking-tight mb-4">Berita & <span class="major-theme-text">Pembaruan</span></h2>
                     <p class="text-gray-500 font-inter">Informasi dan berita terbaru dari program keahlian {{ $jurusan->name }}.</p>
                 </div>
                 <a href="{{ route('berita.index') }}" 
@@ -261,7 +261,7 @@ $majorColor = getMajorColorHex($jurusan->color);
                     <div class="h-56 relative overflow-hidden">
                         <img src="{{ $post->image_url }}" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700">
                         <div class="absolute top-4 left-4">
-                            <span class="px-4 py-2 rounded-xl bg-white/90 backdrop-blur-md text-[#0A142F] text-[10px] font-black uppercase tracking-widest shadow-sm">
+                            <span class="px-4 py-2 rounded-xl bg-white/90 backdrop-blur-md text-[#0D2461] text-[10px] font-black uppercase tracking-widest shadow-sm">
                                 {{ $post->category ?? 'Berita' }}
                             </span>
                         </div>
@@ -271,15 +271,15 @@ $majorColor = getMajorColorHex($jurusan->color);
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                             {{ $post->created_at->translatedFormat('d M Y') }}
                         </div>
-                        <h3 class="text-xl font-extrabold text-[#0A142F] mb-4 font-outfit leading-tight transition-colors line-clamp-2"
+                        <h3 class="text-xl font-extrabold text-[#0D2461] mb-4 font-outfit leading-tight transition-colors line-clamp-2"
                             onmouseover="this.style.color='{{ $majorColor }}'"
-                            onmouseout="this.style.color='#0A142F'">
+                            onmouseout="this.style.color='#0D2461'">
                             {{ $post->title }}
                         </h3>
                         <a href="{{ route('berita.detail', $post->slug) }}" 
-                           class="text-[10px] font-black text-[#0A142F] transition-all uppercase tracking-widest flex items-center gap-2"
+                           class="text-[10px] font-black text-[#0D2461] transition-all uppercase tracking-widest flex items-center gap-2"
                            onmouseover="this.style.color='{{ $majorColor }}'"
-                           onmouseout="this.style.color='#0A142F'">
+                           onmouseout="this.style.color='#0D2461'">
                             Baca Selengkapnya
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                         </a>

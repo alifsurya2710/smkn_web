@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
 @section('title', 'Manajemen Pengumuman Popup')
 
@@ -10,7 +10,7 @@
             <p class="mt-2 text-sm text-slate-700">Kelola pengumuman atau poster yang akan muncul saat pengunjung pertama kali membuka website.</p>
         </div>
         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-            <a href="{{ route('super_admin.popup_announcements.create') }}" class="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-all">Tambah Pengumuman</a>
+            <a href="{{ route('super_admin.popup_announcements.create') }}" class="block rounded-md bg-green-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-all">Tambah Pengumuman</a>
         </div>
     </div>
 
@@ -47,7 +47,7 @@
                                 <td class="whitespace-nowrap px-3 py-4 text-sm">
                                     <div class="font-bold text-slate-900">{{ $announcement->title ?? 'Tanpa Judul' }}</div>
                                     @if($announcement->link)
-                                    <div class="text-[10px] text-blue-500 font-medium truncate max-w-[200px]">{{ $announcement->link }}</div>
+                                    <div class="text-[10px] text-green-600 font-medium truncate max-w-[200px]">{{ $announcement->link }}</div>
                                     @endif
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-slate-500">
@@ -71,12 +71,12 @@
                                     @elseif($announcement->end_date->toDateString() < $today)
                                         <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-[10px] font-bold text-red-700 ring-1 ring-inset ring-red-600/20 uppercase tracking-widest">Kadaluarsa</span>
                                     @else
-                                        <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-[10px] font-bold text-blue-700 ring-1 ring-inset ring-blue-600/20 uppercase tracking-widest">Terjadwal</span>
+                                        <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-[10px] font-bold text-green-700 ring-1 ring-inset ring-green-600/20 uppercase tracking-widest">Terjadwal</span>
                                     @endif
                                 </td>
                                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                     <div class="flex justify-end gap-3">
-                                        <a href="{{ route('super_admin.popup_announcements.edit', $announcement->id) }}" class="text-blue-600 hover:text-blue-900 transition-colors uppercase text-[10px] font-black tracking-widest">Edit</a>
+                                        <a href="{{ route('super_admin.popup_announcements.edit', $announcement->id) }}" class="text-green-700 hover:text-green-900 transition-colors uppercase text-[10px] font-black tracking-widest">Edit</a>
                                         <form action="{{ route('super_admin.popup_announcements.destroy', $announcement->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengumuman ini?')">
                                             @csrf
                                             @method('DELETE')

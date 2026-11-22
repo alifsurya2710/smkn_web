@@ -1,10 +1,10 @@
-<x-app-layout>
+﻿<x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Kelola Mitra Industri') }}
             </h2>
-            <a href="{{ route('super_admin.industrial_partners.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150">
+            <a href="{{ route('super_admin.industrial_partners.create') }}" class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-[#0D2461] focus:outline-none focus:border-[#0D2461] focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150">
                 Tambah Mitra
             </a>
         </div>
@@ -54,7 +54,7 @@
                                         <td class="px-6 py-4">{{ $partner->order }}</td>
                                         <td class="px-6 py-4 text-right">
                                             <div class="flex justify-end gap-2">
-                                                <a href="{{ route('super_admin.industrial_partners.edit', $partner) }}" class="font-semibold text-blue-600 hover:underline">Edit</a>
+                                                <a href="{{ route('super_admin.industrial_partners.edit', $partner) }}" class="font-semibold text-green-700 hover:underline">Edit</a>
                                                 <form action="{{ route('super_admin.industrial_partners.destroy', $partner) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus mitra ini?')">
                                                     @csrf
                                                     @method('DELETE')

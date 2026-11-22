@@ -29,7 +29,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
                 <label for="nisn" class="block text-sm font-medium text-gray-700">NISN Siswa</label>
-                <input type="text" id="nisn" name="nisn" value="{{ old('nisn', $rapor->student->nisn ?? $rapor->nisn) }}" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                <input type="text" id="nisn" name="nisn" value="{{ old('nisn', $rapor->student->nisn ?? $rapor->nisn) }}" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm">
                 @error('nisn')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
@@ -37,12 +37,12 @@
 
             <div>
                 <label for="nama" class="block text-sm font-medium text-gray-700">Nama Siswa <span class="text-xs text-gray-400 font-normal">(opsional)</span></label>
-                <input type="text" id="nama" name="nama" value="{{ old('nama', $rapor->student->name ?? $rapor->nama) }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                <input type="text" id="nama" name="nama" value="{{ old('nama', $rapor->student->name ?? $rapor->nama) }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm">
             </div>
 
             <div>
-                <label for="jurusan" class="block text-sm font-medium text-gray-700">Jurusan <span class="text-xs text-gray-400 font-normal">(opsional)</span></label>
-                <input list="majors_list" id="jurusan" name="jurusan" value="{{ old('jurusan', $rapor->student->major->name ?? $rapor->jurusan) }}" placeholder="Ketik jurusan..." class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                <label for="jurusan" class="block text-sm font-medium text-gray-700">Kelas <span class="text-xs text-gray-400 font-normal">(opsional)</span></label>
+                <input list="majors_list" id="jurusan" name="jurusan" value="{{ old('jurusan', $rapor->student->major->name ?? $rapor->jurusan) }}" placeholder="Pilih atau ketik kelas (Kober, Bulan, Matahari, Bintang)..." class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm">
                 <datalist id="majors_list">
                     @foreach($majors as $major)
                         <option value="{{ $major->name }}">
@@ -52,7 +52,7 @@
 
             <div>
                 <label for="academic_year" class="block text-sm font-medium text-gray-700">Tahun Ajaran</label>
-                <input list="academic_years_list" id="academic_year" name="academic_year" value="{{ old('academic_year', $rapor->academicYear->name ?? $rapor->academic_year) }}" required placeholder="Contoh: 2023/2024" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                <input list="academic_years_list" id="academic_year" name="academic_year" value="{{ old('academic_year', $rapor->academicYear->name ?? $rapor->academic_year) }}" required placeholder="Contoh: 2023/2024" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm">
                 <datalist id="academic_years_list">
                     @foreach($academic_years as $ay)
                         <option value="{{ $ay->name }}">
@@ -65,7 +65,7 @@
 
             <div>
                 <label for="semester" class="block text-sm font-medium text-gray-700">Semester</label>
-                <select id="semester" name="semester" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                <select id="semester" name="semester" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm">
                     <option value="Ganjil" {{ $rapor->semester == 'Ganjil' ? 'selected' : '' }}>Ganjil</option>
                     <option value="Genap" {{ $rapor->semester == 'Genap' ? 'selected' : '' }}>Genap</option>
                 </select>
@@ -76,9 +76,9 @@
 
             <div>
                 <label for="file" class="block text-sm font-medium text-gray-700">File Rapor (Ganti Jika Diperlukan)</label>
-                <input type="file" name="file" id="file" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 border border-gray-300 rounded-md">
+                <input type="file" name="file" id="file" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100 border border-gray-300 rounded-md">
                 @if($rapor->file_path)
-                    <p class="mt-2 text-xs text-blue-600">File saat ini: {{ $rapor->file_name }}</p>
+                    <p class="mt-2 text-xs text-green-700">File saat ini: {{ $rapor->file_name }}</p>
                 @endif
                 <p class="mt-1 text-xs text-gray-500 italic">Maksimal 10MB</p>
                 @error('file')
@@ -89,7 +89,7 @@
 
         <div>
             <label for="teacher_notes" class="block text-sm font-medium text-gray-700">Hasil Rapor / Catatan Wali Kelas</label>
-            <textarea id="teacher_notes" name="teacher_notes" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">{{ $rapor->teacher_notes }}</textarea>
+            <textarea id="teacher_notes" name="teacher_notes" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm">{{ $rapor->teacher_notes }}</textarea>
             @error('teacher_notes')
                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
             @enderror

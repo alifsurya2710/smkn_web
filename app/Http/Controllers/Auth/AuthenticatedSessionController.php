@@ -16,7 +16,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        $captcha = \App\Services\MathCaptchaService::generate('login');
+        return view('auth.login', compact('captcha'));
     }
 
     /**
@@ -30,16 +31,12 @@ class AuthenticatedSessionController extends Controller
 
         $user = Auth::user();
 
-        if ($user->hasRole('super_admin')) {
+        if ($user->hasRole(['super_admin', 'super-admin'])) {
             return redirect()->intended(route('super_admin.dashboard'));
         } elseif ($user->hasRole('admin')) {
             return redirect()->intended(route('admin.dashboard'));
-        } elseif ($user->hasRole('editor')) {
-            return redirect()->intended(route('editor.dashboard'));
         } elseif ($user->hasRole('guru')) {
             return redirect()->intended(route('guru.dashboard'));
-        } elseif ($user->hasRole('siswa')) {
-            return redirect()->intended(route('e-rapor'));
         }
 
         return redirect()->intended(route('dashboard', absolute: false));

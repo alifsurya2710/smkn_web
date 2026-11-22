@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
 @section('title', 'Daftar Prestasi')
 
@@ -10,7 +10,7 @@
     </div>
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none flex gap-2">
          <a href="{{ route('super_admin.prestasi_categories.index') }}" class="block rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-500">Kelola Kategori</a>
-        <a href="{{ route('super_admin.prestasi.create') }}" class="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500">Tambah Prestasi</a>
+        <a href="{{ route('super_admin.prestasi.create') }}" class="block rounded-md bg-green-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-green-500">Tambah Prestasi</a>
     </div>
 </div>
 
@@ -41,7 +41,7 @@
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                 @if($achievement->extracurricular)
-                                    <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20">
+                                    <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                                         {{ $achievement->extracurricular->name }}
                                     </span>
                                 @else
@@ -52,7 +52,7 @@
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $achievement->date }}</td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                <a href="{{ route('super_admin.prestasi.edit', $achievement) }}" class="text-blue-600 hover:text-blue-900 mr-4">Edit</a>
+                                <a href="{{ route('super_admin.prestasi.edit', $achievement) }}" class="text-green-700 hover:text-green-900 mr-4">Edit</a>
                                 <form action="{{ route('super_admin.prestasi.destroy', $achievement) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')

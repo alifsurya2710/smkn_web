@@ -1,4 +1,4 @@
-@extends('layouts.landing')
+﻿@extends('layouts.landing')
 
 @section('title', $settings['tefa_title'] ?? 'Teaching Factory (TEFA)')
 
@@ -6,13 +6,13 @@
 <div class="bg-white min-h-screen pt-0 pb-20 overflow-hidden">
     
     <!-- Hero Banner Section (Full Width, Large) -->
-    <section class="relative h-[65vh] min-h-[500px] w-full bg-[#0A142F] flex items-center justify-center overflow-hidden" data-aos="fade" data-aos-duration="1000">
+    <section class="relative h-[65vh] min-h-[500px] w-full bg-[#0D2461] flex items-center justify-center overflow-hidden" data-aos="fade" data-aos-duration="1000">
         @if(isset($settings['tefa_hero_image']))
             <img src="{{ asset('storage/' . $settings['tefa_hero_image']) }}" alt="TEFA Hero" class="absolute inset-0 w-full h-full object-cover">
         @endif
         
         <!-- Cinematic Overlay -->
-        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#0A142F]/80"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#0D2461]/80"></div>
         <div class="absolute inset-0 backdrop-blur-[1px] bg-black/10"></div>
         
         <div class="relative z-10 max-w-7xl mx-auto px-4 text-center" data-aos="zoom-out" data-aos-duration="1200">
@@ -23,21 +23,21 @@
                         {{ $settings['tefa_hero_title'] ?? 'TEACHING FACTORY' }}
                     </h2>
                     <p class="text-xl md:text-3xl font-bold text-white uppercase tracking-[0.4em] drop-shadow-lg font-inner">
-                        {{ $settings['tefa_hero_subtitle'] ?? 'SMKN 1 KATAPANG' }}
+                        {{ $settings['tefa_hero_subtitle'] ?? 'RA AL-IKHWAN' }}
                     </p>
                 </div>
             </div>
         </div>
         
         <!-- Bottom Decorative Line -->
-        <div class="absolute bottom-0 left-0 w-full h-[6px] bg-gradient-to-r from-blue-500 via-[#FFD700] to-blue-500"></div>
+        <div class="absolute bottom-0 left-0 w-full h-[6px] bg-gradient-to-r from-green-600 via-[#FFD700] to-green-600"></div>
     </section>
 
     <!-- Description Section -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-20">
         <div class="bg-white rounded-[2rem] shadow-xl p-8 md:p-16 border border-slate-50" data-aos="fade-up" data-aos-offset="100" data-aos-duration="800" data-aos-delay="200">
             <h2 class="text-2xl md:text-4xl font-extrabold text-[#7C3AED] mb-8 font-outfit uppercase tracking-tight">
-                {{ $settings['tefa_title'] ?? 'TEACHING FACTORY SMKN 1 KATAPANG' }}
+                {{ $settings['tefa_title'] ?? 'TEACHING FACTORY RA AL-IKHWAN' }}
             </h2>
             
             <div class="text-slate-600 text-base md:text-xl leading-relaxed font-inter text-justify space-y-6">
@@ -52,7 +52,7 @@
         <!-- Manfaat Section -->
         <div class="mt-24">
             <div class="mb-12 border-l-8 border-[#39C5BB] pl-6" data-aos="fade-right" data-aos-duration="800">
-                <h2 class="text-3xl md:text-5xl font-black text-[#0A142F] font-outfit uppercase tracking-tighter">
+                <h2 class="text-3xl md:text-5xl font-black text-[#0D2461] font-outfit uppercase tracking-tighter">
                     Manfaat <span class="text-[#39C5BB]">Teaching Factory</span>
                 </h2>
                 <p class="text-slate-400 font-medium mt-2">Implementasi keunggulan dalam pendidikan vokasi.</p>
@@ -74,7 +74,7 @@
                         <div class="absolute bottom-0 left-0 -ml-4 -mb-4 w-12 h-12 border-2 border-slate-100 rounded-full"></div>
                         
                         <div class="relative z-10">
-                            <h3 class="text-2xl font-black text-[#0A142F] mb-4 font-outfit uppercase leading-tight">{{ $benefit_title }}</h3>
+                            <h3 class="text-2xl font-black text-[#0D2461] mb-4 font-outfit uppercase leading-tight">{{ $benefit_title }}</h3>
                             <p class="text-slate-500 text-sm md:text-base leading-relaxed text-center md:text-justify font-inter underline-offset-4">
                                 {{ $benefit_desc }}
                             </p>
@@ -88,8 +88,8 @@
         <!-- Alur Pembelajaran Section -->
         <div class="mt-32">
             <div class="max-w-4xl mx-auto text-center mb-16" data-aos="fade-up" data-aos-duration="800">
-                <h2 class="text-3xl md:text-5xl font-black text-blue-600 font-outfit uppercase tracking-tighter mb-4">Langkah-Langkah Pembelajaran</h2>
-                <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+                <h2 class="text-3xl md:text-5xl font-black text-green-700 font-outfit uppercase tracking-tighter mb-4">Langkah-Langkah Pembelajaran</h2>
+                <div class="w-24 h-1 bg-green-600 mx-auto rounded-full"></div>
             </div>
 
             <div class="space-y-6 max-w-5xl mx-auto">
@@ -103,7 +103,7 @@
                          data-aos="fade-up" 
                          data-aos-duration="600" 
                          data-aos-delay="{{ $i * 100 }}">
-                        <div class="bg-blue-600 text-white w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-black shrink-0 shadow-lg shadow-blue-500/30">
+                        <div class="bg-green-600 text-white w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-black shrink-0 shadow-lg shadow-blue-500/30">
                             {{ $i }}
                         </div>
                         <div>
@@ -140,7 +140,7 @@
         
         <div class="max-w-5xl mx-auto px-4">
              <div class="text-center mb-12">
-                <span class="text-[10px] font-black text-blue-600 uppercase tracking-widest border-b-2 border-blue-600 pb-1">Testimoni & Pesan</span>
+                <span class="text-[10px] font-black text-green-700 uppercase tracking-widest border-b-2 border-green-600 pb-1">Testimoni & Pesan</span>
              </div>
             <div class="relative min-h-[200px] flex items-center">
                 <template x-for="(msg, index) in slides" :key="index">
@@ -155,10 +155,10 @@
 
                 <template x-if="slides.length > 1">
                     <div class="absolute inset-x-0 flex justify-between items-center">
-                        <button @click="prev()" class="p-2 text-slate-300 hover:text-blue-600 transition-colors">
+                        <button @click="prev()" class="p-2 text-slate-300 hover:text-green-700 transition-colors">
                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                         </button>
-                        <button @click="next()" class="p-2 text-slate-300 hover:text-blue-600 transition-colors">
+                        <button @click="next()" class="p-2 text-slate-300 hover:text-green-700 transition-colors">
                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7-7"></path></svg>
                         </button>
                     </div>

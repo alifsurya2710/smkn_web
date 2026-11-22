@@ -1,4 +1,4 @@
-<x-guest-layout>
+﻿<x-guest-layout>
     <style>
         @keyframes gradient-bg {
             0% { background-position: 0% 50%; }
@@ -32,13 +32,13 @@
             <div class="absolute inset-0 z-0">
                 <img src="{{ asset('images/hero-login.jpg') }}"
                      class="h-full w-full object-cover object-center filter brightness-[0.55]"
-                     alt="SMKN 1 Katapang">
+                     alt="RA AL-IKHWAN">
                 <div class="absolute inset-0 bg-gradient-to-br from-sky-900/60 via-blue-800/30 to-slate-900/70 mix-blend-multiply animate-gradient-bg"></div>
             </div>
 
             <div class="relative z-10 w-full flex flex-col justify-between p-12 lg:p-16 text-white h-full">
                 <div>
-                    <span class="text-[13px] font-bold tracking-widest uppercase opacity-90 drop-shadow-sm">SMKN 1 KATAPANG</span>
+                    <span class="text-[13px] font-bold tracking-widest uppercase opacity-90 drop-shadow-sm">RA AL-IKHWAN</span>
                 </div>
 
                 <div class="max-w-xl pb-32">
@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="text-[11px] font-medium opacity-60 tracking-wide">
-                    &copy; 2024 SMK Negeri 1 Katapang
+                    &copy; {{ date('Y') }} RA AL-IKHWAN
                 </div>
             </div>
         </div>

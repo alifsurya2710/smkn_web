@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
 @section('title', 'Kelola Album Galeri')
 
@@ -43,7 +43,7 @@
                                     <img src="{{ asset('storage/' . $album->cover_image) }}" class="h-full w-full object-cover">
                                 </div>
                                 <div>
-                                    <div class="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{{ $album->title }}</div>
+                                    <div class="font-bold text-slate-900 group-hover:text-green-700 transition-colors">{{ $album->title }}</div>
                                     <div class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider">{{ $album->created_at->format('d M Y') }}</div>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                         </td>
                         <td class="px-8 py-6 border-b border-slate-50 border-r border-transparent group-hover:border-r-slate-200 transition-all">
                             <div class="flex items-center gap-2">
-                                <a href="{{ route('super_admin.albums.edit', $album->id) }}" class="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all">
+                                <a href="{{ route('super_admin.albums.edit', $album->id) }}" class="p-2 text-slate-400 hover:text-green-700 hover:bg-green-50 rounded-xl transition-all">
                                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                                 </a>
                                 <form action="{{ route('super_admin.albums.destroy', $album->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus album ini beserta seluruh fotonya?')">

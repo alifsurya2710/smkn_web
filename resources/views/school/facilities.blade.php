@@ -1,4 +1,4 @@
-@extends('layouts.landing')
+﻿@extends('layouts.landing')
 
 @section('title', 'Fasilitas Sekolah')
 
@@ -13,7 +13,7 @@
                 </svg>
                 <span class="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 font-outfit">FASILITAS</span>
             </div>
-            <h1 class="text-5xl md:text-6xl font-extrabold text-[#0A142F] mb-6 font-outfit" data-aos="fade-up">Fasilitas Kami</h1>
+            <h1 class="text-5xl md:text-6xl font-extrabold text-[#0D2461] mb-6 font-outfit" data-aos="fade-up">Fasilitas Kami</h1>
             <p class="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed" data-aos="fade-up" data-aos-delay="100">
              fasilitas-fasilitas yang ada di SMK Negeri 1 KATAPANG yang menunjang kegiatan belajar mengajar siswa.
             </p>
@@ -41,7 +41,7 @@
                             @endif
                         </div>
                         <div class="px-2 pb-2">
-                            <h3 class="text-2xl font-bold text-[#0A142F] mb-6 font-outfit group-hover:text-[#3d837c] transition-colors">{{ $facility->name }}</h3>
+                            <h3 class="text-2xl font-bold text-[#0D2461] mb-6 font-outfit group-hover:text-[#3d837c] transition-colors">{{ $facility->name }}</h3>
                             
                         </div>
                     </div>

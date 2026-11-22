@@ -6,16 +6,16 @@
 <div class="sm:flex sm:items-center">
     <div class="sm:flex-auto">
         <h1 class="text-2xl font-semibold leading-6 text-gray-900">Recap E-Rapor Digital</h1>
-        <p class="mt-2 text-sm text-gray-700">Dapatkan data semua siswa dari jurusan tertentu dan isi rapor secara masal.</p>
+        <p class="mt-2 text-sm text-gray-700">Dapatkan data semua siswa dari kelas tertentu dan isi rapor secara masal.</p>
     </div>
 </div>
 
 <div class="mt-6 bg-white p-6 rounded-lg shadow-sm border border-gray-100">
     <form action="{{ route('super_admin.rapor.recap') }}" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
         <div>
-            <label for="major_id" class="block text-sm font-medium text-gray-700">Jurusan</label>
-            <select id="major_id" name="major_id" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                <option value="">-- Pilih Jurusan --</option>
+            <label for="major_id" class="block text-sm font-medium text-gray-700">Kelas</label>
+            <select id="major_id" name="major_id" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm">
+                <option value="">-- Pilih Kelas --</option>
                 @foreach($majors as $major)
                     <option value="{{ $major->id }}" {{ $major_id == $major->id ? 'selected' : '' }}>{{ $major->name }}</option>
                 @endforeach
@@ -23,7 +23,7 @@
         </div>
         <div>
             <label for="academic_year_id" class="block text-sm font-medium text-gray-700">Tahun Ajaran</label>
-            <select id="academic_year_id" name="academic_year_id" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+            <select id="academic_year_id" name="academic_year_id" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm">
                 <option value="">-- Pilih Tahun --</option>
                 @foreach($academic_years as $ay)
                     <option value="{{ $ay->id }}" {{ $academic_year_id == $ay->id ? 'selected' : '' }}>{{ $ay->name }}</option>
@@ -32,7 +32,7 @@
         </div>
         <div>
             <label for="semester" class="block text-sm font-medium text-gray-700">Semester</label>
-            <select id="semester" name="semester" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+            <select id="semester" name="semester" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm">
                 <option value="Ganjil" {{ $semester == 'Ganjil' ? 'selected' : '' }}>Ganjil</option>
                 <option value="Genap" {{ $semester == 'Genap' ? 'selected' : '' }}>Genap</option>
             </select>
@@ -76,7 +76,7 @@
                                 @if($report)
                                     <span class="text-green-600 font-semibold italic">Sudah ada rapor</span>
                                     @if($report->file_path)
-                                        <br><span class="text-blue-500">{{ $report->file_name }}</span>
+                                        <br><span class="text-green-600">{{ $report->file_name }}</span>
                                     @endif
                                 @else
                                     <span class="text-gray-400 italic">Belum ada</span>
@@ -84,8 +84,8 @@
                             </td>
                             <td class="px-3 py-4 text-sm">
                                 <div class="space-y-2">
-                                    <textarea name="reports[{{ $index }}][teacher_notes]" rows="2" placeholder="Catatan manual..." class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-xs tracking-tight">{{ $report->teacher_notes ?? '' }}</textarea>
-                                    <input type="file" name="reports[{{ $index }}][file]" class="text-xs file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                                    <textarea name="reports[{{ $index }}][teacher_notes]" rows="2" placeholder="Catatan manual..." class="block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-xs tracking-tight">{{ $report->teacher_notes ?? '' }}</textarea>
+                                    <input type="file" name="reports[{{ $index }}][file]" class="text-xs file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:bg-green-50 file:text-green-700 hover:file:bg-green-100">
                                 </div>
                             </td>
                         </tr>

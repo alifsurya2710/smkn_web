@@ -23,8 +23,7 @@ class AdminController extends Controller
 
     public function ppdb()
     {
-        $applications = \App\Models\PpdbApplication::with(['firstChoiceMajor', 'secondChoiceMajor'])->latest()->paginate(15);
-        return view('admin.ppdb.index', compact('applications'));
+        return redirect()->route('super_admin.ppdb_applications.index');
     }
 
     public function eRapor()

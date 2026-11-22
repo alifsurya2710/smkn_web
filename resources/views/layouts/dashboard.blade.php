@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title') - SMKN Dashboard</title>
+    <title>@yield('title') - RA AL-IKHWAN Dashboard</title>
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
 
     <!-- Fonts -->
@@ -68,10 +68,10 @@
                     <!-- Sidebar content -->
                     <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-slate-900 px-6 pb-4 ring-1 ring-white/10">
                         <div class="flex h-20 shrink-0 items-center gap-3">
-                            <img class="h-10 w-auto" src="{{ asset('images/logo.png') }}" alt="SMKN Logo">
+                            <img class="h-10 w-auto" src="{{ asset('images/logo.png') }}" alt="Logo RA AL-IKHWAN">
                             <div class="flex flex-col">
-                                <span class="text-xs font-bold text-white uppercase tracking-wider">SMKN Dashboard</span>
-                                <span class="text-[10px] text-slate-400 uppercase tracking-widest">Admin Panel</span>
+                                <span class="text-xs font-bold text-white uppercase tracking-wider">RA AL-IKHWAN</span>
+                                <span class="text-[10px] text-slate-400 uppercase tracking-widest">Dashboard Panel</span>
                             </div>
                         </div>
                         <nav class="flex flex-1 flex-col">
@@ -97,14 +97,15 @@
         <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
             <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-slate-900 px-6 pb-4 ring-1 ring-white/10">
                 <div class="flex h-20 shrink-0 items-center gap-3 border-b border-white/5 mx-[-1.5rem] px-6">
-                    <img class="h-10 w-auto" src="{{ asset('images/logo.png') }}" alt="SMKN Logo">
+                    <img class="h-10 w-auto" src="{{ asset('images/logo.png') }}" alt="Logo RA AL-IKHWAN">
                     <div class="flex flex-col">
                         <span class="text-xs font-bold text-white uppercase tracking-wider">
                            @if(auth()->user()->hasRole(['super_admin', 'super-admin'])) SUPER ADMIN PANEL
                            @elseif(auth()->user()->hasRole('admin')) ADMIN PANEL
-                           @else EDITOR PANEL @endif
+                           @elseif(auth()->user()->hasRole('guru')) GURU PANEL
+                           @else MURID BARU PANEL @endif
                         </span>
-                        <span class="text-[10px] text-slate-400 uppercase tracking-widest">SMKN Web Dashboard</span>
+                        <span class="text-[10px] text-slate-400 uppercase tracking-widest">RA AL-IKHWAN Dashboard</span>
                     </div>
                 </div>
                 <nav class="flex flex-1 flex-col mt-4">
@@ -132,18 +133,18 @@
                 </button>
 
                 <!-- Breadcrumbs/Search area placeholder -->
-                <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 h-full items-center">
-                    <div class="flex items-center gap-2 text-sm font-medium text-slate-500 dark:text-slate-400">
-                        <span class="hover:text-slate-700 dark:hover:text-slate-200 cursor-pointer">Dashboard</span>
-                        <svg class="h-4 w-4 text-slate-300 dark:text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                        <span class="text-slate-900 dark:text-white font-semibold">@yield('title')</span>
+                <div class="flex flex-1 gap-x-2 sm:gap-x-4 self-stretch lg:gap-x-6 h-full items-center min-w-0">
+                    <div class="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 min-w-0">
+                        <span class="hover:text-slate-700 dark:hover:text-slate-200 cursor-pointer hidden sm:inline">Dashboard</span>
+                        <svg class="h-3.5 w-3.5 text-slate-300 dark:text-slate-600 hidden sm:inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        <span class="text-slate-900 dark:text-white font-semibold truncate max-w-[140px] sm:max-w-xs">@yield('title')</span>
                     </div>
                     <!-- Logout Button (beside Dashboard breadcrumb) -->
-                    <form method="POST" action="{{ route('logout') }}" class="ml-4">
+                    <form method="POST" action="{{ route('logout') }}" class="ml-auto sm:ml-4">
                         @csrf
-                        <button type="submit" class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors border border-red-200 dark:border-red-800/40">
+                        <button type="submit" class="flex items-center gap-1 px-2.5 py-1.5 sm:px-3 text-xs font-semibold text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors border border-red-200 dark:border-red-800/40">
                             <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-                            Logout
+                            <span class="hidden sm:inline">Logout</span>
                         </button>
                     </form>
                 </div>
@@ -166,7 +167,7 @@
                                 <span class="text-xs font-semibold text-slate-900 dark:text-white leading-none">{{ Auth::user()->name }}</span>
                                 <span class="text-[10px] text-emerald-500 font-medium uppercase tracking-tight">Project Online</span>
                             </div>
-                            <div class="h-9 w-9 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/20 overflow-hidden">
+                            <div class="h-9 w-9 rounded-lg bg-green-600 flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/20 overflow-hidden">
                                 @if(Auth::user()->photo)
                                     <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="" class="h-full w-full object-cover">
                                 @else
@@ -190,7 +191,7 @@
                             <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Masuk sebagai</p>
                             <p class="text-xs font-semibold text-slate-900 dark:text-white truncate">{{ Auth::user()->email }}</p>
                         </div>
-                        <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 px-3 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors">
+                        <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 px-3 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-green-700 dark:hover:text-green-400 rounded-lg transition-colors">
                             <svg class="h-4 w-4 text-slate-400 dark:text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                             Profil Saya
                         </a>
@@ -213,7 +214,7 @@
             
             <footer class="mt-8 border-t border-slate-200 dark:border-slate-800 py-6 px-4 text-center transition-colors duration-300">
                 <p class="text-[11px] font-medium text-slate-400 dark:text-slate-500 uppercase tracking-widest">
-                        &copy; 2026 Sekolah App - Official Website for National Vocational High School. All rights reserved.
+                        &copy; {{ date('Y') }} RA AL-IKHWAN &mdash; Raudhatul Athfal Al-Ikhwan. Hak Cipta Dilindungi.
                     </p>
                 </footer>
             </main>
@@ -261,7 +262,7 @@
         <div class="px-4 py-3 space-y-2.5 max-h-48 overflow-y-auto">
             @foreach($pendingResetPopup as $req)
             <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xs flex-shrink-0 overflow-hidden">
+                <div class="w-8 h-8 rounded-lg bg-green-600 flex items-center justify-center text-white font-bold text-xs flex-shrink-0 overflow-hidden">
                     @if($req->user->photo)
                         <img src="{{ asset('storage/' . $req->user->photo) }}" class="w-full h-full object-cover" alt="">
                     @else

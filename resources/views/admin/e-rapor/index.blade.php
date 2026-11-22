@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
 @section('title', 'E-Rapor Digital')
 
@@ -9,7 +9,7 @@
         <p class="mt-2 text-sm text-gray-700">Manajemen rapor digital siswa. Upload dan kelola akses download rapor.</p>
     </div>
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-        <button type="button" class="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+        <button type="button" class="block rounded-md bg-green-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
             Upload Rapor Baru
         </button>
     </div>
@@ -39,7 +39,7 @@
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $report->student->major->name ?? '-' }}</td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $report->academicYear->name ?? '-' }}</td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                <a href="#" class="text-blue-600 hover:text-blue-900">Download</a>
+                                <a href="#" class="text-green-700 hover:text-green-900">Download</a>
                             </td>
                         </tr>
                         @empty

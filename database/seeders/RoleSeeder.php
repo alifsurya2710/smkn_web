@@ -14,38 +14,32 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        // Define roles (standardizing to underscore as per tests)
-        $roles = ['super_admin', 'admin', 'editor', 'guru', 'siswa'];
+        // Define roles: super_admin, admin, guru, pendaftar
+        $roles = ['super_admin', 'admin', 'guru', 'pendaftar'];
 
         foreach ($roles as $roleName) {
             Role::firstOrCreate(['name' => $roleName]);
         }
 
-        // Create Test Users
+        // Create Default Users for RA AL-IKHWAN
         $users = [
             [
-                'name' => 'Super Admin',
-                'email' => 'super@smkn.sch.id',
-                'password' => 'password',
+                'name' => 'Super Admin RA AL-IKHWAN',
+                'email' => 'superadmin@ra-alikhwan.id',
+                'password' => 'Admin@12345',
                 'role' => 'super_admin',
             ],
             [
-                'name' => 'Admin User',
-                'email' => 'admin@smkn.sch.id',
-                'password' => 'password',
+                'name' => 'Admin RA AL-IKHWAN',
+                'email' => 'admin@ra-alikhwan.id',
+                'password' => 'Admin@12345',
                 'role' => 'admin',
             ],
             [
-                'name' => 'Editor User',
-                'email' => 'editor@smkn.sch.id',
-                'password' => 'password',
-                'role' => 'editor',
-            ],
-            [
-                'name' => 'Siswa User',
-                'email' => 'siswa@smkn-web.sch.id',
-                'password' => 'password',
-                'role' => 'siswa',
+                'name' => 'Guru RA AL-IKHWAN',
+                'email' => 'guru@ra-alikhwan.id',
+                'password' => 'Guru@12345',
+                'role' => 'guru',
             ],
         ];
 

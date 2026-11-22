@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
 @section('title', 'Kelola Users')
 
@@ -9,7 +9,7 @@
         <p class="mt-2 text-sm text-gray-700">Daftar semua pengguna dalam sistem dan peran mereka.</p>
     </div>
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none flex gap-3">
-        <a href="{{ route('super_admin.users.create') }}" class="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+        <a href="{{ route('super_admin.users.create') }}" class="block rounded-md bg-green-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
             + Tambah User
         </a>
         <a href="{{ route('super_admin.users.trash') }}" class="block rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
@@ -72,7 +72,7 @@
                                         @if($user->photo)
                                             <img class="h-10 w-10 rounded-lg object-cover" src="{{ asset('storage/' . $user->photo) }}" alt="">
                                         @else
-                                            <div class="h-10 w-10 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xs">
+                                            <div class="h-10 w-10 rounded-lg bg-green-600 flex items-center justify-center text-white font-bold text-xs">
                                                 {{ strtoupper(substr($user->name, 0, 1)) }}
                                             </div>
                                         @endif
@@ -86,13 +86,13 @@
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $user->nisn ?? '-' }}</td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                 @foreach($user->roles as $role)
-                                    <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
+                                    <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-blue-700/10">
                                         {{ $role->name }}
                                     </span>
                                 @endforeach
                             </td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                <a href="{{ route('super_admin.users.edit', $user) }}" class="text-blue-600 hover:text-blue-900 mr-4">Edit</a>
+                                <a href="{{ route('super_admin.users.edit', $user) }}" class="text-green-700 hover:text-green-900 mr-4">Edit</a>
                                 
                                 @if($user->id !== auth()->id())
                                 <form action="{{ route('super_admin.users.destroy', $user) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus/memasukkan user ini ke trash?');">

@@ -1,7 +1,4 @@
 <x-guest-layout>
-    @if(env('RECAPTCHA_SITE_KEY'))
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    @endif
     <style>
         @keyframes gradient-bg {
             0% { background-position: 0% 50%; }
@@ -35,33 +32,31 @@
                 <img src="{{ str_starts_with($authBg, 'images/') ? asset($authBg) : asset('storage/' . $authBg) }}"
                      class="h-full w-full object-cover object-center filter brightness-[0.55]"
                      style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
-                     alt="SMKN 1 Katapang">
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-900/50 via-indigo-800/30 to-slate-900/70 mix-blend-multiply animate-gradient-bg"></div>
+                     alt="RA AL-IKHWAN">
+                <div class="absolute inset-0 bg-gradient-to-br from-[#0D2461]/50 via-indigo-800/30 to-slate-900/70 mix-blend-multiply animate-gradient-bg"></div>
             </div>
 
             {{-- Content Overlay --}}
             <div class="relative z-10 w-full flex flex-col justify-between p-12 lg:p-16 text-white h-full">
                 {{-- Top Brand --}}
                 <div>
-                    <span class="text-[13px] font-bold tracking-widest uppercase opacity-90 drop-shadow-sm font-sans">SMKN 1 KATAPANG</span>
+                    <span class="text-[13px] font-bold tracking-widest uppercase opacity-90 drop-shadow-sm font-sans">RA AL-IKHWAN</span>
                 </div>
 
                 {{-- Main Text --}}
                 <div class="max-w-xl pb-32">
                     <h1 class="text-[4rem] lg:text-[5rem] font-black leading-[1.05] tracking-tight mb-5 translate-y-8 drop-shadow-lg">
                         <span class="block text-white">Daftar</span>
-                        <span class="block text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 animate-gradient-bg">Sekarang</span>
+                        <span class="block text-transparent bg-clip-text bg-gradient-to-r from-green-600 via-green-700 to-indigo-600 animate-gradient-bg">Sekarang</span>
                     </h1>
                     <p class="text-[15px] opacity-[0.85] leading-relaxed font-medium mt-6 max-w-sm text-slate-100 translate-y-8 font-sans">
-                        "Buat akun untuk mengakses laporan siswa,<br>
-                        pendaftaran SPMB, dan konten khusus<br>
-                        program vokasional SMKN 1 Katapang"
+                        "Buat akun untuk mengakses portal layanan pendidikan RA AL-IKHWAN"
                     </p>
                 </div>
 
                 {{-- Footer --}}
                 <div class="text-[11px] font-medium opacity-60 font-sans tracking-wide">
-                    &copy; 2026 SMK Negeri 1 Katapang
+                    &copy; {{ date('Y') }} RA AL-IKHWAN
                 </div>
             </div>
         </div>
@@ -75,9 +70,10 @@
                     {{-- Logo --}}
                     <div class="w-20 h-20 flex items-center justify-center overflow-hidden drop-shadow-lg transition-transform duration-300 hover:scale-105">
                         <img src="{{ asset('images/logo.png') }}"
-                             alt="Logo SMKN 1 Katapang" class="h-full w-auto object-contain">
+                             alt="Logo RA AL-IKHWAN" class="h-full w-auto object-contain">
                     </div>
-                    <h2 class="text-[22px] font-bold text-slate-800 tracking-tight font-sans">Buat Akun Baru</h2>
+                    <h2 class="text-[22px] font-bold text-slate-800 tracking-tight font-sans">Pendaftaran Akun Guru</h2>
+                    <p class="text-xs text-slate-500 font-medium">Khusus Pengajar RA AL-IKHWAN</p>
                 </div>
 
                 <form method="POST" action="{{ route('register') }}" class="space-y-4 pt-1">
@@ -87,14 +83,14 @@
                     <div class="space-y-1.5 fade-in-up fade-in-up-d1">
                         <label for="name" class="text-[10px] font-bold text-slate-600 tracking-wide">Nama Lengkap</label>
                         <div class="relative group">
-                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-blue-500 transition-colors">
+                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-green-600 transition-colors">
                                 <svg class="h-[16px] w-[16px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
                             </div>
                             <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus
                                    placeholder="Masukkan nama lengkap Anda"
-                                   class="block w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-800 text-[13px] placeholder-slate-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition-all font-medium">
+                                   class="block w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-800 text-[13px] placeholder-slate-400 focus:ring-1 focus:ring-green-500 focus:border-green-500 shadow-sm transition-all font-medium">
                         </div>
                         <x-input-error :messages="$errors->get('name')" class="mt-1 text-xs" />
                     </div>
@@ -103,32 +99,32 @@
                     <div class="space-y-1.5 fade-in-up fade-in-up-d2">
                         <label for="email" class="text-[10px] font-bold text-slate-600 tracking-wide">Alamat Email</label>
                         <div class="relative group">
-                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-blue-500 transition-colors">
+                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-green-600 transition-colors">
                                 <svg class="h-[16px] w-[16px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                 </svg>
                             </div>
                             <input id="email" type="email" name="email" value="{{ old('email') }}" required
                                    placeholder="namaanda@example.com"
-                                   class="block w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-800 text-[13px] placeholder-slate-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition-all font-medium">
+                                   class="block w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-800 text-[13px] placeholder-slate-400 focus:ring-1 focus:ring-green-500 focus:border-green-500 shadow-sm transition-all font-medium">
                         </div>
                         <x-input-error :messages="$errors->get('email')" class="mt-1 text-xs" />
                     </div>
 
-                    {{-- NISN & No Telepon (grid 2 col) --}}
+                    {{-- NUPTK / NIP & No Telepon (grid 2 col) --}}
                     <div class="grid grid-cols-2 gap-3 fade-in-up fade-in-up-d3">
-                        {{-- NISN --}}
+                        {{-- NUPTK / NIP (Guru) --}}
                         <div class="space-y-1.5">
-                            <label for="nisn" class="text-[10px] font-bold text-slate-600 tracking-wide">NISN (Siswa)</label>
+                            <label for="nisn" class="text-[10px] font-bold text-slate-600 tracking-wide">NUPTK / NIP (Guru)</label>
                             <div class="relative group">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 group-focus-within:text-blue-500 transition-colors">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 group-focus-within:text-green-600 transition-colors">
                                     <svg class="h-[14px] w-[14px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
                                     </svg>
                                 </div>
                                 <input id="nisn" type="text" name="nisn" value="{{ old('nisn') }}"
-                                       placeholder="NISN Anda"
-                                       class="block w-full pl-9 pr-3 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-800 text-[12px] placeholder-slate-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition-all font-medium">
+                                       placeholder="NUPTK atau NIP"
+                                       class="block w-full pl-9 pr-3 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-800 text-[12px] placeholder-slate-400 focus:ring-1 focus:ring-green-500 focus:border-green-500 shadow-sm transition-all font-medium">
                             </div>
                             <x-input-error :messages="$errors->get('nisn')" class="mt-1 text-xs" />
                         </div>
@@ -136,14 +132,14 @@
                         <div class="space-y-1.5">
                             <label for="no_telp" class="text-[10px] font-bold text-slate-600 tracking-wide">Nomor Telepon</label>
                             <div class="relative group">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 group-focus-within:text-blue-500 transition-colors">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 group-focus-within:text-green-600 transition-colors">
                                     <svg class="h-[14px] w-[14px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                                     </svg>
                                 </div>
                                 <input id="no_telp" type="text" name="no_telp" value="{{ old('no_telp') }}"
                                        placeholder="0812..."
-                                       class="block w-full pl-9 pr-3 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-800 text-[12px] placeholder-slate-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition-all font-medium">
+                                       class="block w-full pl-9 pr-3 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-800 text-[12px] placeholder-slate-400 focus:ring-1 focus:ring-green-500 focus:border-green-500 shadow-sm transition-all font-medium">
                             </div>
                             <x-input-error :messages="$errors->get('no_telp')" class="mt-1 text-xs" />
                         </div>
@@ -163,7 +159,7 @@
                          }">
                         <label for="password" class="text-[10px] font-bold text-slate-600 tracking-wide">Kata Sandi</label>
                         <div class="relative group">
-                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-blue-500 transition-colors">
+                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-green-600 transition-colors">
                                 <svg class="h-[16px] w-[16px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                 </svg>
@@ -171,7 +167,7 @@
                             <input id="password" :type="show ? 'text' : 'password'" name="password" required autocomplete="new-password"
                                    x-model="pw"
                                    placeholder="Buat kata sandi yang kuat"
-                                   class="block w-full pl-10 pr-10 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-800 text-[13px] placeholder-slate-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition-all font-medium">
+                                   class="block w-full pl-10 pr-10 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-800 text-[13px] placeholder-slate-400 focus:ring-1 focus:ring-green-500 focus:border-green-500 shadow-sm transition-all font-medium">
                             <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 cursor-pointer transition-colors" @click="show = !show">
                                 <svg x-show="!show" class="h-[16px] w-[16px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                                 <svg x-cloak x-show="show" class="h-[16px] w-[16px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg>
@@ -228,7 +224,7 @@
                                     <div :class="[hasMin, hasUpper, hasLower, hasNumber, hasSymbol].filter(Boolean).length >= 1 ? 'bg-red-400' : 'bg-slate-200'" class="h-1 flex-1 rounded-full transition-colors duration-300"></div>
                                     <div :class="[hasMin, hasUpper, hasLower, hasNumber, hasSymbol].filter(Boolean).length >= 2 ? 'bg-orange-400' : 'bg-slate-200'" class="h-1 flex-1 rounded-full transition-colors duration-300"></div>
                                     <div :class="[hasMin, hasUpper, hasLower, hasNumber, hasSymbol].filter(Boolean).length >= 3 ? 'bg-yellow-400' : 'bg-slate-200'" class="h-1 flex-1 rounded-full transition-colors duration-300"></div>
-                                    <div :class="[hasMin, hasUpper, hasLower, hasNumber, hasSymbol].filter(Boolean).length >= 4 ? 'bg-blue-400' : 'bg-slate-200'" class="h-1 flex-1 rounded-full transition-colors duration-300"></div>
+                                    <div :class="[hasMin, hasUpper, hasLower, hasNumber, hasSymbol].filter(Boolean).length >= 4 ? 'bg-green-400' : 'bg-slate-200'" class="h-1 flex-1 rounded-full transition-colors duration-300"></div>
                                     <div :class="allPass ? 'bg-emerald-500' : 'bg-slate-200'" class="h-1 flex-1 rounded-full transition-colors duration-300"></div>
                                 </div>
                                 <p class="text-[9px] font-bold mt-1 transition-colors duration-200"
@@ -236,7 +232,7 @@
                                        'text-red-500':    [hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length <= 1,
                                        'text-orange-500': [hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length === 2,
                                        'text-yellow-600': [hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length === 3,
-                                       'text-blue-600':   [hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length === 4,
+                                       'text-green-700':   [hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length === 4,
                                        'text-emerald-600': allPass,
                                    }">
                                     <span x-text="allPass ? 'Kata sandi kuat ✓' : [hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length <= 1 ? 'Sangat lemah' : [hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length === 2 ? 'Lemah' : [hasMin,hasUpper,hasLower,hasNumber,hasSymbol].filter(Boolean).length === 3 ? 'Cukup' : 'Hampir kuat'"></span>
@@ -251,14 +247,14 @@
                     <div class="space-y-1.5 fade-in-up fade-in-up-d5" x-data="{ show2: false }">
                         <label for="password_confirmation" class="text-[10px] font-bold text-slate-600 tracking-wide">Konfirmasi Kata Sandi</label>
                         <div class="relative group">
-                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-blue-500 transition-colors">
+                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-green-600 transition-colors">
                                 <svg class="h-[16px] w-[16px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                                 </svg>
                             </div>
                             <input id="password_confirmation" :type="show2 ? 'text' : 'password'" name="password_confirmation" required autocomplete="new-password"
                                    placeholder="Masukkan kembali kata sandi Anda"
-                                   class="block w-full pl-10 pr-10 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-800 text-[13px] placeholder-slate-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition-all font-medium">
+                                   class="block w-full pl-10 pr-10 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-800 text-[13px] placeholder-slate-400 focus:ring-1 focus:ring-green-500 focus:border-green-500 shadow-sm transition-all font-medium">
                             <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 cursor-pointer transition-colors" @click="show2 = !show2">
                                 <svg x-show="!show2" class="h-[16px] w-[16px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                                 <svg x-cloak x-show="show2" class="h-[16px] w-[16px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg>
@@ -267,17 +263,31 @@
                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-1 text-xs" />
                     </div>
 
-                    {{-- Submit --}}
+                    {{-- Submit & Math CAPTCHA --}}
                     <div class="pt-2 fade-in-up fade-in-up-d6">
-                        {{-- reCAPTCHA --}}
-                        @if(env('RECAPTCHA_SITE_KEY'))
-                        <div class="flex justify-center mb-4">
-                            <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+                        @php
+                            $registerCaptcha = $captcha ?? \App\Services\MathCaptchaService::generate('register');
+                        @endphp
+                        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl mb-4">
+                            <label for="math_captcha" class="block text-[11px] font-bold text-slate-700 mb-1.5 flex items-center justify-between">
+                                <span class="flex items-center gap-1.5">
+                                    <svg class="w-3.5 h-3.5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                                    Keamanan Pendaftaran (Hitung Cepat)
+                                </span>
+                                <span class="text-[10px] text-slate-400 font-normal">Wajib diisi</span>
+                            </label>
+                            <div class="flex items-center gap-2">
+                                <div class="px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm font-extrabold text-[#0D2461] tracking-wider select-none font-mono">
+                                    {{ $registerCaptcha['num1'] }} {{ $registerCaptcha['op'] }} {{ $registerCaptcha['num2'] }} = ?
+                                </div>
+                                <input id="math_captcha" type="number" name="math_captcha" required
+                                       placeholder="Jawaban angka"
+                                       class="block flex-1 py-2 px-3 bg-white border border-slate-200 rounded-lg text-slate-800 text-[13px] placeholder-slate-400 focus:ring-1 focus:ring-green-500 focus:border-green-500 font-medium">
+                            </div>
+                            @if($errors->has('math_captcha'))
+                                <p class="text-xs text-red-500 mt-1 font-semibold">{{ $errors->first('math_captcha') }}</p>
+                            @endif
                         </div>
-                        @if($errors->has('g-recaptcha-response'))
-                            <p class="text-xs text-red-500 text-center mb-3">{{ $errors->first('g-recaptcha-response') }}</p>
-                        @endif
-                        @endif
                         <button type="submit"
                                 class="w-full py-2.5 bg-black text-white rounded-lg text-[13px] font-bold tracking-wide hover:bg-slate-800 focus:ring-4 focus:ring-slate-200 active:scale-[0.98] transition-all flex justify-center items-center shadow-md">
                             Daftar Sekarang
@@ -292,7 +302,7 @@
                             <div class="w-full border-t border-slate-100"></div>
                         </div>
                         <div class="relative flex justify-center text-xs uppercase tracking-widest font-black">
-                            <a href="{{ route('login') }}" class="bg-white px-4 text-blue-600 hover:text-blue-800 transition-colors">
+                            <a href="{{ route('login') }}" class="bg-white px-4 text-green-700 hover:text-blue-800 transition-colors">
                                 Sudah punya akun? Masuk
                             </a>
                         </div>
@@ -307,6 +317,10 @@
                             Halaman Utama
                         </a>
                     </div>
+
+                    <p class="mt-5 text-[11px] text-slate-500 font-medium leading-relaxed bg-slate-50 border border-slate-200/80 rounded-xl py-2 px-3">
+                        ℹ️ <span class="font-bold text-slate-700">Catatan:</span> Login dan register hanya untuk guru dan admin sekolah saja.
+                    </p>
                 </div>
 
             </div>

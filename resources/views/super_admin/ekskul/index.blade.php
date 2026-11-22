@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
 @section('title', 'Manajemen Ekstrakurikuler')
 
@@ -10,7 +10,7 @@
             <p class="mt-2 text-sm text-slate-700">Daftar semua kegiatan ekstrakurikuler sekolah.</p>
         </div>
         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-            <a href="{{ route('super_admin.ekskul.create') }}" class="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 transition-all">Tambah Ekskul</a>
+            <a href="{{ route('super_admin.ekskul.create') }}" class="block rounded-md bg-green-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-green-500 transition-all">Tambah Ekskul</a>
         </div>
     </div>
 
@@ -64,7 +64,7 @@
                                 </td>
                                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                     <div class="flex justify-end gap-x-3">
-                                        <a href="{{ route('super_admin.ekskul.edit', $ekskul->id) }}" class="text-blue-600 hover:text-blue-900">Edit</a>
+                                        <a href="{{ route('super_admin.ekskul.edit', $ekskul->id) }}" class="text-green-700 hover:text-green-900">Edit</a>
                                         <form action="{{ route('super_admin.ekskul.destroy', $ekskul->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus ekskul ini?')">
                                             @csrf
                                             @method('DELETE')

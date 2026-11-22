@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
 @section('title', 'Kategori Prestasi')
 
@@ -9,7 +9,7 @@
         <p class="mt-2 text-sm text-gray-700">Kelola kategori untuk pengelompokan prestasi sekolah.</p>
     </div>
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-        <a href="{{ route('super_admin.prestasi_categories.create') }}" class="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500">Tambah Kategori</a>
+        <a href="{{ route('super_admin.prestasi_categories.create') }}" class="block rounded-md bg-green-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-green-500">Tambah Kategori</a>
     </div>
 </div>
 

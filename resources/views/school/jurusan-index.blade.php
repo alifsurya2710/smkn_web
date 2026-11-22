@@ -1,4 +1,4 @@
-@extends('layouts.landing')
+﻿@extends('layouts.landing')
 
 @section('title', 'Program Keahlian')
 
@@ -16,7 +16,7 @@ if (!function_exists('getMajorColorHex')) {
         $map = [
             'bg-red-500' => '#ef4444',
             'bg-green-400' => '#4ade80',
-            'bg-blue-500' => '#3b82f6',
+            'bg-green-500' => '#3b82f6',
             'bg-yellow-500' => '#eab308',
             'bg-orange-500' => '#f97316',
         ];
@@ -25,7 +25,7 @@ if (!function_exists('getMajorColorHex')) {
 }
 @endphp
 <!-- Hero Section -->
-<section class="bg-[#0A142F] text-white pt-32 pb-20 relative overflow-hidden">
+<section class="bg-[#0D2461] text-white pt-32 pb-20 relative overflow-hidden">
     @php
         $currentCategory = request('category', 'all');
         $categoryIcons = [
@@ -62,19 +62,19 @@ if (!function_exists('getMajorColorHex')) {
             }
         @endphp
         <img src="{{ $finalImageUrl }}" class="w-full h-full object-cover opacity-60 transition-opacity duration-700" alt="Hero Background">
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0A142F]/40 via-[#0A142F]/60 to-[#0A142F]"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0D2461]/40 via-[#0D2461]/60 to-[#0D2461]"></div>
     </div>
     
     <!-- Decorative elements -->
-    <div class="absolute top-0 right-0 w-1/3 h-full bg-blue-600/10 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
-    <div class="absolute bottom-0 left-0 w-1/4 h-full bg-blue-400/5 blur-[80px] rounded-full -translate-x-1/2 translate-y-1/2"></div>
+    <div class="absolute top-0 right-0 w-1/3 h-full bg-green-600/10 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
+    <div class="absolute bottom-0 left-0 w-1/4 h-full bg-green-400/5 blur-[80px] rounded-full -translate-x-1/2 translate-y-1/2"></div>
 
     <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="max-w-3xl">
             <nav class="flex items-center gap-2 text-xs font-medium text-gray-400 mb-6 uppercase tracking-widest">
                 <a href="{{ route('home') }}" class="hover:text-white transition-colors">Beranda</a>
                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                <span class="text-blue-400">Program Keahlian</span>
+                <span class="text-green-400">Program Keahlian</span>
             </nav>
             
             <h1 class="text-5xl md:text-6xl font-black mb-6 font-outfit tracking-tight leading-tight">
@@ -109,23 +109,23 @@ if (!function_exists('getMajorColorHex')) {
         <aside class="w-full lg:w-80 shrink-0">
             <div class="sticky top-24">
                 <div class="mb-8 flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white">
+                    <div class="w-8 h-8 rounded-lg bg-green-600 flex items-center justify-center text-white">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
                     </div>
-                    <h3 class="text-base font-black text-[#0A142F] font-outfit tracking-tight uppercase">Filter Bidang</h3>
+                    <h3 class="text-base font-black text-[#0D2461] font-outfit tracking-tight uppercase">Filter Bidang</h3>
                 </div>
                 
                 <div class="bg-white rounded-2xl shadow-[0_10px_30px_-15px_rgba(0,0,0,0.05)] border border-slate-200/60 overflow-hidden mb-8 p-2">
                     <ul class="space-y-1">
                         <li>
-                            <a href="{{ route('jurusan.index', ['category' => 'all']) }}" class="flex px-4 py-3 {{ $currentCategory == 'all' ? 'bg-[#4F5B6F] text-white' : 'text-slate-500 hover:text-blue-600 hover:bg-blue-50/50' }} font-bold text-sm tracking-wide rounded-xl transition-all {{ $currentCategory == 'all' ? 'shadow-md shadow-[#4F5B6F]/20' : '' }}">
+                            <a href="{{ route('jurusan.index', ['category' => 'all']) }}" class="flex px-4 py-3 {{ $currentCategory == 'all' ? 'bg-[#4F5B6F] text-white' : 'text-slate-500 hover:text-green-700 hover:bg-green-50/50' }} font-bold text-sm tracking-wide rounded-xl transition-all {{ $currentCategory == 'all' ? 'shadow-md shadow-[#4F5B6F]/20' : '' }}">
                                 <svg class="w-4 h-4 mr-3 {{ $currentCategory == 'all' ? '' : 'opacity-60' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                                 Semua Bidang
                             </a>
                         </li>
                         @foreach($categories as $category)
                         <li>
-                            <a href="{{ route('jurusan.index', ['category' => $category]) }}" class="flex px-4 py-3 {{ $currentCategory == $category ? 'bg-[#4F5B6F] text-white' : 'text-slate-500 hover:text-blue-600 hover:bg-blue-50/50' }} font-bold text-sm tracking-wide transition-all rounded-xl {{ $currentCategory == $category ? 'shadow-md shadow-[#4F5B6F]/20' : '' }}">
+                            <a href="{{ route('jurusan.index', ['category' => $category]) }}" class="flex px-4 py-3 {{ $currentCategory == $category ? 'bg-[#4F5B6F] text-white' : 'text-slate-500 hover:text-green-700 hover:bg-green-50/50' }} font-bold text-sm tracking-wide transition-all rounded-xl {{ $currentCategory == $category ? 'shadow-md shadow-[#4F5B6F]/20' : '' }}">
                                 <svg class="w-4 h-4 mr-3 {{ $currentCategory == $category ? '' : 'opacity-60' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $categoryIcons[strtoupper($category)] ?? 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z' }}"></path>
                                 </svg>
@@ -147,7 +147,7 @@ if (!function_exists('getMajorColorHex')) {
         <main class="flex-1">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
                 <div>
-                    <h2 class="text-3xl font-black text-[#0A142F] font-outfit tracking-tight leading-tight">Program Keahlian</h2>
+                    <h2 class="text-3xl font-black text-[#0D2461] font-outfit tracking-tight leading-tight">Program Keahlian</h2>
                     <p class="text-slate-400 font-medium text-sm mt-1 uppercase tracking-widest">Menampilkan {{ count($majors) }} Jurusan Pilihan</p>
                 </div>
                 
@@ -157,7 +157,7 @@ if (!function_exists('getMajorColorHex')) {
                     <span class="text-sm font-bold text-slate-400 mr-2">Urutkan:</span>
                     
                     <button type="button" @click="open = !open" 
-                            class="flex items-center justify-between gap-2 w-full text-sm font-black text-[#0A142F] focus:outline-none select-none cursor-pointer">
+                            class="flex items-center justify-between gap-2 w-full text-sm font-black text-[#0D2461] focus:outline-none select-none cursor-pointer">
                         <span x-text="selected"></span>
                         <svg class="w-4 h-4 text-slate-400 transition-transform duration-300"
                              :class="{ 'rotate-180': open }"
@@ -178,13 +178,13 @@ if (!function_exists('getMajorColorHex')) {
                         
                         <div @click="selected = 'Terpopuler'; open = false; sortMajors('Terpopuler')" 
                              class="flex items-center px-4 py-2.5 rounded-xl text-sm font-bold cursor-pointer transition-colors duration-150"
-                             :class="selected === 'Terpopuler' ? 'bg-blue-50 text-blue-600' : 'text-slate-700 hover:bg-slate-50'">
+                             :class="selected === 'Terpopuler' ? 'bg-green-50 text-green-700' : 'text-slate-700 hover:bg-slate-50'">
                             Terpopuler
                         </div>
                         
                         <div @click="selected = 'Abjad (A-Z)'; open = false; sortMajors('Abjad (A-Z)')" 
                              class="flex items-center px-4 py-2.5 rounded-xl text-sm font-bold cursor-pointer transition-colors duration-150"
-                             :class="selected === 'Abjad (A-Z)' ? 'bg-blue-50 text-blue-600' : 'text-slate-700 hover:bg-slate-50'">
+                             :class="selected === 'Abjad (A-Z)' ? 'bg-green-50 text-green-700' : 'text-slate-700 hover:bg-slate-50'">
                             Abjad (A-Z)
                         </div>
                     </div>
@@ -219,9 +219,9 @@ if (!function_exists('getMajorColorHex')) {
 
                     <!-- Content Section -->
                     <div class="p-8 flex-1 flex flex-col">
-                        <h3 class="font-black text-[#0A142F] text-xl leading-tight mb-4 font-outfit transition-colors"
+                        <h3 class="font-black text-[#0D2461] text-xl leading-tight mb-4 font-outfit transition-colors"
                             onmouseover="this.style.color='{{ getMajorColorHex($major->color) }}'"
-                            onmouseout="this.style.color='#0A142F'">
+                            onmouseout="this.style.color='#0D2461'">
                             {{ $major->name }}
                         </h3>
                         

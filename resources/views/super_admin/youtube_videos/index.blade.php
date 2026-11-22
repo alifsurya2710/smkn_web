@@ -1,4 +1,4 @@
-<x-app-layout>
+﻿<x-app-layout>
     <x-slot name="header">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
@@ -8,7 +8,7 @@
                 <p class="text-sm text-gray-500 mt-1">Kelola video YouTube untuk galeri timeline publik.</p>
             </div>
             <button onclick="document.getElementById('addVideoModal').classList.remove('hidden')" 
-                    class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150">
+                    class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-[#0D2461] focus:outline-none focus:border-[#0D2461] focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150">
                 <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                 Tambah Video
             </button>
@@ -63,7 +63,7 @@
                             <div class="mt-4 flex items-center justify-between border-t border-gray-50 pt-4">
                                 <div class="flex gap-2">
                                     <button onclick="editVideo({{ $video->id }}, '{{ addslashes($video->title) }}', 'https://youtube.com/watch?v={{ $video->youtube_id }}', '{{ addslashes($video->description) }}', {{ $video->order }})" 
-                                            class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                                            class="p-2 text-green-700 hover:bg-green-50 rounded-lg transition-colors">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                                     </button>
                                     <form action="{{ route('super_admin.youtube_videos.toggle', $video->id) }}" method="POST">
@@ -89,7 +89,7 @@
                         </div>
                         <h3 class="text-lg font-bold text-gray-900">Belum ada video</h3>
                         <p class="text-gray-500 mt-1">Tambahkan video YouTube pertama Anda untuk ditampilkan di galeri.</p>
-                        <button onclick="document.getElementById('addVideoModal').classList.remove('hidden')" class="mt-4 text-blue-600 font-semibold hover:underline">Tambah Video</button>
+                        <button onclick="document.getElementById('addVideoModal').classList.remove('hidden')" class="mt-4 text-green-700 font-semibold hover:underline">Tambah Video</button>
                     </div>
                 @endforelse
             </div>
@@ -110,25 +110,25 @@
                         <div class="space-y-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Judul Video</label>
-                                <input type="text" name="title" required class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Konten Video SMKN 1 Katapang">
+                                <input type="text" name="title" required class="w-full rounded-lg border-gray-300 focus:ring-green-500 focus:border-green-500" placeholder="Konten Video RA AL-IKHWAN">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">URL YouTube</label>
-                                <input type="url" name="youtube_url" required class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="https://www.youtube.com/watch?v=...">
+                                <input type="url" name="youtube_url" required class="w-full rounded-lg border-gray-300 focus:ring-green-500 focus:border-green-500" placeholder="https://www.youtube.com/watch?v=...">
                                 <p class="text-xs text-gray-400 mt-1 italic">*Mendukung format link youtube.com atau youtu.be</p>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi (Opsional)</label>
-                                <textarea name="description" rows="3" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                                <textarea name="description" rows="3" class="w-full rounded-lg border-gray-300 focus:ring-green-500 focus:border-green-500"></textarea>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Urutan</label>
-                                <input type="number" name="order" value="0" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+                                <input type="number" name="order" value="0" class="w-full rounded-lg border-gray-300 focus:ring-green-500 focus:border-green-500">
                             </div>
                         </div>
                     </div>
                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">Simpan</button>
+                        <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">Simpan</button>
                         <button type="button" onclick="document.getElementById('addVideoModal').classList.add('hidden')" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Batal</button>
                     </div>
                 </form>
@@ -149,24 +149,24 @@
                         <div class="space-y-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Judul Video</label>
-                                <input type="text" name="title" id="edit_title" required class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+                                <input type="text" name="title" id="edit_title" required class="w-full rounded-lg border-gray-300 focus:ring-green-500 focus:border-green-500">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">URL YouTube</label>
-                                <input type="url" name="youtube_url" id="edit_url" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Biarkan kosong jika tidak ingin mengubah link">
+                                <input type="url" name="youtube_url" id="edit_url" class="w-full rounded-lg border-gray-300 focus:ring-green-500 focus:border-green-500" placeholder="Biarkan kosong jika tidak ingin mengubah link">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi (Opsional)</label>
-                                <textarea name="description" id="edit_description" rows="3" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                                <textarea name="description" id="edit_description" rows="3" class="w-full rounded-lg border-gray-300 focus:ring-green-500 focus:border-green-500"></textarea>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Urutan</label>
-                                <input type="number" name="order" id="edit_order" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+                                <input type="number" name="order" id="edit_order" class="w-full rounded-lg border-gray-300 focus:ring-green-500 focus:border-green-500">
                             </div>
                         </div>
                     </div>
                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">Perbarui</button>
+                        <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">Perbarui</button>
                         <button type="button" onclick="document.getElementById('editVideoModal').classList.add('hidden')" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Batal</button>
                     </div>
                 </form>

@@ -1,4 +1,4 @@
-<section>
+﻿<section>
     <header>
         <h2 class="text-xl font-bold text-slate-900 dark:text-white">
             Perbarui Kata Sandi
@@ -21,7 +21,7 @@
                 <input id="update_password_current_password"
                        name="current_password"
                        :type="showCurrent ? 'text' : 'password'"
-                       class="block w-full pr-11 rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-900/50 dark:text-white focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-200"
+                       class="block w-full pr-11 rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-900/50 dark:text-white focus:border-green-500 focus:ring-green-500/20 transition-all duration-200"
                        autocomplete="current-password" />
                 <button type="button" @click="showCurrent = !showCurrent"
                         class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
@@ -41,7 +41,7 @@
                 <input id="update_password_password"
                        name="password"
                        :type="showNew ? 'text' : 'password'"
-                       class="block w-full pr-11 rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-900/50 dark:text-white focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-200"
+                       class="block w-full pr-11 rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-900/50 dark:text-white focus:border-green-500 focus:ring-green-500/20 transition-all duration-200"
                        autocomplete="new-password"
                        oninput="checkPasswordStrength(this.value)" />
                 <button type="button" @click="showNew = !showNew"
@@ -111,7 +111,7 @@
                 <input id="update_password_password_confirmation"
                        name="password_confirmation"
                        :type="showConfirm ? 'text' : 'password'"
-                       class="block w-full pr-11 rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-900/50 dark:text-white focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-200"
+                       class="block w-full pr-11 rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-900/50 dark:text-white focus:border-green-500 focus:ring-green-500/20 transition-all duration-200"
                        autocomplete="new-password"
                        oninput="checkConfirmMatch()" />
                 <button type="button" @click="showConfirm = !showConfirm"
@@ -127,7 +127,7 @@
 
         <div class="flex items-center gap-4 pt-2">
             <button type="submit"
-                    class="inline-flex items-center px-6 py-3 bg-blue-600 dark:bg-blue-500 border border-transparent rounded-xl font-bold text-sm text-white uppercase tracking-widest hover:bg-blue-700 dark:hover:bg-blue-400 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150 shadow-lg shadow-blue-500/25">
+                    class="inline-flex items-center px-6 py-3 bg-green-600 dark:bg-green-500 border border-transparent rounded-xl font-bold text-sm text-white uppercase tracking-widest hover:bg-green-700 dark:hover:bg-green-400 focus:bg-blue-700 active:bg-[#0D2461] focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150 shadow-lg shadow-blue-500/25">
                 Perbarui Kata Sandi
             </button>
 
@@ -162,7 +162,7 @@
         { label: 'Sangat Lemah', color: 'text-red-500',    bars: 1, barColor: 'bg-red-500' },
         { label: 'Lemah',        color: 'text-orange-500', bars: 2, barColor: 'bg-orange-500' },
         { label: 'Cukup',        color: 'text-amber-500',  bars: 3, barColor: 'bg-amber-500' },
-        { label: 'Kuat',         color: 'text-blue-500',   bars: 4, barColor: 'bg-blue-500' },
+        { label: 'Kuat',         color: 'text-green-600',   bars: 4, barColor: 'bg-green-500' },
         { label: 'Sangat Kuat',  color: 'text-emerald-500',bars: 5, barColor: 'bg-emerald-500' },
     ];
 
